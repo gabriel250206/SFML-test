@@ -1,15 +1,22 @@
 #include <SFML/Graphics.hpp>
+#include "Rrectangle.hpp"
+#include <vector>
+using namespace std;
 using namespace sf;
 
 
+vector <Rectangle>rectangulos;
 float speedX=1.f;
 float speedY=1.f;
 int main()
 {
     RenderWindow window(VideoMode(800, 600), "SFML works!");
-    RectangleShape shape({20.f,10.f});
+    
     
     window.setFramerateLimit(5000);
+
+Rectangle rect(Vector2f(60.f,30.f));
+
     while (window.isOpen())
     {
         Event event;
@@ -17,24 +24,21 @@ int main()
         {
             if (event.type == Event::Closed)
                 window.close();
+            if (event.type==Event::MouseButtonPresse){
+                if(event.mouseButton.button== Mouse::left){
+                    float x=float(rand()%100);
+                    float y=float(rand()%100);
+                    Rectangle r= Rectangle (Vector2f(x,y))
+                    rectangulos.push_back(r);
+                    r.drawTo(window);
+                }
+|
+            }
         }
 
         window.clear();
-        //if(Mouse:)
-
-        if(shape.getPosition().x+shape.getSize().x>=800|| shape.getPosition().x<0){
-            
-            speedX*= -1;
-          
-        }
-        if(shape.getPosition().y+shape.getSize().y>=600|| shape.getPosition().y<0){
-            
-            speedY*= -1;
-          
-        }
-        shape.setFillColor({shape.getPosition().x,shape.getPosition().y,shape.getPosition().x});
-        shape.move({speedX,speedY});
-        window.draw(shape);
+        rect.update();
+        rect.drawTo(window);
         window.display();
     }
 
