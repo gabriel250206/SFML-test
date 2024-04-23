@@ -3,7 +3,7 @@
 #include <vector>
 using namespace std;
 using namespace sf;
-
+// rebota
 
 vector <Rectangle>rectangulos;
 float speedX=1.f;
