@@ -33,8 +33,14 @@ Rectangle rect(Vector2f(60.f,30.f),window);
                     rectangulos.push_back(r);
                     r.drawTo(window);
                 }
+                if(event.mouseButton.button== Mouse::Right){
+                    for(auto &r: rectangulos){
+                        r.changeColorIfClick(Mouse::getPosition(window));
+                    }
+                }
 
             }
+            
         }
 
 //entra al if si el click iquerido esta presionado

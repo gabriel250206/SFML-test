@@ -3,7 +3,7 @@
 Rectangle::Rectangle(Vector2f size, RenderWindow &window){
     this->shape = RectangleShape(size);
     this->shape.setPosition({Mouse::getPosition(window).x,Mouse::getPosition(window).y});
-    this->shape.setFillColor(Color::Blue);
+    this->shape.setFillColor(Color::Red);
     this->shape.setOutlineThickness(3);
     this->shape.setOutlineColor(Color::Red);
     this->speed=Vector2f(0.f,4.f);
@@ -31,8 +31,23 @@ void Rectangle::update(){
             this->shape.setPosition(this->shape.getPosition().x,600-this->shape.getSize().y);
             
     }
-        
     
+
+    
+}
+
+void Rectangle::changeColorIfClick(Vector2i position){
+    float x=this->shape.getPosition().x;
+    float y=this->shape.getPosition().y;
+    float w=this->shape.getSize().x;
+    float h=this->shape.getSize().y;
+
+    int mouseX=position.x;
+    int mouseY=position.y;
+
+    if(mouseX>=x && mouseX<=x+w && mouseY>=y && mouseY<=y+h){
+        this->shape.setFillColor(Color::Green);
+    }
 }
 
 void Rectangle::drawTo(RenderWindow &window){

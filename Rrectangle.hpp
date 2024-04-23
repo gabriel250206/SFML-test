@@ -14,6 +14,7 @@ public:
     Rectangle(Vector2f size,RenderWindow &window);
     void update();
     void drawTo(RenderWindow &window);
+    void changeColorIfClick(Vector2i position);
 
 
 };
