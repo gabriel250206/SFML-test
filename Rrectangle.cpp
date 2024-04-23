@@ -1,8 +1,8 @@
 #include "Rrectangle.hpp"
 
-Rectangle::Rectangle(Vector2f size){
+Rectangle::Rectangle(Vector2f size, RenderWindow &window){
     this->shape = RectangleShape(size);
-    this->shape.setPosition({400.f,300.f});
+    this->shape.setPosition({Mouse::getPosition(window).x,Mouse::getPosition(window).y});
     this->shape.setFillColor(Color::Blue);
     this->speed=Vector2f(4.f,4.f);
 

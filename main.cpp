@@ -13,9 +13,9 @@ int main()
     RenderWindow window(VideoMode(800, 600), "SFML works!");
     
     
-    window.setFramerateLimit(200);
+    window.setFramerateLimit(50);
 
-Rectangle rect(Vector2f(60.f,30.f));
+Rectangle rect(Vector2f(60.f,30.f),window);
 
     while (window.isOpen())
     {
@@ -29,7 +29,7 @@ Rectangle rect(Vector2f(60.f,30.f));
                 if(event.mouseButton.button== Mouse::Left){
                     float x=float(rand()%100);
                     float y=float(rand()%100);
-                    Rectangle r= Rectangle (Vector2f(x,y));
+                    Rectangle r= Rectangle (Vector2f(x,y),window);
                     rectangulos.push_back(r);
                     r.drawTo(window);
                 }

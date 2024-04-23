@@ -9,7 +9,7 @@ private:
     Vector2f speed;
     RectangleShape shape;
 public:
-    Rectangle(Vector2f size);
+    Rectangle(Vector2f size,RenderWindow &window);
 
     void update();
     void drawTo(RenderWindow &window);
