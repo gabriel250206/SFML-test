@@ -1,6 +1,7 @@
 #include <SFML/Graphics.hpp>
 #include "Rrectangle.hpp"
 #include <vector>
+#include <cmath>
 using namespace std;
 using namespace sf;
 // rebota
