@@ -31,6 +31,7 @@ int main()
         }
         
             
+            
         window.clear();
         grid.update();
         grid.drawTo(window);
