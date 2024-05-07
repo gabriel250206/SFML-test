@@ -49,7 +49,8 @@ void Grid::click(int x, int y){
 
 void Grid::update(){
     for(int i=0;i<this->rows;i++){
-        for(int j=0;j<this->cols;j++){
+        for(int j=0;j<this->cols;j++)
+        {
             
             if (tablero[i][j]==1){
                 if(j==this->cols-1){
@@ -70,3 +71,82 @@ void Grid::update(){
     }
     this->tablero=this->next;
 }
+int Grid::contarVecinos()
+{
+int cont=0;
+for(int i=0;i<this->rows;i++)
+{
+        for(int j=0;j<this->cols;j++)
+        {
+            if(j==0)
+            {
+                if(i==0)
+                {
+                    if(tablero[i][j+1]==1)
+                    {
+                        cont ++;
+                    }
+                    if(tablero[i+1][j+1]==1)
+                    {
+                        cont ++;
+                    }
+                     if(tablero[i+1][j]==1)
+                    {
+                        cont ++;
+                    }
+                }
+              if(i==this->cols-1)
+                {
+                    if(tablero[i][j+1]==1)
+                    {
+                        cont ++;
+                    }
+                    if(tablero[i-1][j+1]==1)
+                    {
+                        cont ++;
+                    }
+                     if(tablero[i-1][j]==1)
+                    {
+                        cont ++;
+                    }
+                }              
+            }
+             if(j==rows-1)
+            {
+                if(i==0)
+                {
+                    if(tablero[i][j-1]==1)
+                    {
+                        cont ++;
+                    }
+                    if(tablero[i+1][j-1]==1)
+                    {
+                        cont ++;
+                    }
+                     if(tablero[i+1][j]==1)
+                    {
+                        cont ++;
+                    }
+                }
+              if(i==this->cols-1)
+                {
+                    if(tablero[i][j-1]==1)
+                    {
+                        cont ++;
+                    }
+                    if(tablero[i-1][j-1]==1)
+                    {
+                        cont ++;
+                    }
+                     if(tablero[i-1][j]==1)
+                    {
+                        cont ++;
+                    }
+                }              
+            }
+
+          
+            }
+            
+        } 
+        }
