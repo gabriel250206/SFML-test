@@ -8,6 +8,7 @@ int numCells=10;
 int main()
 {
 
+    int juega=0;
     RenderWindow window(VideoMode(400, 400), "SFML works!");
     window.setFramerateLimit(5);
     Grid grid(numCells,numCells,width,height);
@@ -26,14 +27,22 @@ int main()
                 grid.click(x,y);
             
             }
+                if(event.mouseButton.button==Mouse::Right){
+                    juega=(juega+1)%2;
+                }
+                
             }
             
+            
+            
         }
-        
+        if(juega==1){
+            grid.update();
+        }
             
 
         window.clear();
-        //grid.update();
+        
         grid.drawTo(window);
         window.display();
     }
