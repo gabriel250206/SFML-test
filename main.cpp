@@ -49,5 +49,47 @@ int main()
 
     return 0;
 }
+<<<<<<< HEAD
 
 
+=======
+if(i>0 && i<cols-1 && j==0)
+{
+     if(tablero[i][j+1]==1)
+     {
+     cont ++;
+     }
+     if(tablero[i-1][j]==1)
+     {
+     cont ++;
+     }
+     if(tablero[i+1][j+1]==1)
+     {
+     cont ++;
+     }
+      if(tablero[i-1][j+1]==1)
+     {
+     cont ++;
+     }
+
+}
+if(i>0 && i<cols-1 && j==rows-1)
+{
+    if(tablero[i][j-1]==1)
+     {
+     cont ++;
+     }
+     if(tablero[i-1][j]==1)
+     {
+     cont ++;
+     }
+     if(tablero[i+1][j-1]==1)
+     {
+     cont ++;
+     }
+      if(tablero[i-1][j-1]==1)
+     {
+     cont ++;
+     } 
+}
+>>>>>>> ba3b2162469f92f62216dc2d9c6287a9dea700e9
