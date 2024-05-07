@@ -37,7 +37,7 @@ int main()
             
         }
         if(juega==1){
-            grid.update();
+            grid.contarVecinos();
         }
             
 
@@ -49,3 +49,5 @@ int main()
 
     return 0;
 }
+
+
