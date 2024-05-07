@@ -31,9 +31,9 @@ int main()
         }
         
             
-            
+
         window.clear();
-        grid.update();
+        //grid.update();
         grid.drawTo(window);
         window.display();
     }
