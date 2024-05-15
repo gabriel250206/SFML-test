@@ -1,12 +1,14 @@
 #include <SFML/Graphics.hpp>
 #include "Personaje.hpp"
+#include <iostream>
 using namespace sf;
 int main()
 {
     RenderWindow window(VideoMode(500, 500), "SFML works!");
     Personaje adan(100);
-    int x=1,y=1;
+    int x=0,y=0;
     int movx=0,movy=0;
+    adan.drawTo(window);
     while (window.isOpen())
     {
         Event event;
@@ -18,37 +20,61 @@ int main()
                 
                 if(Event::KeyPressed==102){
                     if(adan.municion>0){
-                        adan.shot(adan.actual->getPosition());
+                        //adan.shot(adan.actual.getPosition());
                     }
                     
                 }
-                if(Event::KeyPressed==14){
-                    y=-1;
-
-
-                    
-                }
-                if(Event::KeyPressed==15){
-                    y=1;
-
-                    
-                }
-                if(Event::KeyPressed==17){
-                    x=1;
-                    
-                }
-                if(Event::KeyPressed==16){
+                if(event.key.code==Keyboard::A){
                     x=-1;
+                    std::cout<<"A"<<endl;
+                    
+                    
+                    
                     
                 }
+                if(event.key.code==Keyboard::D){
+                    x=1;
+                    std::cout<<"D"<<endl;
+                    ;
+            
+                    
+                    
+                    
+                }
+                if(event.key.code==Keyboard::S){
+                    y=1;
+                    std::cout<<"S"<<endl;
+                    
+            
+                    
+                    
+                    
+                }
+                if(event.key.code==Keyboard::Space){
+                    y=-1;
+                    std::cout<<"W"<<endl;
+                    
+                    
+                }
+                adan.update(x,y);
+                window.clear();
+                adan.drawTo(window);
+                
+                // if(event.key.code==Keyboard::W){
+                //     
+                //y=-1;
+                    
+                // }
 
+            }else if(event.type==Event::KeyReleased){
+                if(event.key.code == Keyboard::A || event.key.code == Keyboard::D) x=0;
+                if(event.key.code == Keyboard::S) y=0;
+               
             }
             
-            adan.update(x,y,10);
-            
         }
-
-        window.clear();
+        
+        
         window.display();
     }
 

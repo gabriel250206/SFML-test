@@ -8,22 +8,25 @@ class Bala;
 
 class Personaje{
     protected:
-        vector<Sprite> animaciones;
-        Vector2f velocidad;
+        // vector<Sprite> animaciones;
+         Vector2f velocidad;
         int vida;
-        vector<Bala*> acumulados;
-        Sprite* siguiente;
+        Texture stmTexture;
+        
+        // vector<Bala*> acumulados;
+        Sprite siguiente;
         
         
         
     public:
-        Sprite* actual;
         
+        Sprite actualTexture;
         int municion;
-        void update(int x, int y, int danio);
+        void update(int x, int y /*t danio*/);
         Personaje(int vida);
-        void shot(Vector2f inicio);
+        // void shot(Vector2f inicio);
         int vista;
+        void drawTo(RenderWindow &window);
 
 
         
