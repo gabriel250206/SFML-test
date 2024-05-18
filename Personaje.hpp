@@ -27,9 +27,10 @@ class Personaje{
         void update(int x, int y /*t danio*/);
         Personaje(int vida);
         // void shot(Vector2f inicio);
-        int vista;
+        Vector2f vista;
         void drawTo(RenderWindow &window);
         bool siguienteS;
+        bool tatekieto;
 
        
 

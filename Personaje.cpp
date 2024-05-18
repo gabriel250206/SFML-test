@@ -17,10 +17,10 @@ Personaje::Personaje(int vida){
     this->vida=vida;
     this->municion=25;
     //this->actual->setPosition(0,250);
-    this->vista=0;
     this->salto=true; // puede saltar
     this->contSalto=0;
     this->siguienteS=true;
+    this->tatekieto=false;
 }
 
 void Personaje::update(int x, int y/*, int danio*/){

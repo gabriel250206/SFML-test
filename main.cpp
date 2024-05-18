@@ -25,8 +25,9 @@ int main()
                     }
                     
                 }
-                if(event.key.code==Keyboard::A){
-                    x=-1;
+                if(event.key.code==Keyboard::A ){
+                    if(adan.tatekieto==false) x=-1;
+                    adan.vista.x=-1;
                     std::cout<<"A"<<endl;
                     
                     
@@ -34,16 +35,17 @@ int main()
                     
                 }
                 if(event.key.code==Keyboard::D){
-                    x=1;
+                    if(adan.tatekieto==false)x=1;
+                    adan.vista.x=1;
                     std::cout<<"D"<<endl;
-                    ;
+                    
             
                     
                     
                     
                 }
                 
-                if(event.key.code==Keyboard::Space && adan.salto==true && adan.siguienteS==true){ // si presionas y puede saltar
+                if(event.key.code==Keyboard::Space && adan.salto==true && adan.siguienteS==true && adan.tatekieto==false){ // si presionas y puede saltar
                     
                     std::cout<<"W"<<endl;
                     adan.salto=false;
@@ -51,11 +53,21 @@ int main()
                     
                     
                 }
-                if(event.key.code==Keyboard::S){
+                if(event.key.code==Keyboard::W){ /// tecla de comprobacion
+                    adan.vista.y=-1;
+
+                }
+                if(event.key.code==Keyboard::S){ /// tecla de comprobacion
+                    adan.vista.y=1;
+
+                }
+                if(event.key.code==Keyboard::I){ /// tecla de comprobacion
                     std::cout<<adan.salto<<" "<<adan.siguienteS<<" "<<  adan.actualTexture.getPosition().y<<std::endl;
 
                 }
-                
+                if(event.key.code==Keyboard::LShift){
+                    adan.tatekieto=true;
+                }
                 // if(event.key.code==Keyboard::W){
                 //     
                 //y=-1;
@@ -67,8 +79,11 @@ int main()
 
 
             }else if(event.type==Event::KeyReleased){
-                if(event.key.code == Keyboard::A || event.key.code == Keyboard::D) x=0;
+                if(event.key.code == Keyboard::A && x==-1) x=0;
+                if( event.key.code == Keyboard::D && x==1) x=0;
                 //if(event.key.code == Keyboard::S) y=0;
+                if(event.key.code == Keyboard::LShift) adan.tatekieto=false;
+                
                
             }
             
