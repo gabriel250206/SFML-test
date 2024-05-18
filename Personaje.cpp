@@ -37,9 +37,10 @@ void Personaje::drawTo(RenderWindow &window){
 
 
 
-// void Personaje::shot(Vector2f inicio){
-//     Bala* disparo=new Bala(10,inicio);
-//     acumulados.push_back(disparo);
-//     municion--;
-// }
+void Personaje::shot(Vector2f inicio){
+    // Bala* disparo=new Bala(10,inicio);
+    // acumulados.push_back(disparo);
+    // municion--;
+    std::cout<<"PUM"<<std::endl;
+}
 

@@ -44,7 +44,7 @@ int main()
                     
                     
                 }
-                
+                /// TAMPOCO ESTO, ES QUE NOS DA DOBLE SALTO
                 if(event.key.code==Keyboard::Space && adan.salto==true && adan.siguienteS==true && adan.tatekieto==false){ // si presionas y puede saltar
                     
                     std::cout<<"W"<<endl;
@@ -68,20 +68,21 @@ int main()
                 if(event.key.code==Keyboard::LShift){
                     adan.tatekieto=true;
                 }
-                // if(event.key.code==Keyboard::W){
-                //     
-                //y=-1;
-                    
-                // }
+                if(event.key.code==Keyboard::Left){
+                    adan.shot(adan.vista);
+                }
+                
 
 
 
 
 
-            }else if(event.type==Event::KeyReleased){
+            }else if(event.type==Event::KeyReleased){// para que no se queden haciendo algo infinitamente
                 if(event.key.code == Keyboard::A && x==-1) x=0;
                 if( event.key.code == Keyboard::D && x==1) x=0;
                 //if(event.key.code == Keyboard::S) y=0;
+                if(event.key.code==Keyboard::W) adan.vista.y=0;
+                if(event.key.code==Keyboard::S)adan.vista.y=0;
                 if(event.key.code == Keyboard::LShift) adan.tatekieto=false;
                 
                
@@ -113,6 +114,7 @@ int main()
             
             
         }
+        /// NADA DE ESTO
         adan.update(x,y);
         window.clear();
         adan.drawTo(window);
