@@ -18,10 +18,13 @@ Personaje::Personaje(int vida){
     this->municion=25;
     //this->actual->setPosition(0,250);
     this->vista=0;
+    this->salto=true; // puede saltar
+    this->contSalto=0;
+    this->siguienteS=true;
 }
 
 void Personaje::update(int x, int y/*, int danio*/){
-    std::cout<<"mueve"<<std::endl;
+    
     
     this->actualTexture.setPosition(this->actualTexture.getPosition().x+x,this->actualTexture.getPosition().y+y);
    
@@ -31,6 +34,8 @@ void Personaje::update(int x, int y/*, int danio*/){
 void Personaje::drawTo(RenderWindow &window){
     window.draw(this->actualTexture);
 }
+
+
 
 // void Personaje::shot(Vector2f inicio){
 //     Bala* disparo=new Bala(10,inicio);

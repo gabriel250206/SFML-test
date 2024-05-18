@@ -5,7 +5,8 @@ using namespace sf;
 int main()
 {
     RenderWindow window(VideoMode(500, 500), "SFML works!");
-    Personaje adan(100);
+    window.setFramerateLimit(200);
+    Personaje adan(150);
     int x=0,y=0;
     int movx=0,movy=0;
     adan.drawTo(window);
@@ -41,24 +42,19 @@ int main()
                     
                     
                 }
-                if(event.key.code==Keyboard::S){
-                    y=1;
-                    std::cout<<"S"<<endl;
+                
+                if(event.key.code==Keyboard::Space && adan.salto==true && adan.siguienteS==true){ // si presionas y puede saltar
                     
-            
-                    
-                    
-                    
-                }
-                if(event.key.code==Keyboard::Space){
-                    y=-1;
                     std::cout<<"W"<<endl;
+                    adan.salto=false;
+                    adan.siguienteS=false;
                     
                     
                 }
-                adan.update(x,y);
-                window.clear();
-                adan.drawTo(window);
+                if(event.key.code==Keyboard::S){
+                    std::cout<<adan.salto<<" "<<adan.siguienteS<<" "<<  adan.actualTexture.getPosition().y<<std::endl;
+
+                }
                 
                 // if(event.key.code==Keyboard::W){
                 //     
@@ -66,15 +62,46 @@ int main()
                     
                 // }
 
+
+
+
+
             }else if(event.type==Event::KeyReleased){
                 if(event.key.code == Keyboard::A || event.key.code == Keyboard::D) x=0;
-                if(event.key.code == Keyboard::S) y=0;
+                //if(event.key.code == Keyboard::S) y=0;
                
             }
             
+            
         }
-        
-        
+        ///EFRA NO TOQUES ESTO 
+        if((adan.actualTexture.getPosition().y<400 && adan.salto==true )){
+            y=1;
+
+           
+        }else {
+            if(adan.salto==false){
+                y=-1;
+                
+                if(adan.contSalto==100){
+                    adan.contSalto=0;
+                    adan.salto=true;
+                }
+                adan.contSalto++;
+            }else{
+                y=0;
+            }
+            if(adan.actualTexture.getPosition().y==400){
+              
+               adan.siguienteS=true;
+            }
+            
+            
+        }
+        adan.update(x,y);
+        window.clear();
+        adan.drawTo(window);
+
         window.display();
     }
 

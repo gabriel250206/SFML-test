@@ -21,12 +21,17 @@ class Personaje{
     public:
         
         Sprite actualTexture;
+        bool salto;
+        int contSalto;
         int municion;
         void update(int x, int y /*t danio*/);
         Personaje(int vida);
         // void shot(Vector2f inicio);
         int vista;
         void drawTo(RenderWindow &window);
+        bool siguienteS;
+
+       
 
 
         
