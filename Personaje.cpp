@@ -7,7 +7,7 @@ Personaje::Personaje(int vida){
 
     if(!stmTexture.loadFromFile("assets/stickman.png"))
     {
-        std::cout << "Error al cargar imagen" << endl;
+        std::cout << "Error al cargar imagen" << std::endl;
     }
     stmTexture.setRepeated(true);
 
@@ -24,8 +24,19 @@ Personaje::Personaje(int vida){
 
 void Personaje::update(int x, int y/*, int danio*/){
     
-    
-    this->actualTexture.setPosition(this->actualTexture.getPosition().x+x,this->actualTexture.getPosition().y+y);
+    if(this->actualTexture.getPosition().x<401 && x==1){
+        this->actualTexture.setPosition(this->actualTexture.getPosition().x+x,this->actualTexture.getPosition().y);
+    }else if(this->actualTexture.getPosition().x>0 && x==-1){
+        this->actualTexture.setPosition(this->actualTexture.getPosition().x+x,this->actualTexture.getPosition().y);
+    }
+    if(this->actualTexture.getPosition().y<401){
+        this->actualTexture.setPosition(this->actualTexture.getPosition().x,this->actualTexture.getPosition().y+y);
+    }
+
+    for(int i=0;i<this->pistola->existentes.size();i++){
+        this->pistola->existentes[i]->trayectoria();
+    }
+    //this->actualTexture.setPosition(this->actualTexture.getPosition().x+x,this->actualTexture.getPosition().y+y);
    
    
 }

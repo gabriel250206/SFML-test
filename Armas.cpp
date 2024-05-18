@@ -23,5 +23,6 @@ void Principal::especial(){
 }
 void Principal::disparo(Vector2f posicion,Vector2f direccion){
     Bala* nueva=new Bala(this->danio, posicion,direccion);
+    existentes.push_back(nueva);
     std::cout<<"pum"<<endl;
 }

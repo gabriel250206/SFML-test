@@ -113,7 +113,9 @@ int main()
         adan.update(x,y);
         window.clear();
         adan.drawTo(window);
+        //for(auto i=0;i<adan.pistola; i++)
 
+        
         window.display();
     }
 

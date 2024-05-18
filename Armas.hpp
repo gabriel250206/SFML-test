@@ -12,8 +12,9 @@ class Principal {
     protected:
         int danio;
         int municionMax;
-        vector<Bala*> existentes;
+        
     public:
+        vector<Bala*> existentes;
         int municion;
         Principal();
         int getDanio();

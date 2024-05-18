@@ -6,11 +6,15 @@ class Bala{
         int danio;
         Vector2f posicion;
         Vector2f direccion;
+        Sprite actualTexture;
+        Texture stmTexture;
         
     public:
-        Sprite bullet;
-
+        
+        
         Bala(int danio, Vector2f posicion, Vector2f direccion);
+        void trayectoria();
         void Impacto();
+        void drawTo(RenderWindow &window);
         
 };
