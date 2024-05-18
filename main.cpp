@@ -19,12 +19,7 @@ int main()
                 window.close();
             if(event.type==Event::KeyPressed){
                 
-                if(Event::KeyPressed==102){
-                    if(adan.municion>0){
-                        //adan.shot(adan.actual.getPosition());
-                    }
-                    
-                }
+                
                 if(event.key.code==Keyboard::A ){
                     if(adan.tatekieto==false) x=-1;
                     adan.vista.x=-1;

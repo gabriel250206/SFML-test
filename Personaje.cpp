@@ -1,5 +1,5 @@
 #include "Personaje.hpp"
-#include "Bala.hpp"
+#include "Armas.hpp"
 #include <SFML/Graphics.hpp>
 #include <iostream>
 
@@ -15,12 +15,11 @@ Personaje::Personaje(int vida){
     this->actualTexture.setTextureRect(IntRect(0,0,105,99));
     
     this->vida=vida;
-    this->municion=25;
-    //this->actual->setPosition(0,250);
     this->salto=true; // puede saltar
     this->contSalto=0;
     this->siguienteS=true;
     this->tatekieto=false;
+    this->pistola= new Principal();
 }
 
 void Personaje::update(int x, int y/*, int danio*/){
@@ -41,6 +40,6 @@ void Personaje::shot(Vector2f inicio){
     // Bala* disparo=new Bala(10,inicio);
     // acumulados.push_back(disparo);
     // municion--;
-    std::cout<<"PUM"<<std::endl;
+    pistola->disparo(this->actualTexture.getPosition(),vista);
 }
 

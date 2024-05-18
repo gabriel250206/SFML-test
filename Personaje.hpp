@@ -4,7 +4,7 @@
 using namespace sf;
 using namespace std;
 
-class Bala;
+class Principal;
 
 class Personaje{
     protected:
@@ -12,8 +12,6 @@ class Personaje{
          Vector2f velocidad;
         int vida;
         Texture stmTexture;
-        
-        // vector<Bala*> acumulados;
         Sprite siguiente;
         
         
@@ -23,14 +21,15 @@ class Personaje{
         Sprite actualTexture;
         bool salto;
         int contSalto;
-        int municion;
-        void update(int x, int y /*t danio*/);
-        Personaje(int vida);
-        void shot(Vector2f inicio);
         Vector2f vista;
-        void drawTo(RenderWindow &window);
         bool siguienteS;
         bool tatekieto;
+        Principal* pistola;
+
+        Personaje(int vida);
+        void drawTo(RenderWindow &window);
+        void update(int x, int y /*t danio*/);
+        void shot(Vector2f inicio);
 
        
 
