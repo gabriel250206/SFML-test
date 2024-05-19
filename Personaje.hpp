@@ -1,10 +1,11 @@
 #pragma once
 #include <SFML/Graphics.hpp>
 #include <vector>
+#include "Armas.hpp"
 using namespace sf;
 using namespace std;
 
-class Principal;
+
 
 class Personaje{
     protected:

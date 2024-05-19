@@ -57,7 +57,7 @@ int main()
 
                 }
                 if(event.key.code==Keyboard::I){ /// tecla de comprobacion
-                    std::cout<<adan.salto<<" "<<adan.siguienteS<<" "<<  adan.actualTexture.getPosition().y<<std::endl;
+                    std::cout<<"x: "<<adan.vista.x<<" "<<"y: "<<adan.vista.y<<" "<<std::endl;
 
                 }
                 if(event.key.code==Keyboard::LShift){
@@ -73,11 +73,17 @@ int main()
 
 
             }else if(event.type==Event::KeyReleased){// para que no se queden haciendo algo infinitamente
-                if(event.key.code == Keyboard::A && x==-1) x=0;
-                if( event.key.code == Keyboard::D && x==1) x=0;
+                if(event.key.code == Keyboard::A ) {
+                    x=0;
+                    adan.vista.x=0;
+                }
+                if( event.key.code == Keyboard::D ) {
+                    x=0;
+                    adan.vista.x=0;
+                }
                 //if(event.key.code == Keyboard::S) y=0;
-                if(event.key.code==Keyboard::W) adan.vista.y=0;
-                if(event.key.code==Keyboard::S)adan.vista.y=0;
+                if(event.key.code==Keyboard::W ) adan.vista.y=0;
+                if(event.key.code==Keyboard::S )adan.vista.y=0;
                 if(event.key.code == Keyboard::LShift) adan.tatekieto=false;
                 
                
@@ -113,7 +119,10 @@ int main()
         adan.update(x,y);
         window.clear();
         adan.drawTo(window);
-        //for(auto i=0;i<adan.pistola; i++)
+        for(int i=0;i<adan.pistola->existentes.size(); i++){
+            adan.pistola->existentes[i]->trayectoria();
+            adan.pistola->existentes[i]->drawTo(window);
+        }
 
         
         window.display();

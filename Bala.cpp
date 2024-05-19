@@ -7,7 +7,7 @@ Bala::Bala(int danio, Vector2f posicion, Vector2f direccion){
     this->danio=danio;
     this->direccion=direccion;
     
-    if(!stmTexture.loadFromFile("assets/stickman.png"))
+    if(!stmTexture.loadFromFile("assets/bala.png"))
     {
         std::cout << "Error al cargar imagen" << std::endl;
     }
