@@ -34,7 +34,14 @@ void Personaje::update(int x, int y/*, int danio*/){
     }
 
     for(int i=0;i<this->pistola->existentes.size();i++){
-        this->pistola->existentes[i]->trayectoria();
+        
+        if(this->pistola->existentes[i]->getPosition().x>=401 || this->pistola->existentes[i]->getPosition().y>=401) {
+            //this->pistola->existentes[i]=nullptr;
+           
+        }else{
+            this->pistola->existentes[i]->trayectoria();
+        }
+        
     }
     //this->actualTexture.setPosition(this->actualTexture.getPosition().x+x,this->actualTexture.getPosition().y+y);
    

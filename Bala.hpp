@@ -16,5 +16,7 @@ class Bala{
         void trayectoria();
         void Impacto();
         void drawTo(RenderWindow &window);
+        Vector2f getPosition();
+        Vector2f getDireccion();
         
 };

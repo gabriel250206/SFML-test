@@ -1,5 +1,6 @@
 #include <SFML/Graphics.hpp>
 #include "Personaje.hpp"
+#include "Enemigo.hpp"
 #include <iostream>
 using namespace sf;
 int main()
@@ -7,8 +8,10 @@ int main()
     RenderWindow window(VideoMode(500, 500), "SFML works!");
     window.setFramerateLimit(200);
     Personaje adan(150);
+    Enemigo serpiente(100);
     int x=0,y=0;
     int movx=0,movy=0;
+    int ultima=0;
     adan.drawTo(window);
     while (window.isOpen())
     {
@@ -57,7 +60,9 @@ int main()
 
                 }
                 if(event.key.code==Keyboard::I){ /// tecla de comprobacion
-                    std::cout<<"x: "<<adan.vista.x<<" "<<"y: "<<adan.vista.y<<" "<<std::endl;
+                    for(int i=0;i<adan.pistola->existentes.size();i++){
+                        std::cout<<"disparo "<<i+1<<": "<<adan.pistola->existentes[i]->getPosition().x<<" "<<adan.pistola->existentes[i]->getPosition().x<< " direccion x:"<<adan.pistola->existentes[i]->getDireccion().x<<" direccion y:"<<adan.pistola->existentes[i]->getDireccion().y<<std::endl;
+                    }// modificalo para ver que esta pasando, por que no guarda el ultimo disparo, por que no detecta cual fue la ultima etc,
 
                 }
                 if(event.key.code==Keyboard::LShift){
@@ -69,23 +74,24 @@ int main()
                 
 
 
-
+                ultima=adan.vista.x;// primero lo puse en tre el else y el primer if pero no funciono
 
 
             }else if(event.type==Event::KeyReleased){// para que no se queden haciendo algo infinitamente
-                if(event.key.code == Keyboard::A ) {
-                    x=0;
-                    adan.vista.x=0;
+                
+                if(event.key.code == Keyboard::A) {
+                    if(x==-1)x=0;
+                    adan.vista.x=0; // esto hace que no se muevan si está parado, pero si no lo ponemos entonces no puede disparar para arriba
                 }
                 if( event.key.code == Keyboard::D ) {
-                    x=0;
+                    if(x==1)x=0;
                     adan.vista.x=0;
                 }
                 //if(event.key.code == Keyboard::S) y=0;
                 if(event.key.code==Keyboard::W ) adan.vista.y=0;
                 if(event.key.code==Keyboard::S )adan.vista.y=0;
                 if(event.key.code == Keyboard::LShift) adan.tatekieto=false;
-                
+                if(event.key.code == Keyboard::A && event.key.code == Keyboard::D && event.key.code==Keyboard::W && event.key.code==Keyboard::S) adan.vista.x=ultima; // no funciona
                
             }
             
@@ -117,11 +123,14 @@ int main()
         }
         /// NADA DE ESTO
         adan.update(x,y);
+        serpiente.update(adan);
         window.clear();
         adan.drawTo(window);
+        serpiente.drawTo(window);
         for(int i=0;i<adan.pistola->existentes.size(); i++){
             adan.pistola->existentes[i]->trayectoria();
             adan.pistola->existentes[i]->drawTo(window);
+            
         }
 
         
