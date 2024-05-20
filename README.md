@@ -1,7 +1,7 @@
 /*  
 Nuestro proyecto se llama "AscomiSida"- Dani idea creativa
 
-La tematica y la inspiración viene de un Contra con mezcla de juegos Cuphead y si hay tiempo pensamos meterle Darksouls, Undertail, nuestro juego tiene cierta inspiracion de juegos retro, pero en especial de Cuphead
+La tematica y la inspiración viene de un Contra con mezcla de juegos Cuphead y si hay tiempo pensamos meterle Darksouls, Undertail, nuestro juego tiene cierta inspiracion de juegos retro, pero en especial de Contra y tiene tematica de hongos.
 
 Los Integrantes del equipo son Diego González y Gabriel Vallarta
 
