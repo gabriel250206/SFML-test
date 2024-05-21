@@ -1,3 +1,31 @@
+/*  
+Nuestro proyecto se llama "AscomiSida"- Dani idea creativa
+
+La tematica y la inspiración viene de un Contra con mezcla de juegos Cuphead y si hay tiempo pensamos meterle Darksouls, Undertail, nuestro juego tiene cierta inspiracion de juegos retro, pero en especial de Contra y tiene tematica de hongos.
+
+Los Integrantes del equipo son Diego González y Gabriel Vallarta
+
+
+Bibliografía:
+
+Fondo 1: Una puesta de sol estilo pixel art en la playa con una ola rompiendo contra la orilla. | Foto Premium. (2023, 15 mayo). Freepik. https://www.freepik.es/fotos-premium/puesta-sol-estilo-pixel-art-playa-ola-rompiendo-contra-orilla_43322817.htm 
+
+Fondo 2: Descubre los mejores recursos gratuitos de Bosque Animado. (2021, 1 julio). Freepik. https://www.freepik.es/fotos-vectores-gratis/bosque-animado 
+
+Espada: Wiki, C. T. M. (s. f.). Espada. Minecraft Wiki. https://minecraft.fandom.com/es/wiki/Espada 
+
+Pistola: 21100340 - online store. (s. f.). https://tisuperet.live/product_details/21100340.html
+
+
+*/
+
+
+
+
+
+
+
+
 # SFML
 
 Recuerda que esta es la base para los trabajos de SFML.
