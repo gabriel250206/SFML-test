@@ -22,3 +22,12 @@ class Principal {
         virtual void especial();
         void disparo(Vector2f posicion, Vector2f direccion);
 };
+
+class LanzaGuizantes:protected Principal{
+    
+    public:
+    int dash;
+    LanzaGuizantes();
+    
+    void especial();
+};

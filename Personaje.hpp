@@ -9,11 +9,12 @@ using namespace std;
 
 class Personaje{
     protected:
-        // vector<Sprite> animaciones;
+        vector<Sprite> animaciones;
          Vector2f velocidad;
         int vida;
         Texture stmTexture;
-        Sprite siguiente;
+        Texture espejo;
+        Sprite* siguiente;
         
         
         
@@ -29,8 +30,9 @@ class Personaje{
 
         Personaje(int vida);
         void drawTo(RenderWindow &window);
-        void update(int x, int y /*t danio*/);
-        void shot(Vector2f inicio);
+        void update(int x, int y /*t danio, bool piso*/);
+        void shot(Vector2f inicio, int ultima);
+        Vector2f getPosition();
 
        
 

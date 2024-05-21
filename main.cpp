@@ -1,6 +1,7 @@
 #include <SFML/Graphics.hpp>
 #include "Personaje.hpp"
 #include "Enemigo.hpp"
+#include "Plataformas.hpp"
 #include <iostream>
 using namespace sf;
 int main()
@@ -9,6 +10,7 @@ int main()
     window.setFramerateLimit(200);
     Personaje adan(150);
     Enemigo serpiente(100);
+    Plataforma base(Vector2f{250,350});
     int x=0,y=0;
     int movx=0,movy=0;
     int ultima=0;
@@ -26,6 +28,7 @@ int main()
                 if(event.key.code==Keyboard::A ){
                     if(adan.tatekieto==false) x=-1;
                     adan.vista.x=-1;
+                    ultima=adan.vista.x;
                     std::cout<<"A"<<endl;
                     
                     
@@ -35,6 +38,7 @@ int main()
                 if(event.key.code==Keyboard::D){
                     if(adan.tatekieto==false)x=1;
                     adan.vista.x=1;
+                    ultima=adan.vista.x;
                     std::cout<<"D"<<endl;
                     
             
@@ -60,21 +64,24 @@ int main()
 
                 }
                 if(event.key.code==Keyboard::I){ /// tecla de comprobacion
-                    for(int i=0;i<adan.pistola->existentes.size();i++){
-                        std::cout<<"disparo "<<i+1<<": "<<adan.pistola->existentes[i]->getPosition().x<<" "<<adan.pistola->existentes[i]->getPosition().x<< " direccion x:"<<adan.pistola->existentes[i]->getDireccion().x<<" direccion y:"<<adan.pistola->existentes[i]->getDireccion().y<<std::endl;
-                    }// modificalo para ver que esta pasando, por que no guarda el ultimo disparo, por que no detecta cual fue la ultima etc,
+                    std::cout<<base.getPosition().x<<" "<<base.getPosition().y<<endl;
+                    std::cout<<adan.getPosition().x<<" "<<adan.getPosition().y<<endl;
+                    // for(int i=0;i<adan.pistola->existentes.size();i++){
+                        
+                    //     //std::cout<<"disparo "<<i+1<<": "<<adan.pistola->existentes[i]->getPosition().x<<" "<<adan.pistola->existentes[i]->getPosition().x<< " direccion x:"<<adan.pistola->existentes[i]->getDireccion().x<<" direccion y:"<<adan.pistola->existentes[i]->getDireccion().y<<std::endl;
+                    // }// modificalo para ver que esta pasando, por que no guarda el ultimo disparo, por que no detecta cual fue la ultima etc,
 
                 }
                 if(event.key.code==Keyboard::LShift){
                     adan.tatekieto=true;
                 }
                 if(event.key.code==Keyboard::Left){
-                    adan.shot(adan.vista);
+                    adan.shot(adan.vista,ultima);
                 }
                 
 
 
-                ultima=adan.vista.x;// primero lo puse en tre el else y el primer if pero no funciono
+                
 
 
             }else if(event.type==Event::KeyReleased){// para que no se queden haciendo algo infinitamente
@@ -122,11 +129,14 @@ int main()
             
         }
         /// NADA DE ESTO
+
+        base.colision(adan,x,y);
         adan.update(x,y);
         serpiente.update(adan);
         window.clear();
         adan.drawTo(window);
         serpiente.drawTo(window);
+        base.drawTo(window);
         for(int i=0;i<adan.pistola->existentes.size(); i++){
             adan.pistola->existentes[i]->trayectoria();
             adan.pistola->existentes[i]->drawTo(window);
