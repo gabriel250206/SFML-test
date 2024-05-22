@@ -1,20 +1,21 @@
 #include "Personaje.hpp"
 #include "Armas.hpp"
+#include "Plataformas.hpp"
 #include <SFML/Graphics.hpp>
 #include <iostream>
 
 Personaje::Personaje(int vida){
 
 
-    // if(!espejo.loadFromFile("assets/soldadoespejo.png"))
-    // {
-    //     std::cout << "Error al cargar imagen" << std::endl;
-    // }
-    // espejo.setRepeated(true);
+    if(!espejo.loadFromFile("assets/soldadoespejo.png"))
+    {
+        std::cout << "Error al cargar imagen" << std::endl;
+    }
+    espejo.setRepeated(true);
 
-    // this->actualTexture.setTexture(espejo);
-    // this->actualTexture.setTextureRect(IntRect(20,0,16,40));
-
+    this->actualTexture.setTexture(espejo);
+    this->actualTexture.setTextureRect(IntRect(18,17,13,17));
+    this->actualTexture.scale(4,4);
     // animaciones.push_back(this->actualTexture);
 
 
@@ -25,11 +26,11 @@ Personaje::Personaje(int vida){
     stmTexture.setRepeated(true);
 
     this->actualTexture.setTexture(stmTexture);
-    this->actualTexture.setTextureRect(IntRect(30,0,16,40));
-    this->actualTexture.scale(4,4);
+    this->actualTexture.setTextureRect(IntRect(30,20,13,17));
+    
 
     
-    animaciones.push_back(actualTexture);
+    // animaciones.push_back(actualTexture);
     //this->actualTexture.setScale(-1,1);
     
     
@@ -39,6 +40,8 @@ Personaje::Personaje(int vida){
     this->siguienteS=true;
     this->tatekieto=false;
     this->pistola= new Principal();
+    this->contRecarga=0;
+    
     
 }
 
@@ -46,10 +49,13 @@ void Personaje::update(int x, int y/*, int danio, bool piso*/){
     
     if(this->actualTexture.getPosition().x<401 && x==1){
         this->actualTexture.setPosition(this->actualTexture.getPosition().x+x,this->actualTexture.getPosition().y);
-        //this->actualTexture.setTexture(animaciones[0]);
+        
+        
+
     }else if(this->actualTexture.getPosition().x>0 && x==-1){
         this->actualTexture.setPosition(this->actualTexture.getPosition().x+x,this->actualTexture.getPosition().y);
-        //this->actualTexture.setTexture(animaciones[1]);
+        
+        
     }
     if(this->actualTexture.getPosition().y<401 /*&& piso==false*/){
         this->actualTexture.setPosition(this->actualTexture.getPosition().x,this->actualTexture.getPosition().y+y);
@@ -79,13 +85,46 @@ void Personaje::drawTo(RenderWindow &window){
 void Personaje::shot(Vector2f inicio, int ultima){
     // Bala* disparo=new Bala(10,inicio);
     // acumulados.push_back(disparo);
-    // municion--;
+    
     if(vista.x==0 && vista.y==0) vista.x=ultima;
-    pistola->disparo(this->actualTexture.getPosition(),vista);
+    if(pistola->municion!=0){
+        pistola->disparo(this->actualTexture.getPosition(),vista);
+        pistola->municion--;
+    }
 }
 
 
 
 Vector2f Personaje::getPosition(){
     return this->actualTexture.getPosition();
+}
+
+void Personaje::saltar(int &y,Plataforma base){
+    if(this->salto==false){
+                y=-1;
+                
+                if(this->contSalto==100){
+                    this->contSalto=0;
+                    this->salto=true;
+                }
+                this->contSalto++;
+            }else{
+                y=0;
+            }
+            if(this->actualTexture.getPosition().y==400 || base.eta==true){
+              
+               this->siguienteS=true;
+            }
+            
+            
+}
+
+
+void Personaje::recargar(bool &recarga){
+    if(contRecarga==500){
+        this->pistola->municion=this->pistola->getMun();
+        contRecarga=0;
+        recarga=false;
+    }
+    contRecarga++;
 }

@@ -10,10 +10,12 @@ int main()
     window.setFramerateLimit(200);
     Personaje adan(150);
     Enemigo serpiente(100);
-    Plataforma base(Vector2f{150,450});
+    Plataforma base(Vector2f{250,350});
     int x=0,y=0;
-    int movx=0,movy=0;
+    int movx=0,movy=0; // desconozco funcionamiento de estas *-
     int ultima=0;
+    bool saltando;// no se si funcione *-
+    bool recargar=false;
     adan.drawTo(window);
     while (window.isOpen())
     {
@@ -29,6 +31,8 @@ int main()
                     if(adan.tatekieto==false) x=-1;
                     adan.vista.x=-1;
                     ultima=adan.vista.x;
+                    adan.actualTexture.setTexture(adan.espejo);
+                    adan.actualTexture.setTextureRect(IntRect(18,17,13,17));
                     std::cout<<"A"<<endl;
                     
                     
@@ -39,6 +43,8 @@ int main()
                     if(adan.tatekieto==false)x=1;
                     adan.vista.x=1;
                     ultima=adan.vista.x;
+                    adan.actualTexture.setTexture(adan.stmTexture);
+                    adan.actualTexture.setTextureRect(IntRect(30,20,13,17));
                     std::cout<<"D"<<endl;
                     
             
@@ -49,7 +55,7 @@ int main()
                 /// TAMPOCO ESTO, ES QUE NOS DA DOBLE SALTO
                 if(event.key.code==Keyboard::Space && adan.salto==true && adan.siguienteS==true && adan.tatekieto==false){ // si presionas y puede saltar
                     
-                    std::cout<<"W"<<endl;
+                    std::cout<<"Espacio"<<endl;
                     adan.salto=false;
                     adan.siguienteS=false;
                     
@@ -61,16 +67,22 @@ int main()
                 }
                 if(event.key.code==Keyboard::S){ /// tecla de comprobacion
                     adan.vista.y=1;
+                    
 
                 }
                 if(event.key.code==Keyboard::I){ /// tecla de comprobacion
-                    std::cout<<base.getPosition().x<<" "<<base.getPosition().y<<endl;
-                    std::cout<<adan.getPosition().x<<" "<<adan.getPosition().y<<endl;
+                    std::cout<<adan.contRecarga<<std::endl;
+                    //std::cout<<adan.pistola->municion<<std::endl;
+                    // std::cout<<base.getPosition().x<<" "<<base.getPosition().y<<endl;
+                    // std::cout<<adan.getPosition().x<<" "<<adan.getPosition().y<<endl;
                     // for(int i=0;i<adan.pistola->existentes.size();i++){
                         
                     //     //std::cout<<"disparo "<<i+1<<": "<<adan.pistola->existentes[i]->getPosition().x<<" "<<adan.pistola->existentes[i]->getPosition().x<< " direccion x:"<<adan.pistola->existentes[i]->getDireccion().x<<" direccion y:"<<adan.pistola->existentes[i]->getDireccion().y<<std::endl;
                     // }// modificalo para ver que esta pasando, por que no guarda el ultimo disparo, por que no detecta cual fue la ultima etc,
 
+                }
+                if(event.key.code==Keyboard::R){
+                    recargar=true;
                 }
                 if(event.key.code==Keyboard::LShift){
                     adan.tatekieto=true;
@@ -110,27 +122,16 @@ int main()
 
            
         }else {
-            if(adan.salto==false){
-                y=-1;
-                
-                if(adan.contSalto==100){
-                    adan.contSalto=0;
-                    adan.salto=true;
-                }
-                adan.contSalto++;
-            }else{
-                y=0;
-            }
-            if(adan.actualTexture.getPosition().y==400){
-              
-               adan.siguienteS=true;
-            }
-            
-            
+            saltando=true;
+            adan.saltar(y,base);
         }
         /// NADA DE ESTO
 
-        base.colision(adan,x,y);
+        if(recargar==true){
+            adan.recargar(recargar);
+        }
+
+        base.colision(adan,x,y,saltando);
         adan.update(x,y);
         serpiente.update(adan);
         window.clear();

@@ -21,6 +21,7 @@ class Principal {
         void recargar();
         virtual void especial();
         void disparo(Vector2f posicion, Vector2f direccion);
+        int getMun();
 };
 
 class LanzaGuizantes:protected Principal{

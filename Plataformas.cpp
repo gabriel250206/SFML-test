@@ -21,16 +21,24 @@ Plataforma::Plataforma(Vector2f posicion){
 
 
     this->actualTexture.setPosition(posicion);
+    this->eta=false;
 }
 
 
-void Plataforma::colision(Personaje &adan,int &x, int &y){
+void Plataforma::colision(Personaje &adan,int &x, int &y, bool saltando){
 
-    // int bmax=this->actualTexture.getPosition().x+105;
-    // int hmax=this->actualTexture.getPosition().y+99;
+    int bmax=this->actualTexture.getPosition().x+105;
+    int hmax=this->actualTexture.getPosition().y+99;
 
     if(adan.actualTexture.getGlobalBounds().intersects(this->actualTexture.getGlobalBounds())){
-        y=0;
+        if(adan.getPosition().y+64==this->actualTexture.getPosition().y){
+            y=0;
+            this->eta=true;
+        }
+        
+
+    }else{
+        eta=false;
     }
 
     // bool tocaBase=adan.actualTexture.getPosition().x<=bmax && adan.actualTexture.getPosition().x + adan.actualTexture.ge().x>=this->actualTexture.getPosition().x;
@@ -51,3 +59,4 @@ void Plataforma::drawTo(RenderWindow &window){
 Vector2f Plataforma::getPosition(){
     return this->actualTexture.getPosition();
 }
+

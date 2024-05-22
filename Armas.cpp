@@ -7,7 +7,7 @@
 
 Principal::Principal(){
     this->danio=10;
-    this->municionMax=20;
+    this->municionMax=10;
     this->municion=municionMax;
 }
 
@@ -36,4 +36,8 @@ LanzaGuizantes::LanzaGuizantes(){
 
 void LanzaGuizantes::especial(){
 
+}
+
+int Principal::getMun(){
+    return this->municionMax;
 }

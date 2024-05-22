@@ -5,24 +5,25 @@
 using namespace sf;
 using namespace std;
 
-
+class Plataforma;
 
 class Personaje{
     protected:
         vector<Sprite> animaciones;
          Vector2f velocidad;
         int vida;
-        Texture stmTexture;
-        Texture espejo;
+        
         Sprite* siguiente;
         
         
         
     public:
-        
+        Texture stmTexture;
+        Texture espejo;
         Sprite actualTexture;
         bool salto;
         int contSalto;
+        int contRecarga;
         Vector2f vista;
         bool siguienteS;
         bool tatekieto;
@@ -33,6 +34,8 @@ class Personaje{
         void update(int x, int y /*t danio, bool piso*/);
         void shot(Vector2f inicio, int ultima);
         Vector2f getPosition();
+        void saltar(int &y, Plataforma base);
+        void recargar(bool &recarga);
 
        
 

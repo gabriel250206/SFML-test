@@ -12,7 +12,8 @@ class Plataforma{
         Sprite actualTexture;
     public:
         Vector2f posicion;
-        void colision(Personaje &adan,int &x, int&y);
+        bool eta;// no se si funcione esto 
+        void colision(Personaje &adan,int &x, int&y,bool saltando);
         Plataforma(Vector2f posicion);
         void drawTo(RenderWindow &window);
         Vector2f getPosition();
