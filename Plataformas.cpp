@@ -16,7 +16,7 @@ Plataforma::Plataforma(Vector2f posicion){
     stmTexture.setRepeated(true);
     
     this->actualTexture.setTexture(stmTexture);
-    this->actualTexture.setTextureRect(IntRect(10,21,28,50));
+    this->actualTexture.setTextureRect(IntRect(11,21,26,9));
     this->actualTexture.scale(4,4);
 
 

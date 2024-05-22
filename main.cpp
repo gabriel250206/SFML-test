@@ -10,7 +10,7 @@ int main()
     window.setFramerateLimit(200);
     Personaje adan(150);
     Enemigo serpiente(100);
-    Plataforma base(Vector2f{250,350});
+    Plataforma base(Vector2f{150,450});
     int x=0,y=0;
     int movx=0,movy=0;
     int ultima=0;
