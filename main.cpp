@@ -2,6 +2,7 @@
 #include "Personaje.hpp"
 #include "Enemigo.hpp"
 #include "Plataformas.hpp"
+#include "back.hpp"
 #include <iostream>
 using namespace sf;
 int main()
@@ -9,13 +10,15 @@ int main()
     RenderWindow window(VideoMode(500, 500), "SFML works!");
     window.setFramerateLimit(200);
     Personaje adan(150);
-    Enemigo serpiente(100);
+    //Enemigo serpiente(100);
     Plataforma base(Vector2f{250,350});
+    Fondo atras;
     int x=0,y=0;
     int movx=0,movy=0; // desconozco funcionamiento de estas *-
     int ultima=0;
     bool saltando;// no se si funcione *-
     bool recargar=false;
+
     adan.drawTo(window);
     while (window.isOpen())
     {
@@ -132,11 +135,13 @@ int main()
         }
 
         base.colision(adan,x,y,saltando);
-        adan.update(x,y);
-        serpiente.update(adan);
+        adan.update(x,y,atras);
+        //serpiente.update(adan);
         window.clear();
+        atras.drawTo(window);
         adan.drawTo(window);
-        serpiente.drawTo(window);
+        adan.pistola->drawTo(window);
+       // serpiente.drawTo(window);
         base.drawTo(window);
         for(int i=0;i<adan.pistola->existentes.size(); i++){
             adan.pistola->existentes[i]->trayectoria();

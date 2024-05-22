@@ -1,6 +1,7 @@
 #include "Personaje.hpp"
 #include "Armas.hpp"
 #include "Plataformas.hpp"
+#include "back.hpp"
 #include <SFML/Graphics.hpp>
 #include <iostream>
 
@@ -39,23 +40,33 @@ Personaje::Personaje(int vida){
     this->contSalto=0;
     this->siguienteS=true;
     this->tatekieto=false;
-    this->pistola= new Principal();
+    this->pistola= new Principal(this->actualTexture.getPosition());
     this->contRecarga=0;
+    this->vista.x=1;
     
     
 }
 
-void Personaje::update(int x, int y/*, int danio, bool piso*/){
+void Personaje::update(int x, int y/*, int danio, bool piso*/, Fondo &paisaje ){
     
-    if(this->actualTexture.getPosition().x<401 && x==1){
+    if(this->actualTexture.getPosition().x<225 && x==1){
         this->actualTexture.setPosition(this->actualTexture.getPosition().x+x,this->actualTexture.getPosition().y);
         
         
 
-    }else if(this->actualTexture.getPosition().x>0 && x==-1){
+    }else {
+        if(this->actualTexture.getPosition().x==225 && x==1){
+            paisaje.desplaza(x);
+        }
+    }
+    if(this->actualTexture.getPosition().x>0 && x==-1){
         this->actualTexture.setPosition(this->actualTexture.getPosition().x+x,this->actualTexture.getPosition().y);
         
         
+    }else{
+        if(this->actualTexture.getPosition().x==0 && x==-1){
+            paisaje.desplaza(x);
+        }
     }
     if(this->actualTexture.getPosition().y<401 /*&& piso==false*/){
         this->actualTexture.setPosition(this->actualTexture.getPosition().x,this->actualTexture.getPosition().y+y);
@@ -73,6 +84,7 @@ void Personaje::update(int x, int y/*, int danio, bool piso*/){
     }
     //this->actualTexture.setPosition(this->actualTexture.getPosition().x+x,this->actualTexture.getPosition().y+y);
    
+   this->pistola->update(this->actualTexture.getPosition());
    
 }
 

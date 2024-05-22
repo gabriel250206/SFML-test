@@ -6,7 +6,7 @@ using namespace sf;
 using namespace std;
 
 class Plataforma;
-
+class Fondo;
 class Personaje{
     protected:
         vector<Sprite> animaciones;
@@ -31,7 +31,7 @@ class Personaje{
 
         Personaje(int vida);
         void drawTo(RenderWindow &window);
-        void update(int x, int y /*t danio, bool piso*/);
+        void update(int x, int y /*t danio, bool piso*/, Fondo &paisaje);
         void shot(Vector2f inicio, int ultima);
         Vector2f getPosition();
         void saltar(int &y, Plataforma base);

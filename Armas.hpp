@@ -16,12 +16,18 @@ class Principal {
     public:
         vector<Bala*> existentes;
         int municion;
+        Texture stmTexture;
+        Sprite actualTexture;
+
         Principal();
+        Principal(Vector2f posicion);
         int getDanio();
         void recargar();
         virtual void especial();
         void disparo(Vector2f posicion, Vector2f direccion);
         int getMun();
+        void update(Vector2f posicion);
+        void drawTo(RenderWindow &window);
 };
 
 class LanzaGuizantes:protected Principal{

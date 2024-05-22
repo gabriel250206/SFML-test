@@ -7,14 +7,15 @@ using namespace std;
 
 Enemigo::Enemigo(int vida){
     this->vida=vida;
-    if(!stmTexture.loadFromFile("assets/stickman.png"))
+    if(!stmTexture.loadFromFile("assets/enemigoRojo.png"))
     {
         std::cout << "Error al cargar imagen" << std::endl;
     }
     stmTexture.setRepeated(true);
 
     this->actualTexture.setTexture(stmTexture);
-    this->actualTexture.setTextureRect(IntRect(0,0,105,99));
+    this->actualTexture.setTextureRect(IntRect(16,16,18,17));
+    this->actualTexture.setScale(4,4);
     this->actualTexture.setPosition(300,400);
     this->dibujar=true;
 }
