@@ -23,18 +23,18 @@ class Principal {
         Principal(Vector2f posicion);
         int getDanio();
         void recargar();
-        virtual void especial();
+        virtual void especial(int &x, int &cont);
         void disparo(Vector2f posicion, Vector2f direccion);
         int getMun();
         void update(Vector2f posicion);
         void drawTo(RenderWindow &window);
 };
 
-class LanzaGuizantes:protected Principal{
+class LanzaGuizantes:public Principal{
     
     public:
     int dash;
-    LanzaGuizantes();
+    LanzaGuizantes(Vector2f posicion);
     
-    void especial();
+    void especial(int &x, int &cont);
 };

@@ -95,6 +95,9 @@ int main()
                 if(event.key.code==Keyboard::Left){
                     adan.shot(adan.vista,ultima);
                 }
+                if(event.key.code==Keyboard::E){
+                    //adan.pistola->especial(x);
+                }
                 
 
 

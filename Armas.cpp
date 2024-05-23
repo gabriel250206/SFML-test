@@ -53,7 +53,7 @@ int Principal::getDanio(){
 void Principal::recargar(){
     this->municion=municionMax;
 }
-void Principal::especial(){
+void Principal::especial(int &x, int &cont){
 
 }
 void Principal::disparo(Vector2f posicion,Vector2f direccion){
@@ -62,15 +62,21 @@ void Principal::disparo(Vector2f posicion,Vector2f direccion){
     std::cout<<"pum"<<endl;
 }
 
-LanzaGuizantes::LanzaGuizantes(){
+LanzaGuizantes::LanzaGuizantes(Vector2f posicion){
     this->danio=10;
     this->municionMax=10;
     this->municion=municionMax;
 }
 
 
-void LanzaGuizantes::especial(){
-
+void LanzaGuizantes::especial(int &x, int& cont){
+    if(cont==100){
+        x/=2;
+        cont=0;
+        
+    }
+    x*=2;
+    
 }
 
 int Principal::getMun(){
