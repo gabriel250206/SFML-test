@@ -13,5 +13,6 @@ class Fondo{
         int a;
         void desplaza(int x);
         void drawTo(RenderWindow &window);
+        int getA();
 
 };

@@ -19,4 +19,5 @@ class Bala{
         Vector2f getPosition();
         Vector2f getDireccion();
         
+        
 };

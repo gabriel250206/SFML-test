@@ -74,7 +74,9 @@ int main()
 
                 }
                 if(event.key.code==Keyboard::I){ /// tecla de comprobacion
-                    std::cout<<adan.contRecarga<<std::endl;
+                    std::cout<<atras.getA()<<std::endl;
+                    std::cout<<adan.actualTexture.getPosition().x<<std::endl;
+                    //std::cout<<adan.contRecarga<<std::endl;
                     //std::cout<<adan.pistola->municion<<std::endl;
                     // std::cout<<base.getPosition().x<<" "<<base.getPosition().y<<endl;
                     // std::cout<<adan.getPosition().x<<" "<<adan.getPosition().y<<endl;
@@ -135,7 +137,7 @@ int main()
         }
 
         base.colision(adan,x,y,saltando);
-        adan.update(x,y,atras);
+        adan.update(x,y,atras,base);
         //serpiente.update(adan);
         window.clear();
         atras.drawTo(window);

@@ -22,6 +22,7 @@ Plataforma::Plataforma(Vector2f posicion){
 
     this->actualTexture.setPosition(posicion);
     this->eta=false;
+    this->a=0;
 }
 
 
@@ -60,3 +61,7 @@ Vector2f Plataforma::getPosition(){
     return this->actualTexture.getPosition();
 }
 
+void Plataforma::desplazamiento(int x){
+    
+    this->actualTexture.setPosition(getPosition().x-x,getPosition().y);
+}

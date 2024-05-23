@@ -26,6 +26,10 @@ void Fondo::drawTo(RenderWindow &window){
 void Fondo::desplaza(int x){
     cout<<"desplaza"<<endl;
     a=a+x;
-    this->actualTexture.setTextureRect(IntRect(0+a,0,500,500));
+    if(a<1000 && a>0)this->actualTexture.setTextureRect(IntRect(0+a,0,500,500));
 
+}
+
+int Fondo::getA(){
+    return this->a;
 }
