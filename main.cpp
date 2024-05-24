@@ -142,11 +142,12 @@ int main()
 
         base.colision(adan,x,y,saltando);
         if(adan.pistola->desplazar==true){
-            if(dash==100){
+            if(dash==10){
                 adan.pistola->desplazar=false;
                 dash=0;
-                x=x/2;
+                x=0;
             }
+            if(x==0)x=adan.vista.x;
             if(dash==0)x=x*2;
             dash++;
             
