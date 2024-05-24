@@ -28,6 +28,7 @@ class Personaje{
         bool siguienteS;
         bool tatekieto;
         Principal* pistola;
+        
 
         Personaje(int vida);
         void drawTo(RenderWindow &window);

@@ -18,6 +18,7 @@ int main()
     int ultima=0;
     bool saltando;// no se si funcione *-
     bool recargar=false;
+    int dash=0;
 
     adan.drawTo(window);
     while (window.isOpen())
@@ -36,7 +37,6 @@ int main()
                     ultima=adan.vista.x;
                     adan.actualTexture.setTexture(adan.espejo);
                     adan.actualTexture.setTextureRect(IntRect(18,17,13,17));
-                    std::cout<<"A"<<endl;
                     
                     
                     
@@ -48,7 +48,7 @@ int main()
                     ultima=adan.vista.x;
                     adan.actualTexture.setTexture(adan.stmTexture);
                     adan.actualTexture.setTextureRect(IntRect(30,20,13,17));
-                    std::cout<<"D"<<endl;
+                   
                     
             
                     
@@ -74,8 +74,9 @@ int main()
 
                 }
                 if(event.key.code==Keyboard::I){ /// tecla de comprobacion
-                    std::cout<<atras.getA()<<std::endl;
-                    std::cout<<adan.actualTexture.getPosition().x<<std::endl;
+                    cout<<x<<endl;
+                    // std::cout<<atras.getA()<<std::endl;
+                    // std::cout<<adan.actualTexture.getPosition().x<<std::endl;
                     //std::cout<<adan.contRecarga<<std::endl;
                     //std::cout<<adan.pistola->municion<<std::endl;
                     // std::cout<<base.getPosition().x<<" "<<base.getPosition().y<<endl;
@@ -96,7 +97,7 @@ int main()
                     adan.shot(adan.vista,ultima);
                 }
                 if(event.key.code==Keyboard::E){
-                    //adan.pistola->especial(x);
+                    adan.pistola->especial(x,dash);
                 }
                 
 
@@ -140,6 +141,18 @@ int main()
         }
 
         base.colision(adan,x,y,saltando);
+        if(adan.pistola->desplazar==true){
+            if(dash==100){
+                adan.pistola->desplazar=false;
+                dash=0;
+                x=x/2;
+            }
+            if(dash==0)x=x*2;
+            dash++;
+            
+            cout<<x<<endl;
+            
+        }
         adan.update(x,y,atras,base);
         //serpiente.update(adan);
         window.clear();

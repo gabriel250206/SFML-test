@@ -66,17 +66,12 @@ LanzaGuizantes::LanzaGuizantes(Vector2f posicion){
     this->danio=10;
     this->municionMax=10;
     this->municion=municionMax;
+    this->desplazar=false;
 }
 
 
 void LanzaGuizantes::especial(int &x, int& cont){
-    if(cont==100){
-        x/=2;
-        cont=0;
-        
-    }
-    x*=2;
-    
+    this->desplazar=true;
 }
 
 int Principal::getMun(){

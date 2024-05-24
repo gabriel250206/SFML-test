@@ -18,7 +18,10 @@ class Principal {
         int municion;
         Texture stmTexture;
         Sprite actualTexture;
+        
 
+
+        bool desplazar;
         Principal();
         Principal(Vector2f posicion);
         int getDanio();
@@ -34,6 +37,7 @@ class LanzaGuizantes:public Principal{
     
     public:
     int dash;
+    
     LanzaGuizantes(Vector2f posicion);
     
     void especial(int &x, int &cont);
