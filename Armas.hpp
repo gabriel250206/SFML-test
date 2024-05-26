@@ -13,13 +13,15 @@ class Principal {
         int danio;
         int municionMax;
         
+        
     public:
+        bool tirada;
         vector<Bala*> existentes;
         int municion;
         Texture stmTexture;
         Sprite actualTexture;
         
-
+        void drop();
 
         bool desplazar;
         Principal();
@@ -29,7 +31,7 @@ class Principal {
         virtual void especial(int &x, int &cont);
         void disparo(Vector2f posicion, Vector2f direccion);
         int getMun();
-        void update(Vector2f posicion);
+        void update(Vector2f posicion, int x, int y);
         void drawTo(RenderWindow &window);
 };
 

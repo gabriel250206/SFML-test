@@ -13,6 +13,7 @@ class Enemigo{
         Texture stmTexture;
         bool dibujar; // solo de prueba, luego hay que eliminarlo
         int tiempo;
+        bool muerto;
     public:
         Sprite actualTexture;
         int vida;
@@ -21,7 +22,7 @@ class Enemigo{
         int getVida();
         void setVida(int danio);
         void drawTo(RenderWindow &window);
-        void update(Personaje adan);
+        void update(Personaje adan, int x, int y);
         
 
 };

@@ -167,12 +167,13 @@ int main()
             cout<<x<<endl;
         }
         adan.update(x,y,atras,base);
-        serpiente.update(adan);
+        serpiente.update(adan,x,y);
         window.clear();
         atras.drawTo(window);
         adan.drawTo(window);
         adan.pistola->drawTo(window);
         serpiente.drawTo(window);
+        serpiente.pistola->drawTo(window);
         base.drawTo(window);
         for(int i=0;i<adan.pistola->existentes.size(); i++){
             adan.pistola->existentes[i]->trayectoria();

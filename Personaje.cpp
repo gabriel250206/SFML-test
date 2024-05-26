@@ -88,7 +88,7 @@ void Personaje::update(int x, int y/*, int danio, bool piso*/, Fondo &paisaje,Pl
     }
     //this->actualTexture.setPosition(this->actualTexture.getPosition().x+x,this->actualTexture.getPosition().y+y);
    
-   this->pistola->update(this->actualTexture.getPosition());
+   this->pistola->update(this->actualTexture.getPosition(), x, y);
    
 }
 
