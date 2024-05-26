@@ -11,13 +11,14 @@ class Personaje{
     protected:
         vector<Sprite> animaciones;
          Vector2f velocidad;
-        int vida;
+        
         
         Sprite* siguiente;
         
         
         
     public:
+        int vida;
         Texture stmTexture;
         Texture espejo;
         Sprite actualTexture;

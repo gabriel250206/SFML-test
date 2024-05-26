@@ -9,13 +9,14 @@ using namespace sf;
 
 class Enemigo{
     protected:
-        int vida;
+        
         Texture stmTexture;
         bool dibujar; // solo de prueba, luego hay que eliminarlo
+        int tiempo;
     public:
         Sprite actualTexture;
-
-        Principal pistola;
+        int vida;
+        Principal* pistola;
         Enemigo( int vida);
         int getVida();
         void setVida(int danio);

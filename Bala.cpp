@@ -16,6 +16,7 @@ Bala::Bala(int danio, Vector2f posicion, Vector2f direccion){
     this->actualTexture.setTexture(stmTexture);
     this->actualTexture.setPosition(posicion);
     this->actualTexture.setTextureRect(IntRect(0,0,100,100));
+    this->impactado=false;
 
 }
 
@@ -36,4 +37,11 @@ Vector2f Bala::getPosition(){
 }
 Vector2f Bala::getDireccion(){
     return this->direccion;
+}
+
+void Bala::Impacto(Sprite actualTexture1, int &vida){
+    if(this->actualTexture.getGlobalBounds().intersects(actualTexture1.getGlobalBounds()) && impactado==false){
+        vida=vida-this->danio;
+        this->impactado=true;
+    }
 }

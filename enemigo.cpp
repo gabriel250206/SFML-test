@@ -18,6 +18,8 @@ Enemigo::Enemigo(int vida){
     this->actualTexture.setScale(4,4);
     this->actualTexture.setPosition(300,400);
     this->dibujar=true;
+    this->pistola= new Principal(this->actualTexture.getPosition());
+    this->tiempo=0;
 }
 
 
@@ -26,6 +28,19 @@ void Enemigo::drawTo(RenderWindow &window){
 }
 
 void Enemigo::update(Personaje adan){
+
+    if(this->tiempo==0){
+        this->pistola->disparo(this->actualTexture.getPosition(),Vector2f{-1,0});
+
+    }
+    tiempo++;
+
+    if(this->tiempo==500){
+        this->tiempo=0;
+    }
+    
+
+
     for(int i=0;i<adan.pistola->existentes.size();i++){
         if(this->actualTexture.getPosition()==adan.pistola->existentes[i]->getPosition()){
             dibujar=false;

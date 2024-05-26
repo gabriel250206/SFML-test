@@ -50,24 +50,24 @@ Personaje::Personaje(int vida){
 
 void Personaje::update(int x, int y/*, int danio, bool piso*/, Fondo &paisaje,Plataforma & piso){
     
-    if((this->actualTexture.getPosition().x<225 && (x==1|| x==2) || (paisaje.getA()>=1000 && this->actualTexture.getPosition().x<450 && x==1))){
+    if((this->actualTexture.getPosition().x<225 && (x==1|| x==3) || (paisaje.getA()>=1000 && this->actualTexture.getPosition().x<450 && x==1))){
         this->actualTexture.setPosition(this->actualTexture.getPosition().x+x,this->actualTexture.getPosition().y);
         
         
 
     }else {
-        if(this->actualTexture.getPosition().x==225 && x==1 && paisaje.getA()<1000){
+        if(this->actualTexture.getPosition().x>=225 && (x==1|| x==3) && paisaje.getA()<1000){
             
             paisaje.desplaza(x);
             piso.desplazamiento(x);
         }
     }
-    if(this->actualTexture.getPosition().x>0 && (x==-1||x==2)){
+    if(this->actualTexture.getPosition().x>0 && (x==-1||x==-3)){
         this->actualTexture.setPosition(this->actualTexture.getPosition().x+x,this->actualTexture.getPosition().y);
         
         
     }else{
-        if(this->actualTexture.getPosition().x==0 && x==-1 && paisaje.getA()>0){
+        if(this->actualTexture.getPosition().x<=0 && (x==-1|| x==-3) && paisaje.getA()>0){
             paisaje.desplaza(x);
             piso.desplazamiento(x);
         }

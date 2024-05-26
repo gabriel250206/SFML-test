@@ -11,10 +11,10 @@ class Bala{
         
     public:
         
-        
+        bool impactado;
         Bala(int danio, Vector2f posicion, Vector2f direccion);
         void trayectoria();
-        void Impacto();
+        void Impacto(Sprite actualtexture1,int &vida);
         void drawTo(RenderWindow &window);
         Vector2f getPosition();
         Vector2f getDireccion();

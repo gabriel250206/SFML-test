@@ -7,10 +7,10 @@
 using namespace sf;
 int main()
 {
-    RenderWindow window(VideoMode(500, 500), "SFML works!");
+    RenderWindow window(VideoMode(500, 500), "le contre");
     window.setFramerateLimit(200);
     Personaje adan(150);
-    //Enemigo serpiente(100);
+    Enemigo serpiente(100);
     Plataforma base(Vector2f{250,350});
     Fondo atras;
     int x=0,y=0;
@@ -19,7 +19,8 @@ int main()
     bool saltando;// no se si funcione *-
     bool recargar=false;
     int dash=0;
-
+    
+    bool presion=false;
     adan.drawTo(window);
     while (window.isOpen())
     {
@@ -35,6 +36,7 @@ int main()
                     if(adan.tatekieto==false) x=-1;
                     adan.vista.x=-1;
                     ultima=adan.vista.x;
+                    presion=true;
                     adan.actualTexture.setTexture(adan.espejo);
                     adan.actualTexture.setTextureRect(IntRect(18,17,13,17));
                     
@@ -46,6 +48,7 @@ int main()
                     if(adan.tatekieto==false)x=1;
                     adan.vista.x=1;
                     ultima=adan.vista.x;
+                    presion=true;
                     adan.actualTexture.setTexture(adan.stmTexture);
                     adan.actualTexture.setTextureRect(IntRect(30,20,13,17));
                    
@@ -74,7 +77,7 @@ int main()
 
                 }
                 if(event.key.code==Keyboard::I){ /// tecla de comprobacion
-                    cout<<x<<endl;
+                    cout<<adan.vida<<" "<<serpiente.vida<<endl;
                     // std::cout<<atras.getA()<<std::endl;
                     // std::cout<<adan.actualTexture.getPosition().x<<std::endl;
                     //std::cout<<adan.contRecarga<<std::endl;
@@ -109,11 +112,13 @@ int main()
                 
                 if(event.key.code == Keyboard::A) {
                     if(x==-1)x=0;
-                    adan.vista.x=0; // esto hace que no se muevan si está parado, pero si no lo ponemos entonces no puede disparar para arriba
+                    presion=false;
+                    if(!event.key.code==Keyboard::W || !event.key.code==Keyboard::S)adan.vista.x=0; // esto hace que no se muevan si está parado, pero si no lo ponemos entonces no puede disparar para arriba
                 }
                 if( event.key.code == Keyboard::D ) {
                     if(x==1)x=0;
-                    adan.vista.x=0;
+                    presion=false;
+                    if(!event.key.code==Keyboard::W||!event.key.code==Keyboard::S)adan.vista.x=0;
                 }
                 //if(event.key.code == Keyboard::S) y=0;
                 if(event.key.code==Keyboard::W ) adan.vista.y=0;
@@ -141,31 +146,44 @@ int main()
         }
 
         base.colision(adan,x,y,saltando);
-        if(adan.pistola->desplazar==true){
-            if(dash==10){
-                adan.pistola->desplazar=false;
-                dash=0;
-                x=0;
-            }
+        if(adan.pistola->desplazar==true && dash<20){
+            
             if(x==0)x=adan.vista.x;
-            if(dash==0)x=x*2;
+            if(dash==0)x=x*3;
             dash++;
             
-            cout<<x<<endl;
+            cout<<x<<" "<<dash<<" "<<adan.pistola->desplazar<<endl;
             
+        }else if(dash==20){ 
+            adan.pistola->desplazar=false;
+            dash=0;
+            cout<<adan.vista.x<<endl;
+
+            if(presion==false){
+                x=0;
+            }else{
+                x=adan.vista.x;
+            }
+            cout<<x<<endl;
         }
         adan.update(x,y,atras,base);
-        //serpiente.update(adan);
+        serpiente.update(adan);
         window.clear();
         atras.drawTo(window);
         adan.drawTo(window);
         adan.pistola->drawTo(window);
-       // serpiente.drawTo(window);
+        serpiente.drawTo(window);
         base.drawTo(window);
         for(int i=0;i<adan.pistola->existentes.size(); i++){
             adan.pistola->existentes[i]->trayectoria();
+            adan.pistola->existentes[i]->Impacto(serpiente.actualTexture,adan.vida);
             adan.pistola->existentes[i]->drawTo(window);
             
+        }
+        for(int i=0;i<serpiente.pistola->existentes.size();i++){
+            serpiente.pistola->existentes[i]->trayectoria();
+            serpiente.pistola->existentes[i]->Impacto(adan.actualTexture,adan.vida);
+            serpiente.pistola->existentes[i]->drawTo(window);
         }
 
         
