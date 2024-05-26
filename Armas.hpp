@@ -24,6 +24,7 @@ class Principal {
         void drop();
 
         bool desplazar;
+        bool piso;
         Principal();
         Principal(Vector2f posicion);
         int getDanio();

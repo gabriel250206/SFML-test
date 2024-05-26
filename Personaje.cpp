@@ -40,7 +40,7 @@ Personaje::Personaje(int vida){
     this->contSalto=0;
     this->siguienteS=true;
     this->tatekieto=false;
-    this->pistola= new LanzaGuizantes(this->actualTexture.getPosition());
+    this->pistola= new Principal(this->actualTexture.getPosition());
     this->contRecarga=0;
     this->vista.x=1;
    
@@ -48,10 +48,11 @@ Personaje::Personaje(int vida){
     
 }
 
-void Personaje::update(int x, int y/*, int danio, bool piso*/, Fondo &paisaje,Plataforma & piso){
+void Personaje::update(int &x, int y/*, int danio, bool piso*/, Fondo &paisaje,Plataforma & piso){
     
     if((this->actualTexture.getPosition().x<225 && (x==1|| x==3) || (paisaje.getA()>=1000 && this->actualTexture.getPosition().x<450 && x==1))){
         this->actualTexture.setPosition(this->actualTexture.getPosition().x+x,this->actualTexture.getPosition().y);
+        
         
         
 
@@ -60,6 +61,7 @@ void Personaje::update(int x, int y/*, int danio, bool piso*/, Fondo &paisaje,Pl
             
             paisaje.desplaza(x);
             piso.desplazamiento(x);
+            
         }
     }
     if(this->actualTexture.getPosition().x>0 && (x==-1||x==-3)){
@@ -70,6 +72,7 @@ void Personaje::update(int x, int y/*, int danio, bool piso*/, Fondo &paisaje,Pl
         if(this->actualTexture.getPosition().x<=0 && (x==-1|| x==-3) && paisaje.getA()>0){
             paisaje.desplaza(x);
             piso.desplazamiento(x);
+           
         }
     }
     if(this->actualTexture.getPosition().y<401 /*&& piso==false*/){

@@ -6,7 +6,7 @@ using namespace sf;
 using namespace std;
 
 Fondo::Fondo(){
-    if(!stmTexture.loadFromFile("assets/pazto.png"))
+    if(!stmTexture.loadFromFile("assets/fondo.png"))
     {
         std::cout << "Error al cargar imagen" << std::endl;
     }

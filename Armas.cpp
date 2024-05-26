@@ -10,6 +10,7 @@ Principal::Principal(Vector2f posicion){
     this->municionMax=10;
     this->municion=municionMax;
     this->tirada=false;
+    this->piso=false;
 
     if(!stmTexture.loadFromFile("assets/raygun.png"))
     {
@@ -82,6 +83,9 @@ int Principal::getMun(){
 void Principal::update(Vector2f posicion, int x, int y){
     if(!tirada){
         this->actualTexture.setPosition(posicion.x+40,posicion.y+35);
+    }else if(piso==false){
+        this->actualTexture.setPosition(this->actualTexture.getPosition().x+(-1*x),this->actualTexture.getPosition().y+30);
+        piso=true;
     }else{
         this->actualTexture.setPosition(this->actualTexture.getPosition().x+(-1*x),this->actualTexture.getPosition().y);
     }

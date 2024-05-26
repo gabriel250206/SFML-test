@@ -22,14 +22,13 @@ Bala::Bala(int danio, Vector2f posicion, Vector2f direccion){
 
 void Bala::trayectoria(){
     
-    this->actualTexture.move(this->direccion);
-    
+    /*if(!impactado)*/this->actualTexture.move(this->direccion);
 }
 // void Bala::mover(int direcx,int direcy){
 //     this->bullet.setPosition(this->bullet.getPosition().x+direcx,this->bullet.getPosition().y+direcy);
 // }
 void Bala::drawTo(RenderWindow &window){
-    window.draw(this->actualTexture);
+    /*if(!impactado)*/window.draw(this->actualTexture);
 }
 
 Vector2f Bala::getPosition(){
