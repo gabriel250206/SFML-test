@@ -105,8 +105,8 @@ int main()
                 if(event.key.code==Keyboard::E){
                     adan.pistola->especial(x,dash);
                 }
-                if(event.key.code==Keyboard::Q){ ///dropear arma
-                    adan.pistola->piso=true;
+                if(event.key.code==Keyboard::Q){ ///dropear arma--
+                    adan.pistola->tirada=true;
                 }
                 
 
@@ -181,7 +181,7 @@ int main()
         serpiente.drawTo(window);
         serpiente.pistola->drawTo(window);
         base.drawTo(window);
-        base2.drawTo(window);
+        //base2.drawTo(window);
         for(int i=0;i<adan.pistola->existentes.size(); i-=-1){
             adan.pistola->existentes[i]->trayectoria();
             adan.pistola->existentes[i]->Impacto(serpiente.actualTexture,serpiente.vida);
