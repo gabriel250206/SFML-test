@@ -5,17 +5,33 @@
 
 Bala::Bala(int danio, Vector2f posicion, Vector2f direccion){
     this->danio=danio;
+    posicion.x=posicion.x+10;
     this->direccion=direccion;
-    
-    if(!stmTexture.loadFromFile("assets/bala.png"))
-    {
-        std::cout << "Error al cargar imagen" << std::endl;
-    }
-    stmTexture.setRepeated(true);
+    if(this->direccion.x==-1){
+        if(!stmTexture.loadFromFile("assets/bala.png"))
+        {
+            std::cout << "Error al cargar imagen" << std::endl;
+        }
+        stmTexture.setRepeated(true);
 
-    this->actualTexture.setTexture(stmTexture);
-    this->actualTexture.setPosition(posicion);
-    this->actualTexture.setTextureRect(IntRect(0,0,100,100));
+        this->actualTexture.setTexture(stmTexture);
+        this->actualTexture.setPosition(posicion);
+        this->actualTexture.setTextureRect(IntRect(13,21,20,7));
+    
+    }else if(this->direccion.x==1){
+        if(!stmTexture.loadFromFile("assets/balaVolteada.png"))
+        {
+            std::cout << "Error al cargar imagen" << std::endl;
+        }
+        stmTexture.setRepeated(true);
+
+        this->actualTexture.setTexture(stmTexture);
+        this->actualTexture.setPosition(posicion);
+
+        this->actualTexture.setTextureRect(IntRect(13,23,20,7));
+       
+    }
+    
     this->impactado=false;
 
 }

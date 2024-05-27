@@ -21,6 +21,7 @@ Enemigo::Enemigo(int vida){
     this->pistola= new Principal(this->actualTexture.getPosition());
     this->tiempo=0;
     this->muerto=false;
+    this->vista={-1,0};
 }
 
 
@@ -33,9 +34,21 @@ void Enemigo::drawTo(RenderWindow &window){
     }
 }
 
-void Enemigo::update(Personaje adan, int x, int y){
+void Enemigo::update(Personaje* adan, int x, int y){
     if(muerto==false){
-        if(this->tiempo==0){
+        
+    this->actualTexture.setPosition(actualTexture.getPosition().x-x,actualTexture.getPosition().y);
+    }
+    
+    
+    
+
+
+    
+}
+
+void Enemigo::disparo(Personaje adan, int x, int y){
+    if(this->tiempo==0){
         
         this->pistola->disparo(this->actualTexture.getPosition(),Vector2f{-1,0});
         
@@ -50,12 +63,10 @@ void Enemigo::update(Personaje adan, int x, int y){
             dibujar=false;
         }
     }
-    this->actualTexture.setPosition(actualTexture.getPosition().x-x,actualTexture.getPosition().y);
-    }
     
-    this->pistola->update(this->actualTexture.getPosition(),x,y);
-    
+    this->pistola->update(this->actualTexture.getPosition(),x,y, vista);
+}
 
-
-    
+bool Enemigo::getEstado(){
+    return muerto;
 }

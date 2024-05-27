@@ -1,6 +1,7 @@
 #include "Personaje.hpp"
 #include "Armas.hpp"
 #include "Plataformas.hpp"
+#include "enemigo.hpp"
 #include "back.hpp"
 #include <SFML/Graphics.hpp>
 #include <iostream>
@@ -48,7 +49,7 @@ Personaje::Personaje(int vida){
     
 }
 
-void Personaje::update(int &x, int y/*, int danio, bool piso*/, Fondo &paisaje,Plataforma & piso){
+void Personaje::update(int &x, int y/*, int danio, bool piso*/, Fondo &paisaje,Plataforma & piso, Enemigo &serpiente){
     
     if((this->actualTexture.getPosition().x<225 && (x==1|| x==3) || (paisaje.getA()>=1000 && this->actualTexture.getPosition().x<450 && x==1))){
         this->actualTexture.setPosition(this->actualTexture.getPosition().x+x,this->actualTexture.getPosition().y);
@@ -61,17 +62,20 @@ void Personaje::update(int &x, int y/*, int danio, bool piso*/, Fondo &paisaje,P
             
             paisaje.desplaza(x);
             piso.desplazamiento(x);
+            serpiente.update(this,x,y);
             
         }
     }
     if(this->actualTexture.getPosition().x>0 && (x==-1||x==-3)){
         this->actualTexture.setPosition(this->actualTexture.getPosition().x+x,this->actualTexture.getPosition().y);
+        serpiente.pistola->update(serpiente.actualTexture.getPosition(),x,y,this->vista);
         
         
     }else{
         if(this->actualTexture.getPosition().x<=0 && (x==-1|| x==-3) && paisaje.getA()>0){
             paisaje.desplaza(x);
             piso.desplazamiento(x);
+            serpiente.update(this,x,y);
            
         }
     }
@@ -91,7 +95,7 @@ void Personaje::update(int &x, int y/*, int danio, bool piso*/, Fondo &paisaje,P
     }
     //this->actualTexture.setPosition(this->actualTexture.getPosition().x+x,this->actualTexture.getPosition().y+y);
    
-   this->pistola->update(this->actualTexture.getPosition(), x, y);
+   this->pistola->update(this->actualTexture.getPosition(), x, y, this->vista);
    
 }
 

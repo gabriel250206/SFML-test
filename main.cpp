@@ -4,6 +4,7 @@
 #include "Plataformas.hpp"
 #include "back.hpp"
 #include <iostream>
+#include <vector>
 using namespace sf;
 int main()
 {
@@ -11,7 +12,9 @@ int main()
     window.setFramerateLimit(200);
     Personaje adan(150);
     Enemigo serpiente(100);
+    
     Plataforma base(Vector2f{250,350});
+    Plataforma base2(Vector2f{600,200});
     Fondo atras;
     int x=0,y=0;
     int movx=0,movy=0; // desconozco funcionamiento de estas *-
@@ -166,8 +169,8 @@ int main()
             }
             cout<<x<<endl;
         }
-        adan.update(x,y,atras,base);
-        serpiente.update(adan,x,y);
+        adan.update(x,y,atras,base,serpiente);
+        if(!serpiente.getEstado())serpiente.disparo(adan,x,y);
         window.clear();
         atras.drawTo(window);
         adan.drawTo(window);

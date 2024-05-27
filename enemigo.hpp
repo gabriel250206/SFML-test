@@ -17,12 +17,13 @@ class Enemigo{
     public:
         Sprite actualTexture;
         int vida;
+        Vector2f vista;
         Principal* pistola;
         Enemigo( int vida);
-        int getVida();
-        void setVida(int danio);
+        bool getEstado();
+        void disparo(Personaje adan, int x, int y);
         void drawTo(RenderWindow &window);
-        void update(Personaje adan, int x, int y);
+        void update(Personaje* adan, int x, int y);
         
 
 };

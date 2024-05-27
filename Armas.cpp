@@ -12,16 +12,9 @@ Principal::Principal(Vector2f posicion){
     this->tirada=false;
     this->piso=false;
 
-    if(!stmTexture.loadFromFile("assets/raygun.png"))
-    {
-        std::cout << "Error al cargar imagen" << std::endl;
-    }
-    stmTexture.setRepeated(true);
-
-    this->actualTexture.setTexture(stmTexture);
-    this->actualTexture.setTextureRect(IntRect(2,25,24,20));
+    
     //this->actualTexture.setScale(2,2);
-    this->actualTexture.setPosition(posicion.x+40,posicion.y+35);
+    
 
 
 
@@ -59,7 +52,7 @@ void Principal::especial(int &x, int &cont){
 
 }
 void Principal::disparo(Vector2f posicion,Vector2f direccion){
-    Bala* nueva=new Bala(this->danio, posicion,direccion);
+    Bala* nueva=new Bala(this->danio, this->actualTexture.getPosition(),direccion);
     existentes.push_back(nueva);
     std::cout<<"pum"<<endl;
 }
@@ -80,15 +73,41 @@ int Principal::getMun(){
     return this->municionMax;
 }
 
-void Principal::update(Vector2f posicion, int x, int y){
+void Principal::update(Vector2f posicion, int x, int y, Vector2f vista){
     if(!tirada){
-        this->actualTexture.setPosition(posicion.x+40,posicion.y+35);
+        if(vista.x==-1){
+
+            this->actualTexture.setPosition(posicion.x+40,posicion.y+35);
+            if(!stmTexture.loadFromFile("assets/raygunvolteada.png"))
+            {
+                std::cout << "Error al cargar imagen" << std::endl;
+            }
+            stmTexture.setRepeated(true);
+
+            this->actualTexture.setTexture(stmTexture);
+            this->actualTexture.setTextureRect(IntRect(11,20,24,20));
+            this->actualTexture.setPosition(posicion.x+25,posicion.y+35);
+            
+        }else if(vista.x==1){
+            this->actualTexture.setPosition(posicion.x-20,posicion.y+37);
+            if(!stmTexture.loadFromFile("assets/raygun.png"))
+            {
+                std::cout << "Error al cargar imagen" << std::endl;
+            }
+            stmTexture.setRepeated(true);
+
+            this->actualTexture.setTexture(stmTexture);
+            this->actualTexture.setTextureRect(IntRect(4,22,24,20));
+            this->actualTexture.setPosition(posicion.x+40,posicion.y+35);
+        }
+        
     }else if(piso==false){
         this->actualTexture.setPosition(this->actualTexture.getPosition().x+(-1*x),this->actualTexture.getPosition().y+30);
         piso=true;
     }else{
         this->actualTexture.setPosition(this->actualTexture.getPosition().x+(-1*x),this->actualTexture.getPosition().y);
     }
+    
 }
 
 void Principal::drawTo(RenderWindow &window){

@@ -32,7 +32,7 @@ class Principal {
         virtual void especial(int &x, int &cont);
         void disparo(Vector2f posicion, Vector2f direccion);
         int getMun();
-        void update(Vector2f posicion, int x, int y);
+        void update(Vector2f posicion, int x, int y, Vector2f vista);
         void drawTo(RenderWindow &window);
 };
 
