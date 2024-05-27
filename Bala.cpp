@@ -2,6 +2,7 @@
 #include "Bala.hpp"
 #include <SFML/Graphics.hpp>
 #include <iostream>
+using namespace std;
 
 Bala::Bala(int danio, Vector2f posicion, Vector2f direccion){
     this->danio=danio;
@@ -56,6 +57,7 @@ Vector2f Bala::getDireccion(){
 
 void Bala::Impacto(Sprite actualTexture1, int &vida){
     if(this->actualTexture.getGlobalBounds().intersects(actualTexture1.getGlobalBounds()) && impactado==false){
+        cout<<"pega"<<endl;
         vida=vida-this->danio;
         this->impactado=true;
     }

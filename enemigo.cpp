@@ -39,6 +39,10 @@ void Enemigo::update(Personaje* adan, int x, int y){
         
     this->actualTexture.setPosition(actualTexture.getPosition().x-x,actualTexture.getPosition().y);
     }
+    if(this->vida<=0){
+        this->muerto=true;
+        this->dibujar=false;
+    }
     
     
     

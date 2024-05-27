@@ -102,7 +102,7 @@ void Principal::update(Vector2f posicion, int x, int y, Vector2f vista){
         }
         
     }else if(piso==false){
-        this->actualTexture.setPosition(this->actualTexture.getPosition().x+(-1*x),this->actualTexture.getPosition().y+30);
+        this->actualTexture.setPosition(this->actualTexture.getPosition().x+(-1*x),this->actualTexture.getPosition().y+10);
         piso=true;
     }else{
         this->actualTexture.setPosition(this->actualTexture.getPosition().x+(-1*x),this->actualTexture.getPosition().y);

@@ -14,7 +14,7 @@ int main()
     Enemigo serpiente(100);
     
     Plataforma base(Vector2f{250,350});
-    Plataforma base2(Vector2f{600,200});
+    Plataforma base2(Vector2f{400,200});
     Fondo atras;
     int x=0,y=0;
     int movx=0,movy=0; // desconozco funcionamiento de estas *-
@@ -105,6 +105,9 @@ int main()
                 if(event.key.code==Keyboard::E){
                     adan.pistola->especial(x,dash);
                 }
+                if(event.key.code==Keyboard::Q){ ///dropear arma
+                    adan.pistola->piso=true;
+                }
                 
 
 
@@ -178,14 +181,16 @@ int main()
         serpiente.drawTo(window);
         serpiente.pistola->drawTo(window);
         base.drawTo(window);
-        for(int i=0;i<adan.pistola->existentes.size(); i++){
+        base2.drawTo(window);
+        for(int i=0;i<adan.pistola->existentes.size(); i-=-1){
             adan.pistola->existentes[i]->trayectoria();
-            adan.pistola->existentes[i]->Impacto(serpiente.actualTexture,adan.vida);
+            adan.pistola->existentes[i]->Impacto(serpiente.actualTexture,serpiente.vida);
             adan.pistola->existentes[i]->drawTo(window);
             
         }
-        for(int i=0;i<serpiente.pistola->existentes.size();i++){
+        for(int i=0;i<serpiente.pistola->existentes.size();i-=-1){
             serpiente.pistola->existentes[i]->trayectoria();
+
             serpiente.pistola->existentes[i]->Impacto(adan.actualTexture,adan.vida);
             serpiente.pistola->existentes[i]->drawTo(window);
         }

@@ -53,6 +53,10 @@ void Personaje::update(int &x, int y/*, int danio, bool piso*/, Fondo &paisaje,P
     
     if((this->actualTexture.getPosition().x<225 && (x==1|| x==3) || (paisaje.getA()>=1000 && this->actualTexture.getPosition().x<450 && x==1))){
         this->actualTexture.setPosition(this->actualTexture.getPosition().x+x,this->actualTexture.getPosition().y);
+        int x2=0;
+        serpiente.update(this,x2,y);
+        serpiente.pistola->update(serpiente.actualTexture.getPosition(),x2,y,this->vista);
+
         
         
         
@@ -63,12 +67,17 @@ void Personaje::update(int &x, int y/*, int danio, bool piso*/, Fondo &paisaje,P
             paisaje.desplaza(x);
             piso.desplazamiento(x);
             serpiente.update(this,x,y);
+          
+            serpiente.pistola->update(serpiente.actualTexture.getPosition(),x,y,this->vista);
             
         }
     }
     if(this->actualTexture.getPosition().x>0 && (x==-1||x==-3)){
         this->actualTexture.setPosition(this->actualTexture.getPosition().x+x,this->actualTexture.getPosition().y);
-        serpiente.pistola->update(serpiente.actualTexture.getPosition(),x,y,this->vista);
+        int x2=0;
+        serpiente.update(this,x2,y);
+        serpiente.pistola->update(serpiente.actualTexture.getPosition(),x2,y,this->vista);
+        
         
         
     }else{
@@ -76,6 +85,7 @@ void Personaje::update(int &x, int y/*, int danio, bool piso*/, Fondo &paisaje,P
             paisaje.desplaza(x);
             piso.desplazamiento(x);
             serpiente.update(this,x,y);
+            serpiente.pistola->update(serpiente.actualTexture.getPosition(),x,y,this->vista);
            
         }
     }
@@ -90,11 +100,18 @@ void Personaje::update(int &x, int y/*, int danio, bool piso*/, Fondo &paisaje,P
            
         }else{
             this->pistola->existentes[i]->trayectoria();
+            
         }
         
     }
     //this->actualTexture.setPosition(this->actualTexture.getPosition().x+x,this->actualTexture.getPosition().y+y);
    
+    if(x==0){
+         serpiente.update(this,x,y);
+         serpiente.pistola->update(serpiente.actualTexture.getPosition(),x,y,this->vista);
+          
+    }
+
    this->pistola->update(this->actualTexture.getPosition(), x, y, this->vista);
    
 }
