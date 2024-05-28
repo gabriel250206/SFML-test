@@ -16,6 +16,11 @@ int main()
     vector<Principal*>dropeadas;
     Plataforma base(Vector2f{250,350});
     Plataforma base2(Vector2f{400,200});
+
+    vector<Plataforma> plataformeo;
+    plataformeo.push_back(base);
+    plataformeo.push_back(base2);
+
     Fondo atras;
     int x=0,y=0;
     int movx=0,movy=0; // desconozco funcionamiento de estas *-
@@ -139,10 +144,17 @@ int main()
             
             
         }
+
         ///EFRA NO TOQUES ESTO 
         if((adan.actualTexture.getPosition().y<400 && adan.salto==true  )){
             y=1;
             cout<<"sale"<<endl;
+            if(base.toca(adan)&&adan.salto==true){
+                cout<<"entra"<<endl;
+                saltando=true;
+                y=-1;
+                adan.saltar(y,base);
+            }
            
         }else {
             cout<<"entra"<<endl;
