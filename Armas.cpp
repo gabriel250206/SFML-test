@@ -1,9 +1,13 @@
-#include "Bala.hpp"
 #pragma once
+#include "Bala.hpp"
+#include "Personaje.hpp"
 #include <SFML/Graphics.hpp>
 #include <vector>
 #include <iostream>
 #include "Armas.hpp"
+
+
+
 
 Principal::Principal(Vector2f posicion){
     this->danio=10;
@@ -114,6 +118,7 @@ void Principal::drawTo(RenderWindow &window){
     window.draw(this->actualTexture);
 }
 
-void Principal::drop(){
-    
+void Principal::dropJugador(Personaje &adan, vector<Principal*>&dropeadas){
+    dropeadas.push_back(adan.pistola);
+    adan.pistola=nullptr;
 }

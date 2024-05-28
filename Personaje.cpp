@@ -92,18 +92,10 @@ void Personaje::update(int &x, int y/*, int danio, bool piso*/, Fondo &paisaje,P
     if(this->actualTexture.getPosition().y<401 /*&& piso==false*/){
         this->actualTexture.setPosition(this->actualTexture.getPosition().x,this->actualTexture.getPosition().y+y);
     }
+    if(this->pistola!=nullptr){
 
-    for(int i=0;i<this->pistola->existentes.size();i++){
-        
-        if(this->pistola->existentes[i]->getPosition().x>=401 || this->pistola->existentes[i]->getPosition().y>=401) {
-            
-           
-        }else{
-            this->pistola->existentes[i]->trayectoria();
-            
-        }
-        
     }
+    
     //this->actualTexture.setPosition(this->actualTexture.getPosition().x+x,this->actualTexture.getPosition().y+y);
    
     if(x==0){
@@ -112,7 +104,7 @@ void Personaje::update(int &x, int y/*, int danio, bool piso*/, Fondo &paisaje,P
           
     }
 
-   this->pistola->update(this->actualTexture.getPosition(), x, y, this->vista);
+   if(this->pistola!=nullptr)this->pistola->update(this->actualTexture.getPosition(), x, y, this->vista);
    
 }
 
@@ -161,10 +153,12 @@ void Personaje::saltar(int &y,Plataforma base){
 
 
 void Personaje::recargar(bool &recarga){
-    if(contRecarga==500){
+    if(this->pistola!=nullptr){
+        if(contRecarga==500){
         this->pistola->municion=this->pistola->getMun();
         contRecarga=0;
         recarga=false;
     }
     contRecarga++;
+    }
 }

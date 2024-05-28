@@ -18,6 +18,7 @@ class Plataforma{
         void desplazamiento(int x);
         void drawTo(RenderWindow &window);
         Vector2f getPosition();
+        bool toca(Personaje adan);
         int a;
 
 };

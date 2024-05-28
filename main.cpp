@@ -2,6 +2,7 @@
 #include "Personaje.hpp"
 #include "Enemigo.hpp"
 #include "Plataformas.hpp"
+#include "Armas.hpp"
 #include "back.hpp"
 #include <iostream>
 #include <vector>
@@ -12,7 +13,7 @@ int main()
     window.setFramerateLimit(200);
     Personaje adan(150);
     Enemigo serpiente(100);
-    
+    vector<Principal*>dropeadas;
     Plataforma base(Vector2f{250,350});
     Plataforma base2(Vector2f{400,200});
     Fondo atras;
@@ -103,10 +104,12 @@ int main()
                     adan.shot(adan.vista,ultima);
                 }
                 if(event.key.code==Keyboard::E){
-                    adan.pistola->especial(x,dash);
+                    if(adan.pistola!=nullptr)adan.pistola->especial(x,dash);
                 }
                 if(event.key.code==Keyboard::Q){ ///dropear arma--
-                    adan.pistola->tirada=true;
+                    if(adan.pistola!=nullptr)adan.pistola->tirada=true;
+                    if(adan.pistola!=nullptr)adan.pistola->dropJugador(adan,dropeadas);
+
                 }
                 
 
@@ -137,22 +140,23 @@ int main()
             
         }
         ///EFRA NO TOQUES ESTO 
-        if((adan.actualTexture.getPosition().y<400 && adan.salto==true )){
+        if((adan.actualTexture.getPosition().y<400 && adan.salto==true  )){
             y=1;
-
+            cout<<"sale"<<endl;
            
         }else {
+            cout<<"entra"<<endl;
             saltando=true;
             adan.saltar(y,base);
         }
         /// NADA DE ESTO
 
-        if(recargar==true){
+        if(recargar==true && adan.pistola!=nullptr){
             adan.recargar(recargar);
         }
 
         base.colision(adan,x,y,saltando);
-        if(adan.pistola->desplazar==true && dash<20){
+        if(adan.pistola!=nullptr && adan.pistola->desplazar==true && dash<20){
             
             if(x==0)x=adan.vista.x;
             if(dash==0)x=x*3;
@@ -160,8 +164,8 @@ int main()
             
             cout<<x<<" "<<dash<<" "<<adan.pistola->desplazar<<endl;
             
-        }else if(dash==20){ 
-            adan.pistola->desplazar=false;
+        }else if(dash==20 && adan.pistola!=nullptr){ 
+            if(adan.pistola!=nullptr)adan.pistola->desplazar=false;
             dash=0;
             cout<<adan.vista.x<<endl;
 
@@ -177,17 +181,21 @@ int main()
         window.clear();
         atras.drawTo(window);
         adan.drawTo(window);
-        adan.pistola->drawTo(window);
+        if(adan.pistola!=nullptr)adan.pistola->drawTo(window);
         serpiente.drawTo(window);
         serpiente.pistola->drawTo(window);
         base.drawTo(window);
         //base2.drawTo(window);
-        for(int i=0;i<adan.pistola->existentes.size(); i-=-1){
+
+        if(adan.pistola!=nullptr){
+            for(int i=0;i<adan.pistola->existentes.size(); i-=-1){
             adan.pistola->existentes[i]->trayectoria();
             adan.pistola->existentes[i]->Impacto(serpiente.actualTexture,serpiente.vida);
             adan.pistola->existentes[i]->drawTo(window);
             
         }
+        }
+        
         for(int i=0;i<serpiente.pistola->existentes.size();i-=-1){
             serpiente.pistola->existentes[i]->trayectoria();
 

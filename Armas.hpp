@@ -8,6 +8,7 @@
 using namespace sf;
 using namespace std;
 
+class Personaje;
 class Principal {
     protected:
         int danio;
@@ -21,7 +22,7 @@ class Principal {
         Texture stmTexture;
         Sprite actualTexture;
         
-        void drop();
+        void dropJugador(Personaje &adan, vector<Principal*>&dropeadas );
 
         bool desplazar;
         bool piso;

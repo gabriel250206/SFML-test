@@ -65,3 +65,11 @@ void Plataforma::desplazamiento(int x){
     
     this->actualTexture.setPosition(getPosition().x-x,getPosition().y);
 }
+
+bool Plataforma::toca(Personaje adan){
+    if(adan.actualTexture.getGlobalBounds().intersects(this->actualTexture.getGlobalBounds())&&adan.getPosition().y+64==this->actualTexture.getPosition().y){
+        return true;
+    }
+    return false;
+
+}
