@@ -34,12 +34,10 @@ void Plataforma::colision(Personaje &adan,int &x, int &y, bool saltando){
     if(adan.actualTexture.getGlobalBounds().intersects(this->actualTexture.getGlobalBounds())){
         if(adan.getPosition().y+64==this->actualTexture.getPosition().y){
             y=0;
-            this->eta=true;
+            
         }
         
 
-    }else{
-        eta=false;
     }
 
     // bool tocaBase=adan.actualTexture.getPosition().x<=bmax && adan.actualTexture.getPosition().x + adan.actualTexture.ge().x>=this->actualTexture.getPosition().x;
