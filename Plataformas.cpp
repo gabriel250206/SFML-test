@@ -26,19 +26,20 @@ Plataforma::Plataforma(Vector2f posicion){
 }
 
 
-void Plataforma::colision(Personaje &adan,int &x, int &y, bool saltando){
+bool Plataforma::colision(Personaje &adan,int &x, int &y, bool saltando){
 
     int bmax=this->actualTexture.getPosition().x+105;
     int hmax=this->actualTexture.getPosition().y+99;
 
     if(adan.actualTexture.getGlobalBounds().intersects(this->actualTexture.getGlobalBounds())){
         if(adan.getPosition().y+64==this->actualTexture.getPosition().y){
-            y=0;
+            return true;
             
         }
         
 
     }
+    return false;
 
     // bool tocaBase=adan.actualTexture.getPosition().x<=bmax && adan.actualTexture.getPosition().x + adan.actualTexture.ge().x>=this->actualTexture.getPosition().x;
     // bool tocaAltura=adan.actualTexture.getPosition().y==this->actualTexture.getPosition().y-1;

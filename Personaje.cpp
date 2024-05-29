@@ -131,9 +131,9 @@ Vector2f Personaje::getPosition(){
     return this->actualTexture.getPosition();
 }
 
-void Personaje::saltar(int &y,Plataforma base){
+void Personaje::saltar(int &y,Plataforma base, int &x, bool saltando){
     
-    if(this->salto==false){
+    if(this->salto==false && !base.toca(*this)){
                 cout<<"sube"<<endl;
                 y=-1;
                 
@@ -144,7 +144,12 @@ void Personaje::saltar(int &y,Plataforma base){
                 this->contSalto++;
             }else{
                 y=0;
-                cout<<"queda"<<endl;
+                //cout<<"queda"<<endl;
+                
+                // if(base.colision(*this,x,y,saltando)){
+                //     this->siguienteS=true;
+                //     this->
+                // }
             }
             if(this->actualTexture.getPosition().y==400 || base.eta==true){
               

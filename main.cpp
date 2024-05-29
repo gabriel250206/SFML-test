@@ -71,7 +71,7 @@ int main()
                     
                 }
                 /// TAMPOCO ESTO, ES QUE NOS DA DOBLE SALTO
-                if(event.key.code==Keyboard::Space && adan.salto==true && adan.siguienteS==true && adan.tatekieto==false){ // si presionas y puede saltar
+                if(event.key.code==Keyboard::Space &&( (adan.salto==true && adan.siguienteS==true && adan.tatekieto==false)|| y==0)){ // si presionas y puede saltar
                     
                     std::cout<<"Espacio"<<endl;
                     adan.salto=false;
@@ -89,7 +89,8 @@ int main()
 
                 }
                 if(event.key.code==Keyboard::I){ /// tecla de comprobacion
-                    cout<<adan.vida<<" "<<serpiente.vida<<endl<<atras.getA();
+                    cout<<adan.getPosition().y<<endl;
+                    //cout<<adan.vida<<" "<<serpiente.vida<<endl<<atras.getA();
                     // std::cout<<atras.getA()<<std::endl;
                     // std::cout<<adan.actualTexture.getPosition().x<<std::endl;
                     //std::cout<<adan.contRecarga<<std::endl;
@@ -158,7 +159,7 @@ int main()
             //cout<<"entra2"<<endl;
             saltando=true;
             if(base.toca(adan))adan.salto=false;
-            adan.saltar(y,base);
+            adan.saltar(y,base,x,saltando);
         }
         /// NADA DE ESTO
 
@@ -166,7 +167,7 @@ int main()
             adan.recargar(recargar);
         }
 
-        base.colision(adan,x,y,saltando);
+        
         if(adan.pistola!=nullptr && adan.pistola->desplazar==true && dash<20){
             
             if(x==0)x=adan.vista.x;

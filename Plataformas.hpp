@@ -13,7 +13,7 @@ class Plataforma{
     public:
         Vector2f posicion;
         bool eta;// no se si funcione esto 
-        void colision(Personaje &adan,int &x, int&y,bool saltando);
+        bool colision(Personaje &adan,int &x, int&y,bool saltando);
         Plataforma(Vector2f posicion);
         void desplazamiento(int x);
         void drawTo(RenderWindow &window);
