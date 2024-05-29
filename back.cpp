@@ -6,7 +6,7 @@ using namespace sf;
 using namespace std;
 
 Fondo::Fondo(){
-    if(!stmTexture.loadFromFile("assets/fondo.png"))
+    if(!stmTexture.loadFromFile("assets/FONDOFINAL.png"))
     {
         std::cout << "Error al cargar imagen" << std::endl;
     }
@@ -26,7 +26,7 @@ void Fondo::drawTo(RenderWindow &window){
 void Fondo::desplaza(int x){
     cout<<"desplaza"<<endl;
     a=a+x;
-    if(a<1000 && a>0)this->actualTexture.setTextureRect(IntRect(0+a,0,500,500));
+    if(a<10000 && a>0)this->actualTexture.setTextureRect(IntRect(0+a,0,500,500));
 
 }
 

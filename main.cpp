@@ -21,6 +21,9 @@ int main()
     plataformeo.push_back(base);
     plataformeo.push_back(base2);
 
+    vector<Enemigo>hongos;
+    hongos.push_back(serpiente);
+
     Fondo atras;
     int x=0,y=0;
     int movx=0,movy=0; // desconozco funcionamiento de estas *-
@@ -86,7 +89,7 @@ int main()
 
                 }
                 if(event.key.code==Keyboard::I){ /// tecla de comprobacion
-                    cout<<adan.vida<<" "<<serpiente.vida<<endl;
+                    cout<<adan.vida<<" "<<serpiente.vida<<endl<<atras.getA();
                     // std::cout<<atras.getA()<<std::endl;
                     // std::cout<<adan.actualTexture.getPosition().x<<std::endl;
                     //std::cout<<adan.contRecarga<<std::endl;
@@ -146,19 +149,15 @@ int main()
         }
 
         ///EFRA NO TOQUES ESTO 
-        if((adan.actualTexture.getPosition().y<400 && adan.salto==true  )){
+        if((adan.actualTexture.getPosition().y<400 && adan.salto==true)&& !base.toca(adan)){
             y=1;
-            cout<<"sale"<<endl;
-            if(base.toca(adan)&&adan.salto==true){
-                cout<<"entra"<<endl;
-                saltando=true;
-                y=-1;
-                adan.saltar(y,base);
-            }
+           cout<<"baja"<<endl;
+            
            
         }else {
-            cout<<"entra"<<endl;
+            //cout<<"entra2"<<endl;
             saltando=true;
+            if(base.toca(adan))adan.salto=false;
             adan.saltar(y,base);
         }
         /// NADA DE ESTO

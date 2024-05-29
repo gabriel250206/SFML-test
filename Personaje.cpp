@@ -51,7 +51,7 @@ Personaje::Personaje(int vida){
 
 void Personaje::update(int &x, int y/*, int danio, bool piso*/, Fondo &paisaje,Plataforma & piso, Enemigo &serpiente){
     
-    if((this->actualTexture.getPosition().x<225 && (x==1|| x==3) || (paisaje.getA()>=1000 && this->actualTexture.getPosition().x<450 && x==1))){
+    if((this->actualTexture.getPosition().x<225 && (x==1|| x==3) || (paisaje.getA()>=9500 && this->actualTexture.getPosition().x<450 && x==1))){
         this->actualTexture.setPosition(this->actualTexture.getPosition().x+x,this->actualTexture.getPosition().y);
         int x2=0;
         serpiente.update(this,x2,y);
@@ -62,7 +62,7 @@ void Personaje::update(int &x, int y/*, int danio, bool piso*/, Fondo &paisaje,P
         
 
     }else {
-        if(this->actualTexture.getPosition().x>=225 && (x==1|| x==3) && paisaje.getA()<1000){
+        if(this->actualTexture.getPosition().x>=225 && (x==1|| x==3) && paisaje.getA()<10000){
             
             paisaje.desplaza(x);
             piso.desplazamiento(x);
@@ -132,7 +132,9 @@ Vector2f Personaje::getPosition(){
 }
 
 void Personaje::saltar(int &y,Plataforma base){
+    
     if(this->salto==false){
+                cout<<"sube"<<endl;
                 y=-1;
                 
                 if(this->contSalto==100){
@@ -142,6 +144,7 @@ void Personaje::saltar(int &y,Plataforma base){
                 this->contSalto++;
             }else{
                 y=0;
+                cout<<"queda"<<endl;
             }
             if(this->actualTexture.getPosition().y==400 || base.eta==true){
               
