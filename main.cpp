@@ -31,7 +31,7 @@ int main()
     bool saltando;// no se si funcione *-
     bool recargar=false;
     int dash=0;
-    
+    bool click=false;
     bool presion=false;
     adan.drawTo(window);
     while (window.isOpen())
@@ -76,8 +76,7 @@ int main()
                     std::cout<<"Espacio"<<endl;
                     adan.salto=false;
                     adan.siguienteS=false;
-                    
-                    
+                    click=true;                    
                 }
                 if(event.key.code==Keyboard::W){ /// tecla de comprobacion
                     adan.vista.y=-1;
@@ -159,7 +158,7 @@ int main()
             //cout<<"entra2"<<endl;
             saltando=true;
             if(base.toca(adan))adan.salto=false;
-            adan.saltar(y,base,x,saltando);
+            adan.saltar(y,base,x,saltando, click);
         }
         /// NADA DE ESTO
 
