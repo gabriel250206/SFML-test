@@ -144,7 +144,7 @@ void Personaje::saltar(int &y,Plataforma base, int &x, bool saltando){
                 this->contSalto++;
             }else{
                 y=0;
-                //cout<<"queda"<<endl;
+                cout<<"queda"<<endl;
                 
                 // if(base.colision(*this,x,y,saltando)){
                 //     this->siguienteS=true;
