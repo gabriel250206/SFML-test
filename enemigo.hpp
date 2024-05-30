@@ -14,16 +14,20 @@ class Enemigo{
         bool dibujar; // solo de prueba, luego hay que eliminarlo
         int tiempo;
         bool muerto;
+        float rangoX;
+        int mov;
+        
     public:
         Sprite actualTexture;
         int vida;
         Vector2f vista;
         Principal* pistola;
-        Enemigo( int vida);
+        Enemigo( int x);
         bool getEstado();
         void disparo(Personaje adan, int x, int y);
         void drawTo(RenderWindow &window);
         void update(Personaje* adan, int x, int y);
+        
         
 
 };

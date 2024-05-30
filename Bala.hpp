@@ -14,7 +14,7 @@ class Bala{
         bool impactado;
         Bala(int danio, Vector2f posicion, Vector2f direccion);
         void trayectoria();
-        void Impacto(Sprite actualtexture1,int &vida);
+        void Impacto(Sprite actualtexture1,int &vida, bool vivo);
         void drawTo(RenderWindow &window);
         Vector2f getPosition();
         Vector2f getDireccion();

@@ -77,7 +77,7 @@ int Principal::getMun(){
     return this->municionMax;
 }
 
-void Principal::update(Vector2f posicion, int x, int y, Vector2f vista){
+void Principal::update(Vector2f posicion, int x, int y, Vector2f vista, int a){
     if(!tirada){
         if(vista.x==-1){
 
@@ -119,6 +119,6 @@ void Principal::drawTo(RenderWindow &window){
 }
 
 void Principal::dropJugador(Personaje &adan, vector<Principal*>&dropeadas){
-    dropeadas.push_back(adan.pistola);
-    adan.pistola=nullptr;
+    // dropeadas.push_back(adan.pistola);
+    // adan.pistola=nullptr;
 }

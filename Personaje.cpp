@@ -44,18 +44,22 @@ Personaje::Personaje(int vida){
     this->pistola= new Principal(this->actualTexture.getPosition());
     this->contRecarga=0;
     this->vista.x=1;
+    this->muerto=false;
    
     
     
 }
 
-void Personaje::update(int &x, int y/*, int danio, bool piso*/, Fondo &paisaje,Plataforma & piso, Enemigo &serpiente){
+void Personaje::update(int &x, int y/*, int danio, bool piso*/, Fondo &paisaje,Plataforma & piso, vector<Enemigo> &serpiente){
     
     if((this->actualTexture.getPosition().x<225 && (x==1|| x==3) || (paisaje.getA()>=9500 && this->actualTexture.getPosition().x<450 && x==1))){
         this->actualTexture.setPosition(this->actualTexture.getPosition().x+x,this->actualTexture.getPosition().y);
         int x2=0;
-        serpiente.update(this,x2,y);
-        serpiente.pistola->update(serpiente.actualTexture.getPosition(),x2,y,this->vista);
+        for(int i=0;i<serpiente.size();i++){
+            serpiente[i].update(this,x2,y);
+            serpiente[i].pistola->update(serpiente[i].actualTexture.getPosition(),x2,y,this->vista,paisaje.getA());
+        }
+        
 
         
         
@@ -66,17 +70,22 @@ void Personaje::update(int &x, int y/*, int danio, bool piso*/, Fondo &paisaje,P
             
             paisaje.desplaza(x);
             piso.desplazamiento(x);
-            serpiente.update(this,x,y);
+            for(int i=0;i<serpiente.size();i++){
+                serpiente[i].update(this,x,y);
           
-            serpiente.pistola->update(serpiente.actualTexture.getPosition(),x,y,this->vista);
+                serpiente[i].pistola->update(serpiente[i].actualTexture.getPosition(),x,y,this->vista,paisaje.getA());
+            }
+            
             
         }
     }
     if(this->actualTexture.getPosition().x>0 && (x==-1||x==-3)){
         this->actualTexture.setPosition(this->actualTexture.getPosition().x+x,this->actualTexture.getPosition().y);
         int x2=0;
-        serpiente.update(this,x2,y);
-        serpiente.pistola->update(serpiente.actualTexture.getPosition(),x2,y,this->vista);
+        for(int i=0;i<serpiente.size();i++){
+            serpiente[i].update(this,x2,y);
+            serpiente[i].pistola->update(serpiente[i].actualTexture.getPosition(),x2,y,this->vista,paisaje.getA());
+        }
         
         
         
@@ -84,8 +93,10 @@ void Personaje::update(int &x, int y/*, int danio, bool piso*/, Fondo &paisaje,P
         if(this->actualTexture.getPosition().x<=0 && (x==-1|| x==-3) && paisaje.getA()>0){
             paisaje.desplaza(x);
             piso.desplazamiento(x);
-            serpiente.update(this,x,y);
-            serpiente.pistola->update(serpiente.actualTexture.getPosition(),x,y,this->vista);
+            for(int i=0;i<serpiente.size();i++){
+                serpiente[i].update(this,x,y);
+                serpiente[i].pistola->update(serpiente[i].actualTexture.getPosition(),x,y,this->vista,paisaje.getA());
+            }
            
         }
     }
@@ -99,12 +110,15 @@ void Personaje::update(int &x, int y/*, int danio, bool piso*/, Fondo &paisaje,P
     //this->actualTexture.setPosition(this->actualTexture.getPosition().x+x,this->actualTexture.getPosition().y+y);
    
     if(x==0){
-         serpiente.update(this,x,y);
-         serpiente.pistola->update(serpiente.actualTexture.getPosition(),x,y,this->vista);
+        for(int i=0;i<serpiente.size();i++){
+            serpiente[i].update(this,x,y);
+            serpiente[i].pistola->update(serpiente[i].actualTexture.getPosition(),x,y,this->vista,paisaje.getA());
+        }
+         
           
     }
 
-   if(this->pistola!=nullptr)this->pistola->update(this->actualTexture.getPosition(), x, y, this->vista);
+   if(this->pistola!=nullptr)this->pistola->update(this->actualTexture.getPosition(), x, y, this->vista,paisaje.getA());
    
 }
 
@@ -134,7 +148,7 @@ Vector2f Personaje::getPosition(){
 void Personaje::saltar(int &y,Plataforma base, int &x, bool saltando, bool &click){
     
     if(this->salto==false && !base.toca(*this)){
-                cout<<"sube"<<endl;
+                //cout<<"sube"<<endl;
                 y=-1;
                 
                 if(this->contSalto==100){
@@ -146,7 +160,7 @@ void Personaje::saltar(int &y,Plataforma base, int &x, bool saltando, bool &clic
             }else{
                 
                 if(base.toca(*this) ^ !click )y=0;
-                cout<<"queda"<<endl;
+                //cout<<"queda"<<endl;
                 
                 // if(base.colision(*this,x,y,saltando)){
                 //     this->siguienteS=true;

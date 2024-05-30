@@ -6,14 +6,27 @@
 #include "back.hpp"
 #include <iostream>
 #include <vector>
+#include<stdlib.h>
+#include<time.h>
 using namespace sf;
 int main()
 {
     RenderWindow window(VideoMode(500, 500), "le contre");
     window.setFramerateLimit(200);
     Personaje adan(150);
-    Enemigo serpiente(100);
+    vector<Enemigo>hongos;
+    
+    for(int i=0;i<3;i++){
+        int primero=rand() %350+200;
+        Enemigo* serpiente= new Enemigo(primero);
+        hongos.push_back(*serpiente);
+    }
+    
+    
+    // primero=rand() %400+100;
+    // Enemigo lilith(primero);
     vector<Principal*>dropeadas;
+    
     Plataforma base(Vector2f{250,350});
     Plataforma base2(Vector2f{400,200});
 
@@ -21,8 +34,8 @@ int main()
     plataformeo.push_back(base);
     plataformeo.push_back(base2);
 
-    vector<Enemigo>hongos;
-    hongos.push_back(serpiente);
+    
+    //hongos.push_back(lilith);
 
     Fondo atras;
     int x=0,y=0;
@@ -88,7 +101,8 @@ int main()
 
                 }
                 if(event.key.code==Keyboard::I){ /// tecla de comprobacion
-                    cout<<adan.getPosition().y<<endl;
+                    for(int i=0;i<hongos.size();i++) cout<<hongos[i].vida<<endl;
+                    //cout<<adan.getPosition().y<<endl;
                     //cout<<adan.vida<<" "<<serpiente.vida<<endl<<atras.getA();
                     // std::cout<<atras.getA()<<std::endl;
                     // std::cout<<adan.actualTexture.getPosition().x<<std::endl;
@@ -116,8 +130,7 @@ int main()
                 }
                 if(event.key.code==Keyboard::Q){ ///dropear arma--
                     if(adan.pistola!=nullptr)adan.pistola->tirada=true;
-                    if(adan.pistola!=nullptr)adan.pistola->dropJugador(adan,dropeadas);
-
+                   
                 }
                 
 
@@ -151,7 +164,7 @@ int main()
         ///EFRA NO TOQUES ESTO 
         if((adan.actualTexture.getPosition().y<400 && adan.salto==true)&& !base.toca(adan)){
             y=1;
-           cout<<"baja"<<endl;
+           //cout<<"baja"<<endl;
             
            
         }else {
@@ -187,32 +200,42 @@ int main()
             }
             cout<<x<<endl;
         }
-        adan.update(x,y,atras,base,serpiente);
-        if(!serpiente.getEstado())serpiente.disparo(adan,x,y);
+        adan.update(x,y,atras,base,hongos);
+        for(int i=0;i<hongos.size();i++){
+            if(!hongos[i].getEstado())hongos[i].disparo(adan,x,y);
+        }
+        
         window.clear();
         atras.drawTo(window);
         adan.drawTo(window);
         if(adan.pistola!=nullptr)adan.pistola->drawTo(window);
-        serpiente.drawTo(window);
-        serpiente.pistola->drawTo(window);
+        for(int i=0;i<hongos.size();i++){
+            hongos[i].drawTo(window);
+            hongos[i].pistola->drawTo(window);
+        }
+        
         base.drawTo(window);
         //base2.drawTo(window);
 
-        if(adan.pistola!=nullptr){
+        
             for(int i=0;i<adan.pistola->existentes.size(); i-=-1){
-            adan.pistola->existentes[i]->trayectoria();
-            adan.pistola->existentes[i]->Impacto(serpiente.actualTexture,serpiente.vida);
-            adan.pistola->existentes[i]->drawTo(window);
+                for(int j=0;j<hongos.size();j++){
+                    adan.pistola->existentes[i]->trayectoria();
+                    adan.pistola->existentes[i]->Impacto(hongos[j].actualTexture,hongos[j].vida,hongos[j].getEstado());
+                    adan.pistola->existentes[i]->drawTo(window);
+                }
+                
             
+            }
+        
+        for(int h=0;h<hongos.size();h++){
+            for(int i=0;i<hongos[h].pistola->existentes.size();i-=-1){
+                hongos[h].pistola->existentes[i]->trayectoria();
+                hongos[h].pistola->existentes[i]->Impacto(adan.actualTexture,adan.vida,adan.muerto);
+                hongos[h].pistola->existentes[i]->drawTo(window);
         }
         }
         
-        for(int i=0;i<serpiente.pistola->existentes.size();i-=-1){
-            serpiente.pistola->existentes[i]->trayectoria();
-
-            serpiente.pistola->existentes[i]->Impacto(adan.actualTexture,adan.vida);
-            serpiente.pistola->existentes[i]->drawTo(window);
-        }
 
         
         window.display();

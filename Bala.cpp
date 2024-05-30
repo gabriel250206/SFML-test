@@ -32,9 +32,9 @@ Bala::Bala(int danio, Vector2f posicion, Vector2f direccion){
         this->actualTexture.setTextureRect(IntRect(13,23,20,7));
        
     }
-    
+    this->direccion.x*=2;
     this->impactado=false;
-
+    
 }
 
 void Bala::trayectoria(){
@@ -55,8 +55,9 @@ Vector2f Bala::getDireccion(){
     return this->direccion;
 }
 
-void Bala::Impacto(Sprite actualTexture1, int &vida){
-    if(this->actualTexture.getGlobalBounds().intersects(actualTexture1.getGlobalBounds()) && impactado==false){
+void Bala::Impacto(Sprite actualTexture1, int &vida, bool muerto){
+   
+    if(this->actualTexture.getGlobalBounds().intersects(actualTexture1.getGlobalBounds()) && this->impactado==false && !muerto){
         cout<<"pega"<<endl;
         vida=vida-this->danio;
         this->impactado=true;
