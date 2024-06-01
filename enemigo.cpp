@@ -208,24 +208,3 @@ Rapido::Rapido(int x):Enemigo(x){
 }
 
 
-Barrera::Barrera(Vector2f posicion):Enemigo(){
-    this->actualTexture.getPosition();
-    this->vista=Vector2f{0,0};
-    this->disparar=false;
-    this->cont=0;
-}
-
-void Barrera::update(Personaje* adan, int x, int y){
-    cout<<"oli"<<endl;
-    if(cont<100){
-        this->muerto=false;
-    }
-    if(cont>=100){
-        this->muerto=true;
-    }
-    cont++;
-    if(cont==200){
-        cont=0;
-    }
-}
-

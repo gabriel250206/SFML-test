@@ -63,8 +63,3 @@ class   Rapido: public Enemigo{
         
 };
 
-class Barrera:public Enemigo{
-    public:
-        Barrera(Vector2f posicion);
-        void update(Personaje* adan, int x, int y) override;
-};

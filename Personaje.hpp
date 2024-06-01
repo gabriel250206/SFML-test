@@ -8,6 +8,7 @@ using namespace std;
 class Plataforma;
 class Fondo;
 class Enemigo;
+class Barrera;
 class Personaje{
     protected:
         vector<Sprite> animaciones;
@@ -36,7 +37,7 @@ class Personaje{
 
         Personaje(int vida);
         void drawTo(RenderWindow &window);
-        void update(int &x, int y /*t danio, bool piso*/, Fondo &paisaje, Plataforma &piso, vector<Enemigo> &serpiente);
+        void update(int &x, int y /*t danio, bool piso*/, Fondo &paisaje, Plataforma &piso, vector<Enemigo> &serpiente, vector<Barrera> &obstaculos);
         void shot(Vector2f inicio, int ultima);
         Vector2f getPosition();
         void saltar(int &y, Plataforma base, int &x, bool saltando, bool &click);

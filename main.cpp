@@ -4,6 +4,7 @@
 #include "Plataformas.hpp"
 #include "Armas.hpp"
 #include "back.hpp"
+#include "Obstaculos.hpp"
 #include <iostream>
 #include <vector>
 #include<stdlib.h>
@@ -14,9 +15,16 @@ int main()
     RenderWindow window(VideoMode(500, 500), "le contre");
     window.setFramerateLimit(200);
     Personaje adan(150);
+
+    Barrera primero(Vector2f{200,0});
+    PisoLava segundo(Vector2f{400,460});
+    segundo.setExtention(100);
+    vector<Barrera>obstaculos;
+
+    obstaculos.push_back(primero);
+    obstaculos.push_back(segundo);
     vector<Enemigo>hongos;
-    Barrera primis(Vector2f{350,400});
-    hongos.push_back(primis);
+    
     
     // for(int i=0;i<3;i++){
     //     int primero=rand() %350+200;
@@ -210,12 +218,12 @@ int main()
             }
             cout<<x<<endl;
         }
-        adan.update(x,y,atras,base,hongos);
+        adan.update(x,y,atras,base,hongos,obstaculos);
         for(int i=0;i<hongos.size();i++){
             if(!hongos[i].getEstado())hongos[i].disparo(adan,x,y);
         }
         
-        window.clear();
+        
         atras.drawTo(window);
         if(!adan.muerto)adan.drawTo(window);
         if(adan.pistola!=nullptr)adan.pistola->drawTo(window);
@@ -249,6 +257,11 @@ int main()
         }
         }
         
+        for(int i=0;i<obstaculos.size();i++){
+            obstaculos[i].desaparecer();
+            obstaculos[i].golpe(adan);
+            obstaculos[i].drawTo(window);
+        }
 
         
         window.display();
