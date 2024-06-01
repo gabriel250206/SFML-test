@@ -7,6 +7,27 @@
 using namespace sf;
 using namespace std;
 
+Enemigo::Enemigo(){
+    this->vida=100000;
+    if(!stmTexture.loadFromFile("assets/enemigoRojo.png"))
+    {
+        std::cout << "Error al cargar imagen" << std::endl;
+    }
+    stmTexture.setRepeated(true);
+    this->movimiento=false;
+    this->actualTexture.setTexture(stmTexture);
+    this->actualTexture.setTextureRect(IntRect(16,16,18,17));
+    this->actualTexture.setScale(4,4);
+    this->cooldown=0;
+    this->actualTexture.setPosition(100,400);
+    this->dibujar=true;
+    this->pistola= new Principal(this->actualTexture.getPosition());
+    this->tiempo=0;
+    this->muerto=false;
+    this->vista={-1,0};
+    
+}
+
 Enemigo::Enemigo(int x){
     this->vida=100;
     if(!stmTexture.loadFromFile("assets/enemigoRojo.png"))
@@ -14,11 +35,11 @@ Enemigo::Enemigo(int x){
         std::cout << "Error al cargar imagen" << std::endl;
     }
     stmTexture.setRepeated(true);
-
+    this->movimiento=true;
     this->actualTexture.setTexture(stmTexture);
     this->actualTexture.setTextureRect(IntRect(16,16,18,17));
     this->actualTexture.setScale(4,4);
-
+    this->cooldown=0;
     this->actualTexture.setPosition(x,400);
     this->dibujar=true;
     this->pistola= new Principal(this->actualTexture.getPosition());
@@ -43,9 +64,10 @@ void Enemigo::drawTo(RenderWindow &window){
 void Enemigo::update(Personaje* adan, int x, int y){
     if(muerto==false){
         
+        
     this->actualTexture.setPosition(actualTexture.getPosition().x-x,actualTexture.getPosition().y);
 
-    this->actualTexture.setPosition(this->actualTexture.getPosition().x+rangoX,this->actualTexture.getPosition().y);
+    if(movimiento)this->actualTexture.setPosition(this->actualTexture.getPosition().x+rangoX,this->actualTexture.getPosition().y);
     if((mov==0||mov==500)||(mov==-500||mov==0)){
         rangoX *= -1;
     }
@@ -60,13 +82,19 @@ void Enemigo::update(Personaje* adan, int x, int y){
         this->dibujar=false;
     }
     
-   
-    
-
-    
-    
-
-
+   if(this->cooldown==0){
+        if(this->actualTexture.getGlobalBounds().intersects(adan->actualTexture.getGlobalBounds())){
+            cout<<"golpe"<<endl;
+            adan->vida= adan->vida-10;
+            this->cooldown++;
+            adan->actualTexture.setPosition(adan->actualTexture.getPosition().x-40,adan->actualTexture.getPosition().y-20);
+        }
+   }else{
+    cooldown++;
+    if(this->cooldown==300){
+        this->cooldown=0;
+    }
+   }
     
 }
 
@@ -94,3 +122,79 @@ bool Enemigo::getEstado(){
     return muerto;
 }
 
+
+
+
+Disparador::Disparador(Vector2f posicion, Vector2f vista):Enemigo(){
+    if(!stmTexture.loadFromFile("assets/pium.png"))
+    {
+        std::cout << "Error al cargar imagen" << std::endl;
+    }
+    stmTexture.setRepeated(true);
+    this->movimiento=true;
+    this->actualTexture.setTexture(stmTexture);
+    this->actualTexture.setTextureRect(IntRect(18,46,10,4));
+    this->actualTexture.setPosition(posicion);
+    this->pistola=new Base(this->actualTexture.getPosition());
+    this->vista=vista;
+    this->muerto=false;
+
+}
+
+void Disparador::update(Personaje* adan, int x, int y){
+    this->actualTexture.setPosition(actualTexture.getPosition().x-x,actualTexture.getPosition().y);
+
+    if(this->cooldown==0){
+        if(this->actualTexture.getGlobalBounds().intersects(adan->actualTexture.getGlobalBounds())){
+            cout<<"golpe"<<endl;
+            adan->vida= adan->vida-10;
+            this->cooldown++;
+            adan->actualTexture.setPosition(adan->actualTexture.getPosition().x-40,adan->actualTexture.getPosition().y-20);
+        }
+   }else{
+    cooldown++;
+    if(this->cooldown==300){
+        this->cooldown=0;
+    }
+   }
+   
+   this->pistola->update(this->actualTexture.getPosition(),x,y, vista,0);
+}
+
+void Disparador::drawTo(RenderWindow &window){
+    window.draw(this->actualTexture);
+}
+
+void Disparador::disparo(Personaje adan, int x, int y){
+    if(this->tiempo==0){
+        
+        this->pistola->disparo(this->actualTexture.getPosition(),Vector2f{0,-1});
+        
+    }
+    tiempo++;
+
+    if(this->tiempo==500){
+        this->tiempo=0;
+    }
+    
+    
+    this->pistola->update(this->actualTexture.getPosition(),x,y, vista,0);
+}
+
+
+
+
+
+
+
+Fuerte::Fuerte(int x):Enemigo(x){
+    this->actualTexture.setColor(Color::Blue);
+    this->vida=200;
+}
+
+Rapido::Rapido(int x):Enemigo(x){
+    this->vida=50;
+    this->actualTexture.setColor(Color::Green);
+    this->mov=2;
+    this->rangoX=2;
+}

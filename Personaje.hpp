@@ -20,6 +20,7 @@ class Personaje{
         
     public:
         int vida;
+        bool boss;
         Texture stmTexture;
         Texture espejo;
         Sprite actualTexture;

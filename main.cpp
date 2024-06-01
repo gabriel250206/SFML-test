@@ -15,12 +15,21 @@ int main()
     window.setFramerateLimit(200);
     Personaje adan(150);
     vector<Enemigo>hongos;
+    //Disparador primis(Vector2f{250,450},Vector2f{0,-1});
+    //hongos.push_back(primis);
     
     for(int i=0;i<3;i++){
         int primero=rand() %350+200;
-        Enemigo* serpiente= new Enemigo(primero);
+        Enemigo* serpiente= new Rapido(primero);
         hongos.push_back(*serpiente);
     }
+    for(int i=0;i<3;i++){
+        int primero=rand() %350+200;
+        Fuerte* serpiente= new Fuerte(primero);
+        hongos.push_back(*serpiente);
+    }
+
+    
     
     
     // primero=rand() %400+100;
@@ -101,7 +110,8 @@ int main()
 
                 }
                 if(event.key.code==Keyboard::I){ /// tecla de comprobacion
-                    for(int i=0;i<hongos.size();i++) cout<<hongos[i].vida<<endl;
+                    //for(int i=0;i<hongos.size();i++) cout<<hongos[i].vida<<endl;
+                    cout<<adan.vida<<endl;
                     //cout<<adan.getPosition().y<<endl;
                     //cout<<adan.vida<<" "<<serpiente.vida<<endl<<atras.getA();
                     // std::cout<<atras.getA()<<std::endl;
@@ -207,10 +217,12 @@ int main()
         
         window.clear();
         atras.drawTo(window);
-        adan.drawTo(window);
+        if(!adan.muerto)adan.drawTo(window);
         if(adan.pistola!=nullptr)adan.pistola->drawTo(window);
         for(int i=0;i<hongos.size();i++){
+            
             hongos[i].drawTo(window);
+
             hongos[i].pistola->drawTo(window);
         }
         
@@ -232,6 +244,7 @@ int main()
             for(int i=0;i<hongos[h].pistola->existentes.size();i-=-1){
                 hongos[h].pistola->existentes[i]->trayectoria();
                 hongos[h].pistola->existentes[i]->Impacto(adan.actualTexture,adan.vida,adan.muerto);
+                
                 hongos[h].pistola->existentes[i]->drawTo(window);
         }
         }

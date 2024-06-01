@@ -45,6 +45,7 @@ Personaje::Personaje(int vida){
     this->contRecarga=0;
     this->vista.x=1;
     this->muerto=false;
+    this->boss=false;
    
     
     
@@ -52,12 +53,23 @@ Personaje::Personaje(int vida){
 
 void Personaje::update(int &x, int y/*, int danio, bool piso*/, Fondo &paisaje,Plataforma & piso, vector<Enemigo> &serpiente){
     
-    if((this->actualTexture.getPosition().x<225 && (x==1|| x==3) || (paisaje.getA()>=9500 && this->actualTexture.getPosition().x<450 && x==1))){
+    if((this->actualTexture.getPosition().x<225 && (x==1|| x==3) || (paisaje.getA()>=9500 && this->actualTexture.getPosition().x<450 && x==1  ))){
         this->actualTexture.setPosition(this->actualTexture.getPosition().x+x,this->actualTexture.getPosition().y);
         int x2=0;
         for(int i=0;i<serpiente.size();i++){
             serpiente[i].update(this,x2,y);
-            serpiente[i].pistola->update(serpiente[i].actualTexture.getPosition(),x2,y,this->vista,paisaje.getA());
+            if(serpiente[i].pistola->base==false){
+                serpiente[i].pistola->update(serpiente[i].actualTexture.getPosition(),0,y,this->vista,paisaje.getA());
+                
+            }else{
+                serpiente[i].pistola->update(serpiente[i].actualTexture.getPosition(),0,y,Vector2f {0,-1},paisaje.getA());
+                
+            }
+            
+            
+        }
+        if(paisaje.getA()>=9500){
+            this->boss=true;
         }
         
 
@@ -66,7 +78,7 @@ void Personaje::update(int &x, int y/*, int danio, bool piso*/, Fondo &paisaje,P
         
 
     }else {
-        if(this->actualTexture.getPosition().x>=225 && (x==1|| x==3) && paisaje.getA()<10000){
+        if(this->actualTexture.getPosition().x>=225 && (x==1|| x==3) && paisaje.getA()<10000 ){
             
             paisaje.desplaza(x);
             piso.desplazamiento(x);
@@ -74,23 +86,27 @@ void Personaje::update(int &x, int y/*, int danio, bool piso*/, Fondo &paisaje,P
                 serpiente[i].update(this,x,y);
           
                 serpiente[i].pistola->update(serpiente[i].actualTexture.getPosition(),x,y,this->vista,paisaje.getA());
+                cout<<"entrando"<<endl;
+            }
+            if(paisaje.getA()==9500){
+            this->boss=true;
             }
             
             
         }
     }
-    if(this->actualTexture.getPosition().x>0 && (x==-1||x==-3)){
+    if(this->actualTexture.getPosition().x>0 && (x==-1||x==-3) ){
         this->actualTexture.setPosition(this->actualTexture.getPosition().x+x,this->actualTexture.getPosition().y);
         int x2=0;
         for(int i=0;i<serpiente.size();i++){
             serpiente[i].update(this,x2,y);
-            serpiente[i].pistola->update(serpiente[i].actualTexture.getPosition(),x2,y,this->vista,paisaje.getA());
+            serpiente[i].pistola->update(serpiente[i].actualTexture.getPosition(),0,y,this->vista,paisaje.getA());
         }
         
         
         
     }else{
-        if(this->actualTexture.getPosition().x<=0 && (x==-1|| x==-3) && paisaje.getA()>0){
+        if(this->actualTexture.getPosition().x<=0 && (x==-1|| x==-3) && paisaje.getA()>0 ){
             paisaje.desplaza(x);
             piso.desplazamiento(x);
             for(int i=0;i<serpiente.size();i++){
@@ -119,7 +135,7 @@ void Personaje::update(int &x, int y/*, int danio, bool piso*/, Fondo &paisaje,P
     }
 
    if(this->pistola!=nullptr)this->pistola->update(this->actualTexture.getPosition(), x, y, this->vista,paisaje.getA());
-   
+   if(this->vida==0)this->muerto=true;
 }
 
 void Personaje::drawTo(RenderWindow &window){

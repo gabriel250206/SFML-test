@@ -24,6 +24,7 @@ class Principal {
         
         void dropJugador(Personaje &adan, vector<Principal*>&dropeadas );
 
+        bool base;
         bool desplazar;
         bool piso;
         Principal();
@@ -31,9 +32,9 @@ class Principal {
         int getDanio();
         void recargar();
         virtual void especial(int &x, int &cont);
-        void disparo(Vector2f posicion, Vector2f direccion);
+        virtual void disparo(Vector2f posicion, Vector2f direccion);
         int getMun();
-        void update(Vector2f posicion, int x, int y, Vector2f vista, int a);
+        virtual void update(Vector2f posicion, int x, int y, Vector2f vista, int a);
         void drawTo(RenderWindow &window);
 };
 
@@ -46,3 +47,15 @@ class LanzaGuizantes:public Principal{
     
     void especial(int &x, int &cont);
 };
+
+class Espadon:public Principal{
+    Espadon();
+};
+
+class Base :public Principal{
+    public:
+        Base(Vector2f posicion);
+        void update(Vector2f posicion, int x, int y, Vector2f vista, int a);
+        void disparo(Vector2f posicion, Vector2f direccion);
+};
+
