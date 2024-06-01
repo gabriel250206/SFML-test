@@ -126,19 +126,23 @@ void Principal::dropJugador(Personaje &adan, vector<Principal*>&dropeadas){
 }
 
 
-Espadon::Espadon(){
+Espadon::Espadon():Principal(){
     
-    if(!stmTexture.loadFromFile("assets/raygun.png"))
-    {
-        std::cout << "Error al cargar imagen" << std::endl;
-    }
-    stmTexture.setRepeated(true);
+    // if(!stmTexture.loadFromFile("assets/raygun.png"))
+    // {
+    //     std::cout << "Error al cargar imagen" << std::endl;
+    // }
+    // stmTexture.setRepeated(true);
 
-    this->danio=10;
-    this->municionMax=10;
-    this->municion=municionMax;
-    this->tirada=false;
-    this->piso=false;
+    // this->danio=10;
+    // this->municionMax=10;
+    // this->municion=municionMax;
+    // this->tirada=false;
+    // this->piso=false;
+}
+
+void Espadon::especial(int &x, int &cont){
+    cout<<"hola"<<endl;
 }
 
 Base::Base(Vector2f posicion):Principal(posicion){

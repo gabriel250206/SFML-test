@@ -25,6 +25,7 @@ Enemigo::Enemigo(){
     this->tiempo=0;
     this->muerto=false;
     this->vista={-1,0};
+    this->disparar=true;
     
 }
 
@@ -48,9 +49,9 @@ Enemigo::Enemigo(int x){
     this->vista={-1,0};
     this->rangoX=1;
     this->mov=rand() %500;
+    this->disparar=true;
     
 }
-
 
 void Enemigo::drawTo(RenderWindow &window){
     if(dibujar){
@@ -99,7 +100,7 @@ void Enemigo::update(Personaje* adan, int x, int y){
 }
 
 void Enemigo::disparo(Personaje adan, int x, int y){
-    if(this->tiempo==0){
+    if(this->tiempo==0 && disparar==true){
         
         this->pistola->disparo(this->actualTexture.getPosition(),Vector2f{-1,0});
         
@@ -121,6 +122,12 @@ void Enemigo::disparo(Personaje adan, int x, int y){
 bool Enemigo::getEstado(){
     return muerto;
 }
+
+
+
+
+
+
 
 
 
@@ -193,8 +200,32 @@ Fuerte::Fuerte(int x):Enemigo(x){
 }
 
 Rapido::Rapido(int x):Enemigo(x){
+
     this->vida=50;
     this->actualTexture.setColor(Color::Green);
     this->mov=2;
     this->rangoX=2;
 }
+
+
+Barrera::Barrera(Vector2f posicion):Enemigo(){
+    this->actualTexture.getPosition();
+    this->vista=Vector2f{0,0};
+    this->disparar=false;
+    this->cont=0;
+}
+
+void Barrera::update(Personaje* adan, int x, int y){
+    cout<<"oli"<<endl;
+    if(cont<100){
+        this->muerto=false;
+    }
+    if(cont>=100){
+        this->muerto=true;
+    }
+    cont++;
+    if(cont==200){
+        cont=0;
+    }
+}
+

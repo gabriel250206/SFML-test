@@ -49,7 +49,9 @@ class LanzaGuizantes:public Principal{
 };
 
 class Espadon:public Principal{
+    public:
     Espadon();
+    void especial(int &x, int &cont);
 };
 
 class Base :public Principal{

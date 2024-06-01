@@ -16,7 +16,7 @@ class Enemigo{
         bool muerto;
         float rangoX;
         int mov;
-        
+        int cont;
     public:
         Sprite actualTexture;
         int vida;
@@ -25,14 +25,22 @@ class Enemigo{
         Enemigo( int x);
         Enemigo();
         bool movimiento;
+        bool disparar;
         bool getEstado();
         virtual void disparo(Personaje adan, int x, int y);
         virtual void drawTo(RenderWindow &window);
         virtual void update(Personaje* adan, int x, int y);
         
         
+        
 
 };
+
+
+
+
+
+
 
 
 
@@ -53,4 +61,10 @@ class   Rapido: public Enemigo{
     public:
         Rapido(int x);
         
+};
+
+class Barrera:public Enemigo{
+    public:
+        Barrera(Vector2f posicion);
+        void update(Personaje* adan, int x, int y) override;
 };

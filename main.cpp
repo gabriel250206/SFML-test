@@ -15,19 +15,19 @@ int main()
     window.setFramerateLimit(200);
     Personaje adan(150);
     vector<Enemigo>hongos;
-    //Disparador primis(Vector2f{250,450},Vector2f{0,-1});
-    //hongos.push_back(primis);
+    Barrera primis(Vector2f{350,400});
+    hongos.push_back(primis);
     
-    for(int i=0;i<3;i++){
-        int primero=rand() %350+200;
-        Enemigo* serpiente= new Rapido(primero);
-        hongos.push_back(*serpiente);
-    }
-    for(int i=0;i<3;i++){
-        int primero=rand() %350+200;
-        Fuerte* serpiente= new Fuerte(primero);
-        hongos.push_back(*serpiente);
-    }
+    // for(int i=0;i<3;i++){
+    //     int primero=rand() %350+200;
+    //     Enemigo* serpiente= new Rapido(primero);
+    //     hongos.push_back(*serpiente);
+    // }
+    // for(int i=0;i<3;i++){
+    //     int primero=rand() %350+200;
+    //     Fuerte* serpiente= new Fuerte(primero);
+    //     hongos.push_back(*serpiente);
+    // }
 
     
     

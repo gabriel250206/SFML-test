@@ -41,7 +41,7 @@ Personaje::Personaje(int vida){
     this->contSalto=0;
     this->siguienteS=true;
     this->tatekieto=false;
-    this->pistola= new Principal(this->actualTexture.getPosition());
+    this->pistola= new LanzaGuizantes(this->actualTexture.getPosition());
     this->contRecarga=0;
     this->vista.x=1;
     this->muerto=false;
