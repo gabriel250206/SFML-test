@@ -63,7 +63,7 @@ void Enemigo::drawTo(RenderWindow &window){
 }
 
 void Enemigo::update(Personaje* adan, int x, int y){
-    if(muerto==false){
+    if(muerto==false ){
         
         
     this->actualTexture.setPosition(actualTexture.getPosition().x-x,actualTexture.getPosition().y);
@@ -126,7 +126,12 @@ bool Enemigo::getEstado(){
 
 
 
-
+bool Enemigo::aparecer(Personaje * adan){
+    if(this->actualTexture.getPosition().x-adan->actualTexture.getPosition().x<500 /*||adan->actualTexture.getPosition().x -this->actualTexture.getPosition().x <300*/){
+        return true;
+    }
+    return false;
+}
 
 
 

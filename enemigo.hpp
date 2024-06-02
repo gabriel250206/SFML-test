@@ -27,6 +27,7 @@ class Enemigo{
         bool movimiento;
         bool disparar;
         bool getEstado();
+        bool aparecer(Personaje* adan);
         virtual void disparo(Personaje adan, int x, int y);
         virtual void drawTo(RenderWindow &window);
         virtual void update(Personaje* adan, int x, int y);

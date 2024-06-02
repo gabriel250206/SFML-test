@@ -79,7 +79,7 @@ void Personaje::update(int &x, int y/*, int danio, bool piso*/, Fondo &paisaje,P
         
 
     }else {
-        if(this->actualTexture.getPosition().x>=225 && (x==1|| x==3) && paisaje.getA()<10000 ){
+        if(this->actualTexture.getPosition().x>=225 && (x==1|| x==3) && paisaje.getA()<9500 ){
             
             paisaje.desplaza(x);
             piso.desplazamiento(x);
@@ -110,7 +110,7 @@ void Personaje::update(int &x, int y/*, int danio, bool piso*/, Fondo &paisaje,P
         
         
     }else{
-        if(this->actualTexture.getPosition().x<=0 && (x==-1|| x==-3) && paisaje.getA()>0 ){
+        if(this->actualTexture.getPosition().x<=0 && (x==-1|| x==-3) && paisaje.getA()>0 && !boss){
             paisaje.desplaza(x);
             piso.desplazamiento(x);
             for(int i=0;i<serpiente.size();i++){

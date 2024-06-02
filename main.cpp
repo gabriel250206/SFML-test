@@ -15,22 +15,22 @@ int main()
     RenderWindow window(VideoMode(500, 500), "le contre");
     window.setFramerateLimit(200);
     Personaje adan(150);
-
-    Barrera primero(Vector2f{200,0});
-    PisoLava segundo(Vector2f{400,460});
-    segundo.setExtention(100);
+    
+    //Barrera primero(Vector2f{200,0});
+    //PisoLava segundo(Vector2f{400,460});
+    //segundo.setExtention(100);
     vector<Barrera>obstaculos;
 
-    obstaculos.push_back(primero);
-    obstaculos.push_back(segundo);
+    //obstaculos.push_back(primero);
+    //obstaculos.push_back(segundo);
     vector<Enemigo>hongos;
     
     
-    // for(int i=0;i<3;i++){
-    //     int primero=rand() %350+200;
-    //     Enemigo* serpiente= new Rapido(primero);
-    //     hongos.push_back(*serpiente);
-    // }
+    for(int i=0;i<3;i++){
+        int primero=rand() %350+1000;
+        Enemigo* serpiente= new Rapido(primero);
+        hongos.push_back(*serpiente);
+    }
     // for(int i=0;i<3;i++){
     //     int primero=rand() %350+200;
     //     Fuerte* serpiente= new Fuerte(primero);
@@ -119,7 +119,8 @@ int main()
                 }
                 if(event.key.code==Keyboard::I){ /// tecla de comprobacion
                     //for(int i=0;i<hongos.size();i++) cout<<hongos[i].vida<<endl;
-                    cout<<adan.vida<<endl;
+                    cout<<atras.getA()<<endl;
+                    cout<<adan.boss<<endl;
                     //cout<<adan.getPosition().y<<endl;
                     //cout<<adan.vida<<" "<<serpiente.vida<<endl<<atras.getA();
                     // std::cout<<atras.getA()<<std::endl;
@@ -228,10 +229,11 @@ int main()
         if(!adan.muerto)adan.drawTo(window);
         if(adan.pistola!=nullptr)adan.pistola->drawTo(window);
         for(int i=0;i<hongos.size();i++){
+            if(hongos[i].aparecer(&adan)){
+                hongos[i].drawTo(window);
+                hongos[i].pistola->drawTo(window);
+            }
             
-            hongos[i].drawTo(window);
-
-            hongos[i].pistola->drawTo(window);
         }
         
         base.drawTo(window);
@@ -250,10 +252,13 @@ int main()
         
         for(int h=0;h<hongos.size();h++){
             for(int i=0;i<hongos[h].pistola->existentes.size();i-=-1){
-                hongos[h].pistola->existentes[i]->trayectoria();
-                hongos[h].pistola->existentes[i]->Impacto(adan.actualTexture,adan.vida,adan.muerto);
+                if(hongos[i].aparecer(&adan)){
+                    hongos[h].pistola->existentes[i]->trayectoria();
+                    hongos[h].pistola->existentes[i]->Impacto(adan.actualTexture,adan.vida,adan.muerto);
                 
-                hongos[h].pistola->existentes[i]->drawTo(window);
+                    hongos[h].pistola->existentes[i]->drawTo(window);
+                }
+                
         }
         }
         
