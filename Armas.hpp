@@ -61,3 +61,7 @@ class Base :public Principal{
         void disparo(Vector2f posicion, Vector2f direccion);
 };
 
+class Antenas:Principal{
+    Antenas(int lado);
+
+};

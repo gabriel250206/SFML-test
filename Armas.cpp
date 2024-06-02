@@ -195,3 +195,41 @@ void Base::disparo(Vector2f posicion, Vector2f direccion){
     // Bala* nueva=new Bala(this->danio, this->actualTexture.getPosition(),direccion);
     // existentes.push_back(nueva);
 }
+
+
+
+Antenas::Antenas(int lado){
+    if(lado==1){
+        if(!stmTexture.loadFromFile("assets/antenaIA.png"))
+        {
+            std::cout << "Error al cargar imagen" << std::endl;
+            stmTexture.setRepeated(true);
+        }
+    }
+    if(lado==2){
+        if(!stmTexture.loadFromFile("assets/antenaDA.png"))
+        {
+            std::cout << "Error al cargar imagen" << std::endl;
+            stmTexture.setRepeated(true);
+        }
+    }
+    if(lado==3){
+        if(!stmTexture.loadFromFile("assets/antenaIB.png"))
+        {
+            std::cout << "Error al cargar imagen" << std::endl;
+            stmTexture.setRepeated(true);
+        }
+    }
+    if(lado==4){
+        if(!stmTexture.loadFromFile("assets/antenaDB.png"))
+        {
+            std::cout << "Error al cargar imagen" << std::endl;
+            stmTexture.setRepeated(true);
+        }
+    }
+    
+    this->actualTexture.setTexture(stmTexture);
+    this->actualTexture.setTextureRect(IntRect(0,0,2,1));
+     
+
+}

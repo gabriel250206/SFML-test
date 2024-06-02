@@ -28,7 +28,7 @@ int main()
     
     
     for(int i=0;i<3;i++){
-        int primero=rand() %350+1000;
+        int primero=(rand() %350)+1000;
         Enemigo* serpiente= new Rapido(primero);
         hongos.push_back(*serpiente);
     }
@@ -120,8 +120,12 @@ int main()
                 }
                 if(event.key.code==Keyboard::I){ /// tecla de comprobacion
                     //for(int i=0;i<hongos.size();i++) cout<<hongos[i].vida<<endl;
-                    cout<<atras.getA()<<endl;
-                    cout<<adan.boss<<endl;
+                    // cout<<atras.getA()<<endl;
+                    // cout<<adan.boss<<endl;
+                    for(int i=0;i<hongos.size();i++){
+                        cout<<adan.actualTexture.getPosition().x-hongos[i].actualTexture.getPosition().x<<endl;
+                    }
+                    
                     //cout<<adan.getPosition().y<<endl;
                     //cout<<adan.vida<<" "<<serpiente.vida<<endl<<atras.getA();
                     // std::cout<<atras.getA()<<std::endl;
@@ -222,7 +226,7 @@ int main()
         }
         adan.update(x,y,atras,base,hongos,obstaculos,lucy);
         for(int i=0;i<hongos.size();i++){
-            if(!hongos[i].getEstado())hongos[i].disparo(adan,x,y);
+            if(!hongos[i].getEstado() && hongos[i].aparecer(&adan))hongos[i].disparo(adan,x,y);
         }
         
         

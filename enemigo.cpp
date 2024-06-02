@@ -84,7 +84,7 @@ void Enemigo::update(Personaje* adan, int x, int y){
     }
     
    if(this->cooldown==0){
-        if(this->actualTexture.getGlobalBounds().intersects(adan->actualTexture.getGlobalBounds())){
+        if(this->actualTexture.getGlobalBounds().intersects(adan->actualTexture.getGlobalBounds())&& !muerto){
             cout<<"golpe"<<endl;
             adan->vida= adan->vida-10;
             this->cooldown++;
@@ -127,7 +127,7 @@ bool Enemigo::getEstado(){
 
 
 bool Enemigo::aparecer(Personaje * adan){
-    if(this->actualTexture.getPosition().x-adan->actualTexture.getPosition().x<500 /*||adan->actualTexture.getPosition().x -this->actualTexture.getPosition().x <300*/){
+    if(this->actualTexture.getPosition().x-adan->actualTexture.getPosition().x<500 && adan->actualTexture.getPosition().x -this->actualTexture.getPosition().x >-500){
         return true;
     }
     return false;
@@ -211,5 +211,7 @@ Rapido::Rapido(int x):Enemigo(x){
     this->mov=2;
     this->rangoX=2;
 }
+
+
 
 

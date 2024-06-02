@@ -13,6 +13,13 @@ Boss::Boss(Vector2f posicion){
     this->actualTexture.setTextureRect(IntRect(15,14,22,19));
     this->actualTexture.setScale(4,4);
     this->actualTexture.setPosition(posicion);
+
+
+
+
+
+    
+    
 }
 
 void Boss::drawTo(RenderWindow &window){
@@ -23,4 +30,9 @@ void Boss::drawTo(RenderWindow &window){
 
 void Boss::mover(int x){
     this->actualTexture.setPosition(this->actualTexture.getPosition().x-x,this->actualTexture.getPosition().y);
+}
+
+void Boss::disparo(Personaje & adan){
+    
+
 }

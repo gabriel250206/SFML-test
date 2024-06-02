@@ -89,7 +89,7 @@ void Personaje::update(int &x, int y/*, int danio, bool piso*/, Fondo &paisaje,P
                 serpiente[i].update(this,x,y);
           
                 serpiente[i].pistola->update(serpiente[i].actualTexture.getPosition(),x,y,this->vista,paisaje.getA());
-                cout<<"entrando"<<endl;
+                
             }
             for(int i=0;i<obstaculos.size();i++){
                 obstaculos[i].movimiento(x);
