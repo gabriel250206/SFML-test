@@ -5,6 +5,7 @@
 #include "Armas.hpp"
 #include "back.hpp"
 #include "Obstaculos.hpp"
+#include "Boss.hpp"
 #include <iostream>
 #include <vector>
 #include<stdlib.h>
@@ -15,7 +16,7 @@ int main()
     RenderWindow window(VideoMode(500, 500), "le contre");
     window.setFramerateLimit(200);
     Personaje adan(150);
-    
+    Boss lucy(Vector2f{400,400});
     //Barrera primero(Vector2f{200,0});
     //PisoLava segundo(Vector2f{400,460});
     //segundo.setExtention(100);
@@ -219,7 +220,7 @@ int main()
             }
             cout<<x<<endl;
         }
-        adan.update(x,y,atras,base,hongos,obstaculos);
+        adan.update(x,y,atras,base,hongos,obstaculos,lucy);
         for(int i=0;i<hongos.size();i++){
             if(!hongos[i].getEstado())hongos[i].disparo(adan,x,y);
         }
@@ -268,6 +269,7 @@ int main()
             obstaculos[i].drawTo(window);
         }
 
+        lucy.drawTo(window);
         
         window.display();
     }

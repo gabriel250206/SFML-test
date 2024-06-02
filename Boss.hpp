@@ -17,8 +17,8 @@ class Boss{
 
         void disparo();
         void update();
-        void mover();
-
+        void mover(int x);
+        void drawTo(RenderWindow &window);
 
 
 

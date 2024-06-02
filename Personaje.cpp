@@ -3,6 +3,7 @@
 #include "Plataformas.hpp"
 #include "Obstaculos.hpp"
 #include "enemigo.hpp"
+#include "Boss.hpp"
 #include "back.hpp"
 #include <SFML/Graphics.hpp>
 #include <iostream>
@@ -52,7 +53,7 @@ Personaje::Personaje(int vida){
     
 }
 
-void Personaje::update(int &x, int y/*, int danio, bool piso*/, Fondo &paisaje,Plataforma & piso, vector<Enemigo> &serpiente, vector<Barrera> &obstaculos){
+void Personaje::update(int &x, int y/*, int danio, bool piso*/, Fondo &paisaje,Plataforma & piso, vector<Enemigo> &serpiente, vector<Barrera> &obstaculos, Boss &lucy){
     
     if((this->actualTexture.getPosition().x<225 && (x==1|| x==3) || (paisaje.getA()>=9500 && this->actualTexture.getPosition().x<450 && x==1  ))){
         this->actualTexture.setPosition(this->actualTexture.getPosition().x+x,this->actualTexture.getPosition().y);
@@ -83,6 +84,7 @@ void Personaje::update(int &x, int y/*, int danio, bool piso*/, Fondo &paisaje,P
             
             paisaje.desplaza(x);
             piso.desplazamiento(x);
+            lucy.mover(x);
             for(int i=0;i<serpiente.size();i++){
                 serpiente[i].update(this,x,y);
           
@@ -113,6 +115,7 @@ void Personaje::update(int &x, int y/*, int danio, bool piso*/, Fondo &paisaje,P
         if(this->actualTexture.getPosition().x<=0 && (x==-1|| x==-3) && paisaje.getA()>0 && !boss){
             paisaje.desplaza(x);
             piso.desplazamiento(x);
+            lucy.mover(x);
             for(int i=0;i<serpiente.size();i++){
                 serpiente[i].update(this,x,y);
                 serpiente[i].pistola->update(serpiente[i].actualTexture.getPosition(),x,y,this->vista,paisaje.getA());
