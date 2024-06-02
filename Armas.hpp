@@ -9,6 +9,7 @@ using namespace sf;
 using namespace std;
 
 class Personaje;
+class Boss;
 class Principal {
     protected:
         int danio;
@@ -61,7 +62,12 @@ class Base :public Principal{
         void disparo(Vector2f posicion, Vector2f direccion);
 };
 
-class Antenas:Principal{
-    Antenas(int lado);
+class Antenas: public Principal{
+    protected:
+    int lado;
+    public:
+    
+    Antenas(int lado, Boss lucy);
+    void especial(Personaje &adan);
 
 };

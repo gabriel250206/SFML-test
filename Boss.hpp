@@ -1,10 +1,11 @@
 #pragma once
 #include <SFML/Graphics.hpp>
 #include <vector>
+#include "Armas.hpp"
 using namespace sf;
 using namespace std;
 
-class Principal;
+
 class Bala;
 class Personaje;
 class Boss{
@@ -15,8 +16,9 @@ class Boss{
     public:
         Sprite actualTexture;
         Boss(Vector2f posicion);
-        //vector<Principal>cuernitos;
-        void disparo(Personaje &adan);
+        vector<Antenas>cuernitos;
+       
+        void disparo();
         void update();
         void mover(int x);
         void drawTo(RenderWindow &window);

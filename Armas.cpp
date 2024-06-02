@@ -5,6 +5,7 @@
 #include <vector>
 #include <iostream>
 #include "Armas.hpp"
+#include "Boss.hpp"
 
 
 
@@ -198,12 +199,17 @@ void Base::disparo(Vector2f posicion, Vector2f direccion){
 
 
 
-Antenas::Antenas(int lado){
+Antenas::Antenas(int lado, Boss lucy){
     if(lado==1){
         if(!stmTexture.loadFromFile("assets/antenaIA.png"))
         {
             std::cout << "Error al cargar imagen" << std::endl;
             stmTexture.setRepeated(true);
+            this->actualTexture.setTexture(stmTexture);
+            this->actualTexture.setTextureRect(IntRect(0,0,2,1));
+            this->actualTexture.setPosition(lucy.actualTexture.getPosition());
+            this->lado=lado;
+            
         }
     }
     if(lado==2){
@@ -211,6 +217,9 @@ Antenas::Antenas(int lado){
         {
             std::cout << "Error al cargar imagen" << std::endl;
             stmTexture.setRepeated(true);
+            this->actualTexture.setTexture(stmTexture);
+            this->actualTexture.setTextureRect(IntRect(0,0,2,1));
+            this->lado=lado;
         }
     }
     if(lado==3){
@@ -218,6 +227,9 @@ Antenas::Antenas(int lado){
         {
             std::cout << "Error al cargar imagen" << std::endl;
             stmTexture.setRepeated(true);
+            this->actualTexture.setTexture(stmTexture);
+            this->actualTexture.setTextureRect(IntRect(0,0,2,1));
+            this->lado=lado;
         }
     }
     if(lado==4){
@@ -225,11 +237,34 @@ Antenas::Antenas(int lado){
         {
             std::cout << "Error al cargar imagen" << std::endl;
             stmTexture.setRepeated(true);
+            this->actualTexture.setTexture(stmTexture);
+            this->actualTexture.setTextureRect(IntRect(0,0,2,1));
+            this->lado=lado;
         }
     }
     
-    this->actualTexture.setTexture(stmTexture);
-    this->actualTexture.setTextureRect(IntRect(0,0,2,1));
+    
+    
      
 
+}
+
+void Antenas::especial(Personaje &adan){
+    if(lado==1){
+        Bala* nueva=new Bala(this->danio, this->actualTexture.getPosition(),Vector2f{-1,1});
+        existentes.push_back(nueva); 
+    }
+    if(lado==2){
+        Bala* nueva=new Bala(this->danio, this->actualTexture.getPosition(),Vector2f{1,1});
+        existentes.push_back(nueva); 
+    }
+    if(lado==3){
+        Bala* nueva=new Bala(this->danio, this->actualTexture.getPosition(),Vector2f{-1,-1});
+        existentes.push_back(nueva); 
+    }
+    if(lado==4){
+        Bala* nueva=new Bala(this->danio, this->actualTexture.getPosition(),Vector2f{1,-1});
+        existentes.push_back(nueva); 
+    }
+    
 }
