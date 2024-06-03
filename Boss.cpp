@@ -13,9 +13,10 @@ Boss::Boss(Vector2f posicion){
     this->actualTexture.setTextureRect(IntRect(15,14,22,19));
     this->actualTexture.setScale(4,4);
     this->actualTexture.setPosition(posicion);
-
+    cout<<this->actualTexture.getPosition().x<<endl;
     for(int i=0; i<4;i++){
-        Antenas* cuerno = new Antenas(1,*this);
+        
+        Antenas* cuerno = new Antenas(i+1,this->actualTexture.getPosition());
         this->cuernitos.push_back(*cuerno);
     }
    
@@ -29,8 +30,6 @@ Boss::Boss(Vector2f posicion){
 
 void Boss::drawTo(RenderWindow &window){
     window.draw(this->actualTexture);
-    cuernitos[0].drawTo(window);
-    
 }
 
 
@@ -42,7 +41,11 @@ void Boss::mover(int x){
 void Boss::disparo(){
     
     for(int i=0;i<this->cuernitos.size();i++){
-        
+        cuernitos[i].especial();
     }
+    
+}
+
+void Boss::update(Personaje &adan){
 
 }

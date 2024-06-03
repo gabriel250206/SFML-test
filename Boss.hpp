@@ -1,7 +1,7 @@
 #pragma once
 #include <SFML/Graphics.hpp>
 #include <vector>
-#include "Armas.hpp"
+#include "ataquesB.hpp"
 using namespace sf;
 using namespace std;
 
@@ -19,7 +19,7 @@ class Boss{
         vector<Antenas>cuernitos;
        
         void disparo();
-        void update();
+        void update(Personaje &adan);
         void mover(int x);
         void drawTo(RenderWindow &window);
 

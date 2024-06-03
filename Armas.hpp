@@ -62,12 +62,3 @@ class Base :public Principal{
         void disparo(Vector2f posicion, Vector2f direccion);
 };
 
-class Antenas: public Principal{
-    protected:
-    int lado;
-    public:
-    
-    Antenas(int lado, Boss lucy);
-    void especial(Personaje &adan);
-
-};

@@ -122,10 +122,12 @@ int main()
                     //for(int i=0;i<hongos.size();i++) cout<<hongos[i].vida<<endl;
                     // cout<<atras.getA()<<endl;
                     // cout<<adan.boss<<endl;
-                    for(int i=0;i<hongos.size();i++){
-                        cout<<adan.actualTexture.getPosition().x-hongos[i].actualTexture.getPosition().x<<endl;
+                    // for(int i=0;i<hongos.size();i++){
+                    //     cout<<adan.actualTexture.getPosition().x-hongos[i].actualTexture.getPosition().x<<endl;
+                    // }
+                    for(int i=0;i<lucy.cuernitos.size();i++){
+                        cout<<lucy.cuernitos[i].actualTexture.getPosition().x<<" "<< lucy.cuernitos[i].actualTexture.getPosition().y<<endl;
                     }
-                    
                     //cout<<adan.getPosition().y<<endl;
                     //cout<<adan.vida<<" "<<serpiente.vida<<endl<<atras.getA();
                     // std::cout<<atras.getA()<<std::endl;
@@ -273,6 +275,20 @@ int main()
             obstaculos[i].drawTo(window);
         }
 
+
+        lucy.disparo();
+
+
+        for(int i=0;i<lucy.cuernitos.size();i++){
+            for(int j=0;j<lucy.cuernitos[i].existentes.size();j++){
+                lucy.cuernitos[i].existentes[j]->trayectoria();
+                lucy.cuernitos[i].existentes[j]->Impacto(adan.actualTexture,adan.vida,adan.muerto);
+                lucy.cuernitos[i].existentes[j]->drawTo(window);
+            }
+        }
+        for(int i=0;i<lucy.cuernitos.size();i++){
+            lucy.cuernitos[i].drawTo(window);
+        }
         lucy.drawTo(window);
         
         window.display();
