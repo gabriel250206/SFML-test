@@ -53,7 +53,7 @@ Personaje::Personaje(int vida){
     
 }
 
-void Personaje::update(int &x, int y/*, int danio, bool piso*/, Fondo &paisaje,Plataforma & piso, vector<Enemigo> &serpiente, vector<Barrera> &obstaculos, Boss &lucy){
+void Personaje::update(int &x, int y/*, int danio, bool piso*/, Fondo &paisaje,vector<Plataforma>&piso, vector<Enemigo> &serpiente, vector<Barrera> &obstaculos, Boss &lucy){
     
     if((this->actualTexture.getPosition().x<225 && (x==1|| x==3) || (paisaje.getA()>=9500 && this->actualTexture.getPosition().x<450 && x==1  ))){
         this->actualTexture.setPosition(this->actualTexture.getPosition().x+x,this->actualTexture.getPosition().y);
@@ -83,7 +83,8 @@ void Personaje::update(int &x, int y/*, int danio, bool piso*/, Fondo &paisaje,P
         if(this->actualTexture.getPosition().x>=225 && (x==1|| x==3) && paisaje.getA()<9500 ){
             
             paisaje.desplaza(x);
-            piso.desplazamiento(x);
+            for(int i=0;i<piso.size();i++)piso[i].desplazamiento(x);
+            
             lucy.mover(x);
             for(int i=0;i<serpiente.size();i++){
                 serpiente[i].update(this,x,y);
@@ -114,7 +115,7 @@ void Personaje::update(int &x, int y/*, int danio, bool piso*/, Fondo &paisaje,P
     }else{
         if(this->actualTexture.getPosition().x<=0 && (x==-1|| x==-3) && paisaje.getA()>0 && !boss){
             paisaje.desplaza(x);
-            piso.desplazamiento(x);
+            for(int i=0;i<piso.size();i++)piso[i].desplazamiento(x);
             lucy.mover(x);
             for(int i=0;i<serpiente.size();i++){
                 serpiente[i].update(this,x,y);
@@ -171,32 +172,40 @@ Vector2f Personaje::getPosition(){
     return this->actualTexture.getPosition();
 }
 
-void Personaje::saltar(int &y,Plataforma base, int &x, bool saltando, bool &click){
+void Personaje::saltar(int &y){
     
-    if(this->salto==false && !base.toca(*this)){
-                //cout<<"sube"<<endl;
-                y=-1;
+    if(this->contSalto<200){
+        y=-1;
+        contSalto++;
+    }else{
+        this->salto=true;
+        return;
+    }
+
+    // if(this->salto==false && !base.toca(*this)){
+    //             //cout<<"sube"<<endl;
+    //             y=-1;
                 
-                if(this->contSalto==100){
-                    this->contSalto=0;
-                    this->salto=true;
-                    click=false;
-                }
-                this->contSalto++;
-            }else{
+    //             if(this->contSalto==100){
+    //                 this->contSalto=0;
+    //                 this->salto=true;
+    //                 click=false;
+    //             }
+    //             this->contSalto++;
+    //         }else{
                 
-                if(base.toca(*this) ^ !click )y=0;
-                //cout<<"queda"<<endl;
+    //             if(base.toca(*this) ^ !click )y=0;
+    //             //cout<<"queda"<<endl;
                 
-                // if(base.colision(*this,x,y,saltando)){
-                //     this->siguienteS=true;
-                //     this->
-                // }
-            }
-            if(this->actualTexture.getPosition().y==400 || base.eta==true){
+    //             // if(base.colision(*this,x,y,saltando)){
+    //             //     this->siguienteS=true;
+    //             //     this->
+    //             // }
+    //         }
+    //         if(this->actualTexture.getPosition().y==400 || base.eta==true){
               
-               this->siguienteS=true;
-            }
+    //            this->siguienteS=true;
+    //         }
             
             
 }

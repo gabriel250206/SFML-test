@@ -38,10 +38,10 @@ class Personaje{
 
         Personaje(int vida);
         void drawTo(RenderWindow &window);
-        void update(int &x, int y /*t danio, bool piso*/, Fondo &paisaje, Plataforma &piso, vector<Enemigo> &serpiente, vector<Barrera> &obstaculos, Boss &lucy);
+        void update(int &x, int y /*t danio, bool piso*/, Fondo &paisaje, vector<Plataforma> &piso, vector<Enemigo> &serpiente, vector<Barrera> &obstaculos, Boss &lucy);
         void shot(Vector2f inicio, int ultima);
         Vector2f getPosition();
-        void saltar(int &y, Plataforma base, int &x, bool saltando, bool &click);
+        void saltar(int &y);
         void recargar(bool &recarga);
 
        

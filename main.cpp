@@ -47,10 +47,11 @@ int main()
     
     Plataforma base(Vector2f{250,350});
     Plataforma base2(Vector2f{400,200});
-
+    Plataforma base3(Vector2f{500,350});
     vector<Plataforma> plataformeo;
-    plataformeo.push_back(base);
+    //plataformeo.push_back(base);
     plataformeo.push_back(base2);
+    plataformeo.push_back(base3);
 
     
     //hongos.push_back(lilith);
@@ -64,6 +65,11 @@ int main()
     int dash=0;
     bool click=false;
     bool presion=false;
+    
+    bool si=false;
+    Plataforma* tocando;
+
+
     adan.drawTo(window);
     while (window.isOpen())
     {
@@ -102,12 +108,11 @@ int main()
                     
                 }
                 /// TAMPOCO ESTO, ES QUE NOS DA DOBLE SALTO
-                if(event.key.code==Keyboard::Space &&( (adan.salto==true && adan.siguienteS==true && adan.tatekieto==false)|| y==0)){ // si presionas y puede saltar
+                if(event.key.code==Keyboard::Space  && adan.salto==true ){ // si presionas y puede saltar
                     
                     std::cout<<"Espacio"<<endl;
                     adan.salto=false;
-                    adan.siguienteS=false;
-                    click=true;                    
+                                     
                 }
                 if(event.key.code==Keyboard::W){ /// tecla de comprobacion
                     adan.vista.y=-1;
@@ -125,9 +130,10 @@ int main()
                     // for(int i=0;i<hongos.size();i++){
                     //     cout<<adan.actualTexture.getPosition().x-hongos[i].actualTexture.getPosition().x<<endl;
                     // }
-                    for(int i=0;i<lucy.cuernitos.size();i++){
-                        cout<<lucy.cuernitos[i].actualTexture.getPosition().x<<" "<< lucy.cuernitos[i].actualTexture.getPosition().y<<endl;
-                    }
+                    // for(int i=0;i<lucy.cuernitos.size();i++){
+                    //     cout<<lucy.cuernitos[i].actualTexture.getPosition().x<<" "<< lucy.cuernitos[i].actualTexture.getPosition().y<<endl;
+                    // }
+                    cout<<y<<endl;
                     //cout<<adan.getPosition().y<<endl;
                     //cout<<adan.vida<<" "<<serpiente.vida<<endl<<atras.getA();
                     // std::cout<<atras.getA()<<std::endl;
@@ -188,17 +194,45 @@ int main()
         }
 
         ///EFRA NO TOQUES ESTO 
-        if((adan.actualTexture.getPosition().y<400 && adan.salto==true)&& !base.toca(adan)){
-            y=1;
-           //cout<<"baja"<<endl;
+        si=false;
+        for(int i=0;i<plataformeo.size();i++){
+            if(plataformeo[i].toca(adan)){
+                si=true;
+                
+                tocando=&plataformeo[i];
+            }
+
+        }
+        if(adan.actualTexture.getPosition().y<400 && adan.salto==true && !si){
             
+            y=1;
            
         }else {
-            //cout<<"entra2"<<endl;
-            saltando=true;
-            if(base.toca(adan))adan.salto=false;
-            adan.saltar(y,base,x,saltando, click);
-        }
+            if(!adan.salto){
+                adan.saltar(y);
+            }
+
+            if(si && adan.salto){
+                y=0;
+                adan.contSalto=0;
+
+            }else{
+                if(si){
+                    si=false;
+                    
+                    
+                }
+                
+            }
+                
+            if(adan.actualTexture.getPosition().y==400 && adan.salto){
+            
+                y=0;
+                adan.contSalto=0;
+            }
+        } 
+            
+         
         /// NADA DE ESTO
 
         if(recargar==true && adan.pistola!=nullptr){
@@ -226,7 +260,7 @@ int main()
             }
             cout<<x<<endl;
         }
-        adan.update(x,y,atras,base,hongos,obstaculos,lucy);
+        adan.update(x,y,atras,plataformeo,hongos,obstaculos,lucy);
         for(int i=0;i<hongos.size();i++){
             if(!hongos[i].getEstado() && hongos[i].aparecer(&adan))hongos[i].disparo(adan,x,y);
         }
@@ -243,8 +277,8 @@ int main()
             
         }
         
-        base.drawTo(window);
-        //base2.drawTo(window);
+        for(int i=0;i<plataformeo.size();i++)plataformeo[i].drawTo(window);
+        
 
         
             for(int i=0;i<adan.pistola->existentes.size(); i-=-1){
