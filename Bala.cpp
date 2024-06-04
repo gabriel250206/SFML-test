@@ -73,3 +73,4 @@ void Bala::Impacto(Sprite actualTexture1, int &vida, bool muerto){
         this->impactado=true;
     }
 }
+

@@ -95,7 +95,7 @@ void Personaje::update(int &x, int y/*, int danio, bool piso*/, Fondo &paisaje,v
             for(int i=0;i<obstaculos.size();i++){
                 obstaculos[i].movimiento(x);
             }
-            if(paisaje.getA()==9500){
+            if(paisaje.getA()==9800){
             this->boss=true;
             }
             
