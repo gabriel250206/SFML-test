@@ -476,10 +476,15 @@ void Juego(RenderWindow &window, Personaje &adan){
         window.display();
         }
         if(adan.boss){
-            window.setFramerateLimit(1);
+            
             window.clear();
             finalizar.fin(window);
             window.display();
+            return;
+        }
+        if(adan.muerto){
+            window.clear();
+            
             return;
         }
     }
@@ -541,12 +546,15 @@ void readAndWriteNames(bool escribir, Personaje adan) {
     }
     in.close();
 
-    for (int i = 0; i < 5; i++) {
+    if(!escribir){
+        for (int i = 0; i < 5; i++) {
 
         std::cout << registros[i].char1 << registros[i].char2 << registros[i].char3 << " score: " << registros[i].score << "\n";
 
     }
     cout<<endl;
+}
+    
 
     if(escribir){
         string nombre;
@@ -564,17 +572,18 @@ void readAndWriteNames(bool escribir, Personaje adan) {
     // registros[3].score = 10.10f;
     int este=5;
     for(int i=4;i>=0;i--){
-        if(registros[i].score<adan.puntaje)este--;
+        if(registros[i].score<=adan.puntaje)este--;
     }
     if(este<5){
-        // for(int i=este;i>=0;i++){
-        //     registro[i]
-        // }
-        // registros[1].char1=nombre[0];
-        // registros[1].char2=nombre[1];
-        // registros[1].char3=nombre[2];
-        // registros[1].score=adan.puntaje;
+        for(int i=4;i>este;i--){
+            registros[i]=registros[i-1];        
+        }
     }
+    registros[este].char1=nombre[0];
+    registros[este].char2=nombre[1];
+    registros[este].char3=nombre[2];
+    registros[este].score=adan.puntaje;
+
         
 
 
@@ -617,11 +626,11 @@ int main()
 {
     RenderWindow window(VideoMode(500, 500), "le contre");
     window.setFramerateLimit(200);
-    Personaje adan(150);
+    Personaje adan(300);
     int x=1;
     bool escribir;
     Inicio iniciador;
-    createEmpty();
+    //createEmpty();
     while(window.isOpen()){
         Event event;
         iniciador.drawTo(window);
@@ -641,11 +650,13 @@ int main()
                         if(adan.boss){
                             readAndWriteNames(escribir,adan);
                         }
+                        window.close();
                     }
                     if(x==2){
-                        escribir=false;
+                         escribir=false;
                         readAndWriteNames(escribir,adan);
                         escribir=true;
+                       
                     }
                     if(x==3){
                         window.close();
