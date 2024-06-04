@@ -27,7 +27,7 @@ Principal::Principal(Vector2f posicion){
 }
 
 Principal::Principal(){
-    this->danio=10;
+    this->danio=50;
     this->municionMax=10;
     this->municion=municionMax;
     this->base=false;
@@ -64,7 +64,7 @@ void Principal::disparo(Vector2f posicion,Vector2f direccion){
 }
 
 LanzaGuizantes::LanzaGuizantes(Vector2f posicion){
-    this->danio=10;
+    this->danio=50;
     this->municionMax=10;
     this->municion=municionMax;
     this->desplazar=false;

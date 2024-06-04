@@ -18,169 +18,9 @@ using namespace sf;
 
 
 void Juego(RenderWindow &window, Personaje &adan){
-   
-
-}
-
-
-typedef struct record {
-    char char1;
-    char char2;
-    char char3;
-
-    float score;
-
-} registro;
-
-
-
-void createEmpty() {
-
-    std::string filename = "assets/score.bin";
-
-    std::cout << "Creating empty records\n";
-
-    registro registro1;
-
-
-    registro1.char1 = ' ';
-    registro1.char2 = ' ';
-    registro1.char3 = ' ';
-
-    registro1.score = 0.0f;
-
-
-    std::ofstream out(filename, std::ios::binary);
-
-
-    for (int i = 0; i < 5; i++) {
-        out.write(reinterpret_cast<const char*>(&registro1), sizeof(registro));
-    }
-
-    out.close();
-
-}
-
-
-void readAndWriteNames(bool escribir, Personaje adan) {
-
-
-    registro registros[5];
-
-
-    std::string filename = "assets/score.bin";
-
-    std::ifstream in(filename, std::ios::binary);
-  
-    for (int i = 0; i < 5; i++) {
-        in.read(reinterpret_cast<char* >(&(registros[i])), sizeof(registro));
-    }
-    in.close();
-
-    if(!escribir){
-        for (int i = 0; i < 5; i++) {
-
-        std::cout << registros[i].char1 << registros[i].char2 << registros[i].char3 << " score: " << registros[i].score << "\n";
-
-    }
-    cout<<endl;
-}
+    Outro finalizar;
     
-
-    if(escribir){
-        string nombre;
-        otra:
-        std::cout << "escribe tres letras"<<endl;
-        cin>>nombre;
-        if (nombre.size()>3){
-            cout<<" solo 3 letras"<<endl;
-            goto otra;
-        }
-    // registros[3].char1 = 'A';
-    // registros[3].char2 = 'A';
-    // registros[3].char3 = 'A';
-
-    // registros[3].score = 10.10f;
-    int este=5;
-    for(int i=4;i>=0;i--){
-        if(registros[i].score<=adan.puntaje)este--;
-    }
-    if(este<5){
-        for(int i=4;i>este;i--){
-            registros[i]=registros[i-1];        
-        }
-    }
-    registros[este].char1=nombre[0];
-    registros[este].char2=nombre[1];
-    registros[este].char3=nombre[2];
-    registros[este].score=adan.puntaje;
-
-        
-
-
-    std::ofstream out(filename, std::ios::binary);
-
-    for (int i = 0; i < 5; i++) {
-        out.write(reinterpret_cast<const char*>(&(registros[i])), sizeof(registro));
-    }
-
-    out.close();
-
-
-    std::cout << "Writing updated records\n";
-
-
-    for (int i = 0; i < 5; i++) {
-
-        std::cout << registros[i].char1 << registros[i].char2 << registros[i].char3 << " score: " << registros[i].score << "\n";
-
-    }
-
-    }
-    
-
-
-}
-
-
-
-// int main()
-// {
-    
-
-//     createEmpty();
-//     readAndWriteNames();
-// }
-
-
-int main()
-{
-    RenderWindow window(VideoMode(500, 500), "le contre");
-    window.setFramerateLimit(1000);
-    Personaje adan(300);
-    int x=1;
-    bool escribir;
-    Inicio iniciador;
-    //createEmpty();
-    while(window.isOpen()){
-        Event event;
-        iniciador.drawTo(window);
-        while(window.pollEvent(event)){
-            if(event.type==Event::Closed)
-                window.close();
-            if(event.type==Event::KeyPressed){
-                if(event.key.code==Keyboard::W ){
-                    x--;
-                }
-                if(event.key.code==Keyboard::S ){
-                    x++;
-                }
-                if(event.key.code==Keyboard::Enter){
-                    if(x==1){
-                        
-                         Outro finalizar;
-    
-    //Boss lucy(Vector2f{400,400});
+    Boss lucy(Vector2f{400,400});
     //Barrera primero(Vector2f{200,0});
     //PisoLava segundo(Vector2f{400,460});
     //segundo.setExtention(100);
@@ -198,11 +38,11 @@ int main()
         Enemigo* serpiente= new Rapido(primero);
         hongos.push_back(*serpiente);
     }
-    for(int i=0;i<3;i++){
-        int primero=rand() %350+4000;
-        Fuerte* serpiente= new Fuerte(primero);
-        hongos.push_back(*serpiente);
-    }
+    // for(int i=0;i<3;i++){
+    //     int primero=rand() %350+200;
+    //     Fuerte* serpiente= new Fuerte(primero);
+    //     hongos.push_back(*serpiente);
+    // }
 
     
     
@@ -277,7 +117,7 @@ int main()
     plataformeo.push_back(base);
     plataformeo.push_back(base2);
     plataformeo.push_back(base3);
-    base.actualTexture.setPosition(Vector2f{5678,365});
+    base.actualTexture.setPosition(Vector2f{5678,205});
     base2.actualTexture.setPosition(Vector2f{5864,258});
     base3.actualTexture.setPosition(Vector2f{5978,369});
     plataformeo.push_back(base);
@@ -293,7 +133,7 @@ int main()
     
     vector<int>lista;
     
-    for(int i=0;i<5;i++){
+    for(int i=0;i<10;i++){
         otra:
         int random=rand()%plataformeo.size();
         for(int j=0;j<lista.size();i++){
@@ -640,16 +480,173 @@ int main()
             window.clear();
             finalizar.fin(window);
             window.display();
-            break;
+            return;
         }
         if(adan.muerto){
             window.clear();
             
-            break;
+            return;
         }
     }
 
+}
 
+
+typedef struct record {
+    char char1;
+    char char2;
+    char char3;
+
+    float score;
+
+} registro;
+
+
+
+void createEmpty() {
+
+    std::string filename = "assets/score.bin";
+
+    std::cout << "Creating empty records\n";
+
+    registro registro1;
+
+
+    registro1.char1 = ' ';
+    registro1.char2 = ' ';
+    registro1.char3 = ' ';
+
+    registro1.score = 0.0f;
+
+
+    std::ofstream out(filename, std::ios::binary);
+
+
+    for (int i = 0; i < 5; i++) {
+        out.write(reinterpret_cast<const char*>(&registro1), sizeof(registro));
+    }
+
+    out.close();
+
+}
+
+
+void readAndWriteNames(bool escribir, Personaje adan) {
+
+
+    registro registros[5];
+
+
+    std::string filename = "assets/score.bin";
+
+    std::ifstream in(filename, std::ios::binary);
+  
+    for (int i = 0; i < 5; i++) {
+        in.read(reinterpret_cast<char* >(&(registros[i])), sizeof(registro));
+    }
+    in.close();
+
+    if(!escribir){
+        for (int i = 0; i < 5; i++) {
+
+        std::cout << registros[i].char1 << registros[i].char2 << registros[i].char3 << " score: " << registros[i].score << "\n";
+
+    }
+    cout<<endl;
+}
+    
+
+    if(escribir){
+        string nombre;
+        otra:
+        std::cout << "escribe tres letras"<<endl;
+        cin>>nombre;
+        if (nombre.size()>3){
+            cout<<" solo 3 letras"<<endl;
+            goto otra;
+        }
+    // registros[3].char1 = 'A';
+    // registros[3].char2 = 'A';
+    // registros[3].char3 = 'A';
+
+    // registros[3].score = 10.10f;
+    int este=5;
+    for(int i=4;i>=0;i--){
+        if(registros[i].score<=adan.puntaje)este--;
+    }
+    if(este<5){
+        for(int i=4;i>este;i--){
+            registros[i]=registros[i-1];        
+        }
+    }
+    registros[este].char1=nombre[0];
+    registros[este].char2=nombre[1];
+    registros[este].char3=nombre[2];
+    registros[este].score=adan.puntaje;
+
+        
+
+
+    std::ofstream out(filename, std::ios::binary);
+
+    for (int i = 0; i < 5; i++) {
+        out.write(reinterpret_cast<const char*>(&(registros[i])), sizeof(registro));
+    }
+
+    out.close();
+
+
+    std::cout << "Writing updated records\n";
+
+
+    for (int i = 0; i < 5; i++) {
+
+        std::cout << registros[i].char1 << registros[i].char2 << registros[i].char3 << " score: " << registros[i].score << "\n";
+
+    }
+
+    }
+    
+
+
+}
+
+
+
+// int main()
+// {
+    
+
+//     createEmpty();
+//     readAndWriteNames();
+// }
+
+
+int main()
+{
+    RenderWindow window(VideoMode(500, 500), "le contre");
+    window.setFramerateLimit(1000);
+    Personaje adan(100);
+    int x=1;
+    bool escribir;
+    Inicio iniciador;
+    //createEmpty();
+    while(window.isOpen()){
+        Event event;
+        iniciador.drawTo(window);
+        while(window.pollEvent(event)){
+            if(event.type==Event::Closed)
+                window.close();
+            if(event.type==Event::KeyPressed){
+                if(event.key.code==Keyboard::W ){
+                    x--;
+                }
+                if(event.key.code==Keyboard::S ){
+                    x++;
+                }
+                if(event.key.code==Keyboard::Enter){
+                    if(x==1){
+                        Juego(window,adan);
                         if(adan.boss){
                             readAndWriteNames(escribir,adan);
                         }

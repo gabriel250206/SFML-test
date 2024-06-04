@@ -29,7 +29,7 @@ Boss::Boss(Vector2f posicion){
 }
 
 void Boss::drawTo(RenderWindow &window){
-    window.draw(this->actualTexture);
+    //window.draw(this->actualTexture);
 }
 
 
