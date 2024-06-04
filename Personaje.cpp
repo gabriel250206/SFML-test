@@ -49,6 +49,7 @@ Personaje::Personaje(int vida){
     this->muerto=false;
     this->boss=false;
    this->doblesalto=0;
+   this->puntaje=0;
     
     
 }

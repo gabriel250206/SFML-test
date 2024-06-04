@@ -17,9 +17,11 @@ class Enemigo{
         float rangoX;
         int mov;
         int cont;
+        
     public:
         Sprite actualTexture;
         int vida;
+        int puntaje;
         Vector2f vista;
         Principal* pistola;
         Enemigo( int x);

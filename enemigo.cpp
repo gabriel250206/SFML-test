@@ -26,6 +26,7 @@ Enemigo::Enemigo(){
     this->muerto=false;
     this->vista={-1,0};
     this->disparar=true;
+    this->puntaje=200;
     
 }
 
@@ -50,6 +51,7 @@ Enemigo::Enemigo(int x){
     this->rangoX=1;
     this->mov=rand() %500;
     this->disparar=true;
+    this->puntaje=200;
     
 }
 
@@ -75,6 +77,7 @@ Enemigo::Enemigo(Vector2f posicion){
     this->rangoX=1;
     this->mov=rand() %500;
     this->disparar=true;
+    this->puntaje=200;
     
 }
 
@@ -105,8 +108,10 @@ void Enemigo::update(Personaje* adan, int x, int y){
 
     }
     if(this->vida<=0){
+        if(!muerto)adan->puntaje+=puntaje;
         this->muerto=true;
         this->dibujar=false;
+        
     }
     
    if(this->cooldown==0){
@@ -228,6 +233,7 @@ void Disparador::disparo(Personaje adan, int x, int y){
 Fuerte::Fuerte(int x):Enemigo(x){
     this->actualTexture.setColor(Color::Blue);
     this->vida=200;
+    this->puntaje=300;
 }
 
 Rapido::Rapido(int x):Enemigo(x){
@@ -235,11 +241,13 @@ Rapido::Rapido(int x):Enemigo(x){
     this->vida=50;
     this->actualTexture.setColor(Color::Green);
     this->mov=2;
+    this->puntaje=75;
     this->rangoX=2;
 }
 
 Volador::Volador(Vector2f posicion):Enemigo(posicion){
     this->movimiento=false;
+    this->puntaje=100;
 }
 
 

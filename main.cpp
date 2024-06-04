@@ -10,6 +10,7 @@
 #include <vector>
 #include<stdlib.h>
 #include<time.h>
+#include <fstream>
 #include <SFML/Audio.hpp>
 using namespace sf;
 
@@ -109,8 +110,27 @@ void Juego(RenderWindow &window, Personaje &adan){
     plataformeo.push_back(base);
     plataformeo.push_back(base2);
     plataformeo.push_back(base3);
-    
 
+    base.actualTexture.setPosition(Vector2f{5200,123});
+    base2.actualTexture.setPosition(Vector2f{5362,200});
+    base3.actualTexture.setPosition(Vector2f{5500,147});
+    plataformeo.push_back(base);
+    plataformeo.push_back(base2);
+    plataformeo.push_back(base3);
+    base.actualTexture.setPosition(Vector2f{5678,365});
+    base2.actualTexture.setPosition(Vector2f{5864,258});
+    base3.actualTexture.setPosition(Vector2f{5978,369});
+    plataformeo.push_back(base);
+    plataformeo.push_back(base2);
+    plataformeo.push_back(base3);
+    base.actualTexture.setPosition(Vector2f{6100,365});
+    base2.actualTexture.setPosition(Vector2f{6358,159});
+    base3.actualTexture.setPosition(Vector2f{6578,176});
+    plataformeo.push_back(base);
+    plataformeo.push_back(base2);
+    plataformeo.push_back(base3);
+    
+    
     vector<int>lista;
     
     for(int i=0;i<10;i++){
@@ -125,6 +145,35 @@ void Juego(RenderWindow &window, Personaje &adan){
     }
 
     
+    Barrera pared(Vector2f{5000,0});
+    PisoLava lava(Vector2f{4500,450});
+    lava.setExtention(300);
+    obstaculos.push_back(pared);
+    obstaculos.push_back(lava);
+
+    pared.actualTexture.setPosition(Vector2f{5250,0});
+    lava.actualTexture.setPosition(Vector2f{5000,450});
+    lava.setExtention(2000);
+    obstaculos.push_back(pared);
+    obstaculos.push_back(lava);
+
+
+    pared.actualTexture.setPosition(Vector2f{5600,0});
+    obstaculos.push_back(pared);
+    pared.actualTexture.setPosition(Vector2f{5864,0});
+    obstaculos.push_back(pared);
+    pared.actualTexture.setPosition(Vector2f{6000,0});
+    obstaculos.push_back(pared);
+    pared.actualTexture.setPosition(Vector2f{6200,0});
+    obstaculos.push_back(pared);
+    pared.actualTexture.setPosition(Vector2f{6400,0});
+    obstaculos.push_back(pared);
+    pared.actualTexture.setPosition(Vector2f{6600,0});
+    obstaculos.push_back(pared);
+    // pared.actualTexture.setPosition(Vector2f{5600,0});
+    // obstaculos.push_back(pared);
+
+
     
     // for(int i=0;i<10;i++){
     //     float posicionx =(rand()% (i+1)*350)+500;
@@ -438,7 +487,116 @@ void Juego(RenderWindow &window, Personaje &adan){
 }
 
 
+typedef struct record {
+    char char1;
+    char char2;
+    char char3;
 
+    float score;
+
+} registro;
+
+
+
+void createEmpty() {
+
+    std::string filename = "assets/score.bin";
+
+    std::cout << "Creating empty records\n";
+
+    registro registro1;
+
+
+    registro1.char1 = ' ';
+    registro1.char2 = ' ';
+    registro1.char3 = ' ';
+
+    registro1.score = 0.0f;
+
+
+    std::ofstream out(filename, std::ios::binary);
+
+
+    for (int i = 0; i < 5; i++) {
+        out.write(reinterpret_cast<const char*>(&registro1), sizeof(registro));
+    }
+
+    out.close();
+
+}
+
+
+void readAndWriteNames(bool escribir) {
+
+
+    registro registros[5];
+
+
+    std::string filename = "assets/score.bin";
+
+    std::ifstream in(filename, std::ios::binary);
+  
+    for (int i = 0; i < 5; i++) {
+        in.read(reinterpret_cast<char* >(&(registros[i])), sizeof(registro));
+    }
+    in.close();
+
+    for (int i = 0; i < 5; i++) {
+
+        std::cout << registros[i].char1 << registros[i].char2 << registros[i].char3 << " score: " << registros[i].score << "\n";
+
+    }
+    cout<<endl;
+
+    if(escribir){
+        string nombre;
+        otra:
+        std::cout << "escribe tres letras"<<endl;
+        cin>>nombre;
+        if (nombre.size()>3){
+            cout<<" solo 3 letras"<<endl;
+            goto otra;
+        }
+    registros[3].char1 = 'A';
+    registros[3].char2 = 'A';
+    registros[3].char3 = 'A';
+
+    registros[3].score = 10.10f;
+
+
+    std::ofstream out(filename, std::ios::binary);
+
+    for (int i = 0; i < 5; i++) {
+        out.write(reinterpret_cast<const char*>(&(registros[i])), sizeof(registro));
+    }
+
+    out.close();
+
+
+    std::cout << "Writing updated records\n";
+
+
+    for (int i = 0; i < 5; i++) {
+
+        std::cout << registros[i].char1 << registros[i].char2 << registros[i].char3 << " score: " << registros[i].score << "\n";
+
+    }
+
+    }
+    
+
+
+}
+
+
+
+// int main()
+// {
+    
+
+//     createEmpty();
+//     readAndWriteNames();
+// }
 
 
 int main()
@@ -447,7 +605,9 @@ int main()
     window.setFramerateLimit(200);
     Personaje adan(150);
     int x=1;
+    bool escribir;
     Inicio iniciador;
+    createEmpty();
     while(window.isOpen()){
         Event event;
         iniciador.drawTo(window);
@@ -464,6 +624,12 @@ int main()
                 if(event.key.code==Keyboard::Enter){
                     if(x==1){
                         Juego(window,adan);
+
+                    }
+                    if(x==2){
+                        escribir=false;
+                        readAndWriteNames(escribir);
+                        escribir=true;
                     }
                     if(x==3){
                         window.close();

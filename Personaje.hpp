@@ -35,6 +35,7 @@ class Personaje{
         Principal* pistola;
         bool muerto;
         int doblesalto;
+        int puntaje;
 
         Personaje(int vida);
         void drawTo(RenderWindow &window);
