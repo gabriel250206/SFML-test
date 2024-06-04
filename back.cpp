@@ -25,7 +25,7 @@ void Fondo::drawTo(RenderWindow &window){
 
 void Fondo::desplaza(int x){
     
-    a=a+x;
+    a=a+x*2;
     if(a<10000 && a>0)this->actualTexture.setTextureRect(IntRect(0+a,0,500,500));
 
 }

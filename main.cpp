@@ -198,11 +198,11 @@ int main()
         Enemigo* serpiente= new Rapido(primero);
         hongos.push_back(*serpiente);
     }
-    // for(int i=0;i<3;i++){
-    //     int primero=rand() %350+200;
-    //     Fuerte* serpiente= new Fuerte(primero);
-    //     hongos.push_back(*serpiente);
-    // }
+    for(int i=0;i<3;i++){
+        int primero=rand() %350+4000;
+        Fuerte* serpiente= new Fuerte(primero);
+        hongos.push_back(*serpiente);
+    }
 
     
     
@@ -293,16 +293,16 @@ int main()
     
     vector<int>lista;
     
-    // for(int i=0;i<5;i++){
-    //     otra:
-    //     int random=rand()%plataformeo.size();
-    //     for(int j=0;j<lista.size();i++){
-    //         if(lista[i]==random)goto otra;
-    //     }
-    //     Volador* nuevoEnemigo= new Volador(Vector2f{plataformeo[random].actualTexture.getPosition().x+40,plataformeo[random].actualTexture.getPosition().y-70 });
-    //     hongos.push_back(*nuevoEnemigo);
+    for(int i=0;i<5;i++){
+        otra:
+        int random=rand()%plataformeo.size();
+        for(int j=0;j<lista.size();i++){
+            if(lista[i]==random)goto otra;
+        }
+        Volador* nuevoEnemigo= new Volador(Vector2f{plataformeo[random].actualTexture.getPosition().x+40,plataformeo[random].actualTexture.getPosition().y-70 });
+        hongos.push_back(*nuevoEnemigo);
 
-    // }
+    }
 
     
     Barrera pared(Vector2f{5000,0});
@@ -465,7 +465,7 @@ int main()
                     if(adan.pistola!=nullptr)adan.pistola->especial(x,dash);
                 }
                 if(event.key.code==Keyboard::Q){ ///dropear arma--
-                    if(adan.pistola!=nullptr)adan.pistola->tirada=true;
+                    //if(adan.pistola!=nullptr)adan.pistola->tirada=true;
                    
                 }
                 
