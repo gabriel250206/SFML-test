@@ -2,8 +2,9 @@
 #include "Bala.hpp"
 #include <SFML/Graphics.hpp>
 #include <iostream>
+#include <SFML/Audio.hpp>
 using namespace std;
-
+using namespace sf;
 Bala::Bala(int danio, Vector2f posicion, Vector2f direccion){
     this->danio=danio;
     posicion.x=posicion.x+10;
@@ -34,6 +35,15 @@ Bala::Bala(int danio, Vector2f posicion, Vector2f direccion){
     }
     this->direccion.x*=2;
     this->impactado=false;
+
+    SoundBuffer buffer;
+        if(!buffer.loadFromFile("assets/disparo.mp3"))
+        {
+            cout << "No funciona la musica" << endl;
+        }
+        Sound sound;
+        sound.setBuffer(buffer);
+        sound.play();
     
 }
 

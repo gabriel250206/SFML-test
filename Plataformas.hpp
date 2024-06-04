@@ -21,5 +21,6 @@ class Plataforma{
         Vector2f getPosition();
         bool toca(Personaje adan);
         int a;
+        
 
 };

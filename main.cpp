@@ -76,14 +76,18 @@ int main()
     plataformeo.push_back(base2);
     plataformeo.push_back(base3);
 
-    
+    vector<int>lista;
+    bool puedePonerse;
     for(int i=0;i<5;i++){
+        otra:
         int random=rand()%plataformeo.size();
-        for(int j=0;j;i++)
-        Enemigo* nuevoEnemigo1= new Volador(Vector2f{plataformeo[random].actualTexture.getPosition().x+40,plataformeo[random].actualTexture.getPosition().y-70 });
-        hongos.push_back(*nuevoEnemigo1);
-
+        for(int j=0;j<lista.size();i++){
+            if(lista[i]==random)goto otra;
         }
+        Volador* nuevoEnemigo= new Volador(Vector2f{plataformeo[random].actualTexture.getPosition().x+40,plataformeo[random].actualTexture.getPosition().y-70 });
+        hongos.push_back(*nuevoEnemigo);
+
+    }
 
     
     
@@ -115,7 +119,7 @@ int main()
     Plataforma* tocando;
 
     SoundBuffer buffer;
-    if (!buffer.loadFromFile("musica.wav"))
+    if (!buffer.loadFromFile("assets/principal.mp3"))
     {
         cout << "No funciona la musica" << endl;
     }
@@ -164,7 +168,7 @@ int main()
                 /// TAMPOCO ESTO, ES QUE NOS DA DOBLE SALTO
                 if(event.key.code==Keyboard::Space  && adan.salto==true ){ // si presionas y puede saltar
                     
-                    std::cout<<"Espacio"<<endl;
+                  
                     adan.salto=false;
                                      
                 }

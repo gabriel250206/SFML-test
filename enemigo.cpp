@@ -111,7 +111,7 @@ void Enemigo::update(Personaje* adan, int x, int y){
     
    if(this->cooldown==0){
         if(this->actualTexture.getGlobalBounds().intersects(adan->actualTexture.getGlobalBounds())&& !muerto){
-            cout<<"golpe"<<endl;
+            
             adan->vida= adan->vida-10;
             this->cooldown++;
             adan->actualTexture.setPosition(adan->actualTexture.getPosition().x-40,adan->actualTexture.getPosition().y-20);
@@ -184,7 +184,7 @@ void Disparador::update(Personaje* adan, int x, int y){
 
     if(this->cooldown==0){
         if(this->actualTexture.getGlobalBounds().intersects(adan->actualTexture.getGlobalBounds())){
-            cout<<"golpe"<<endl;
+            
             adan->vida= adan->vida-10;
             this->cooldown++;
             adan->actualTexture.setPosition(adan->actualTexture.getPosition().x-40,adan->actualTexture.getPosition().y-20);
