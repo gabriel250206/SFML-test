@@ -180,7 +180,7 @@ int main()
                         
                          Outro finalizar;
     
-    Boss lucy(Vector2f{400,400});
+    //Boss lucy(Vector2f{400,400});
     //Barrera primero(Vector2f{200,0});
     //PisoLava segundo(Vector2f{400,460});
     //segundo.setExtention(100);
