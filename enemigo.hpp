@@ -24,6 +24,7 @@ class Enemigo{
         Principal* pistola;
         Enemigo( int x);
         Enemigo();
+        Enemigo(Vector2f posicion);
         bool movimiento;
         bool disparar;
         bool getEstado();
@@ -64,3 +65,7 @@ class   Rapido: public Enemigo{
         
 };
 
+class Volador:public Enemigo{
+    public:
+    Volador(Vector2f posicion);
+};

@@ -48,7 +48,7 @@ Personaje::Personaje(int vida){
     this->vista.x=1;
     this->muerto=false;
     this->boss=false;
-   
+   this->doblesalto=0;
     
     
 }
@@ -174,9 +174,10 @@ Vector2f Personaje::getPosition(){
 
 void Personaje::saltar(int &y){
     
-    if(this->contSalto<200){
+    if(this->contSalto<150){
         y=-1;
         contSalto++;
+
     }else{
         this->salto=true;
         return;

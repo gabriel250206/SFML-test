@@ -25,7 +25,9 @@ int main()
     //obstaculos.push_back(primero);
     //obstaculos.push_back(segundo);
     vector<Enemigo>hongos;
-    
+    Enemigo nuevo(Vector2f{448,136});
+    nuevo.movimiento=false;
+    hongos.push_back(nuevo);
     
     for(int i=0;i<3;i++){
         int primero=(rand() %350)+1000;
@@ -44,26 +46,68 @@ int main()
     // primero=rand() %400+100;
     // Enemigo lilith(primero);
     vector<Principal*>dropeadas;
-    
-    Plataforma base(Vector2f{250,350});
-    Plataforma base2(Vector2f{400,200});
-    Plataforma base3(Vector2f{500,350});
     vector<Plataforma> plataformeo;
-    //plataformeo.push_back(base);
+
+
+    
+    Plataforma base2(Vector2f{400,200});
+    Plataforma base3(Vector2f{300,350});
+    Plataforma base(Vector2f{650,350});
+    plataformeo.push_back(base);
+    plataformeo.push_back(base2);
+    plataformeo.push_back(base3);
+    base.actualTexture.setPosition(Vector2f{1089,258});
+    base2.actualTexture.setPosition(Vector2f{865,412});
+    base3.actualTexture.setPosition(Vector2f{963,150});
+    plataformeo.push_back(base);
+    plataformeo.push_back(base2);
+    plataformeo.push_back(base3);
+    base.actualTexture.setPosition(Vector2f{1200,360});
+    base2.actualTexture.setPosition(Vector2f{1460,250});
+    base3.actualTexture.setPosition(Vector2f{1636,145});
+    plataformeo.push_back(base);
+    plataformeo.push_back(base2);
+    plataformeo.push_back(base3);
+    base.actualTexture.setPosition(Vector2f{2000,360});
+    base2.actualTexture.setPosition(Vector2f{2289,140});
+    base3.actualTexture.setPosition(Vector2f{2354,345});
+    plataformeo.push_back(base);
     plataformeo.push_back(base2);
     plataformeo.push_back(base3);
 
     
+    for(int i=0;i<5;i++){
+        int random=rand()%plataformeo.size();
+        for(int j=0;j;i++)
+        Enemigo* nuevoEnemigo1= new Volador(Vector2f{plataformeo[random].actualTexture.getPosition().x+40,plataformeo[random].actualTexture.getPosition().y-70 });
+        hongos.push_back(*nuevoEnemigo1);
+
+        }
+
+    
+    
+    // for(int i=0;i<10;i++){
+    //     float posicionx =(rand()% (i+1)*350)+500;
+    //     float posiciony=(rand()&300)+100;
+    //     int probabilidad=rand()&2;
+    //     if(probabilidad==0){
+    //         Enemigo* nuevoEnemigo= new Volador(Vector2f{posicionx+10,posiciony-70});
+    //         hongos.push_back(*nuevoEnemigo);
+    //         //delete nuevoEnemigo;
+    //     }
+    //     Plataforma* plataformaP=new Plataforma(Vector2f{posicionx,posiciony});
+    //     plataformeo.push_back(*plataformaP);
+    // }
     //hongos.push_back(lilith);
 
     Fondo atras;
     int x=0,y=0;
-    int movx=0,movy=0; // desconozco funcionamiento de estas *-
+
     int ultima=0;
-    bool saltando;// no se si funcione *-
+    
     bool recargar=false;
     int dash=0;
-    bool click=false;
+   
     bool presion=false;
     
     bool si=false;
@@ -133,7 +177,8 @@ int main()
                     // for(int i=0;i<lucy.cuernitos.size();i++){
                     //     cout<<lucy.cuernitos[i].actualTexture.getPosition().x<<" "<< lucy.cuernitos[i].actualTexture.getPosition().y<<endl;
                     // }
-                    cout<<y<<endl;
+                    cout<<atras.getA()<<" "<<adan.actualTexture.getPosition().y<<endl;
+                    
                     //cout<<adan.getPosition().y<<endl;
                     //cout<<adan.vida<<" "<<serpiente.vida<<endl<<atras.getA();
                     // std::cout<<atras.getA()<<std::endl;

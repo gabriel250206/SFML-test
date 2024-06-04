@@ -9,8 +9,9 @@ class Personaje;
 class Plataforma{
     private:
         Texture stmTexture;
-        Sprite actualTexture;
+        
     public:
+        Sprite actualTexture;
         Vector2f posicion;
         bool eta;// no se si funcione esto 
         bool colision(Personaje &adan,int &x, int&y,bool saltando);

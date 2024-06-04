@@ -53,6 +53,32 @@ Enemigo::Enemigo(int x){
     
 }
 
+
+Enemigo::Enemigo(Vector2f posicion){
+    this->vida=100;
+    if(!stmTexture.loadFromFile("assets/enemigoRojo.png"))
+    {
+        std::cout << "Error al cargar imagen" << std::endl;
+    }
+    stmTexture.setRepeated(true);
+    this->movimiento=true;
+    this->actualTexture.setTexture(stmTexture);
+    this->actualTexture.setTextureRect(IntRect(16,16,18,17));
+    this->actualTexture.setScale(4,4);
+    this->cooldown=0;
+    this->actualTexture.setPosition(posicion);
+    this->dibujar=true;
+    this->pistola= new Principal(this->actualTexture.getPosition());
+    this->tiempo=0;
+    this->muerto=false;
+    this->vista={-1,0};
+    this->rangoX=1;
+    this->mov=rand() %500;
+    this->disparar=true;
+    
+}
+
+
 void Enemigo::drawTo(RenderWindow &window){
     if(dibujar){
         window.draw(this->actualTexture);
@@ -212,6 +238,9 @@ Rapido::Rapido(int x):Enemigo(x){
     this->rangoX=2;
 }
 
+Volador::Volador(Vector2f posicion):Enemigo(posicion){
+    this->movimiento=false;
+}
 
 
 

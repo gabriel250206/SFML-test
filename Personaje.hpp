@@ -34,7 +34,7 @@ class Personaje{
         bool tatekieto;
         Principal* pistola;
         bool muerto;
-        
+        int doblesalto;
 
         Personaje(int vida);
         void drawTo(RenderWindow &window);
