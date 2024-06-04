@@ -526,7 +526,7 @@ void createEmpty() {
 }
 
 
-void readAndWriteNames(bool escribir) {
+void readAndWriteNames(bool escribir, Personaje adan) {
 
 
     registro registros[5];
@@ -557,11 +557,25 @@ void readAndWriteNames(bool escribir) {
             cout<<" solo 3 letras"<<endl;
             goto otra;
         }
-    registros[3].char1 = 'A';
-    registros[3].char2 = 'A';
-    registros[3].char3 = 'A';
+    // registros[3].char1 = 'A';
+    // registros[3].char2 = 'A';
+    // registros[3].char3 = 'A';
 
-    registros[3].score = 10.10f;
+    // registros[3].score = 10.10f;
+    int este=5;
+    for(int i=4;i>=0;i--){
+        if(registros[i].score<adan.puntaje)este--;
+    }
+    if(este<5){
+        // for(int i=este;i>=0;i++){
+        //     registro[i]
+        // }
+        // registros[1].char1=nombre[0];
+        // registros[1].char2=nombre[1];
+        // registros[1].char3=nombre[2];
+        // registros[1].score=adan.puntaje;
+    }
+        
 
 
     std::ofstream out(filename, std::ios::binary);
@@ -624,11 +638,13 @@ int main()
                 if(event.key.code==Keyboard::Enter){
                     if(x==1){
                         Juego(window,adan);
-
+                        if(adan.boss){
+                            readAndWriteNames(escribir,adan);
+                        }
                     }
                     if(x==2){
                         escribir=false;
-                        readAndWriteNames(escribir);
+                        readAndWriteNames(escribir,adan);
                         escribir=true;
                     }
                     if(x==3){
