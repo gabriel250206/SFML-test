@@ -10,6 +10,7 @@
 #include <vector>
 #include<stdlib.h>
 #include<time.h>
+#include <SFML/Audio.hpp>
 using namespace sf;
 int main()
 {
@@ -112,6 +113,15 @@ int main()
     
     bool si=false;
     Plataforma* tocando;
+
+    SoundBuffer buffer;
+    if (!buffer.loadFromFile("musica.wav"))
+    {
+        cout << "No funciona la musica" << endl;
+    }
+    Sound sound;
+    sound.setBuffer(buffer);
+    sound.play();
 
 
     adan.drawTo(window);
